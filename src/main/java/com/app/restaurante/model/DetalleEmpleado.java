@@ -9,18 +9,67 @@ public class DetalleEmpleado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDetalleEmp;
 
-    @Column(name = "Telefono", length = 9)
     private String telefono;
-
-    @Column(name = "Correo", length = 100)
     private String correo;
-
-    @Column(name = "Foto", length = 150)
     private String foto;
 
     @OneToOne
     @JoinColumn(name = "IDEmpleado")
     private Empleado empleado;
 
-    // Getters y Setters
+// Getters y Setters
+    public Integer getIdDetalleEmp() {
+        return idDetalleEmp;
+    }
+
+    public void setIdDetalleEmp(Integer idDetalleEmp) {
+        this.idDetalleEmp = idDetalleEmp;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+//Constructores
+
+    public DetalleEmpleado() {
+    }
+
+    public DetalleEmpleado(Integer idDetalleEmp, String telefono, String correo, String foto, Empleado empleado) {
+        this.idDetalleEmp = idDetalleEmp;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.foto = foto;
+        this.empleado = empleado;
+    }
+
+    
+    
 }
