@@ -9,6 +9,7 @@ public class TipoPago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTipoPago;
 
+    @Column(length = 100, nullable = true)
     private String tipoPago;
 
     // Getters y Setters

@@ -10,7 +10,10 @@ public class Carrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCarrito;
 
+    @Column(nullable = true)
     private Integer cantidad;
+
+    @Column(precision = 12, scale = 8, nullable = true)
     private BigDecimal precioProducto;
 
     @ManyToOne

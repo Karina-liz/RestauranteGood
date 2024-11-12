@@ -11,11 +11,21 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProducto;
 
+    @Column(length = 100, nullable = true)
     private String nomProducto;
+
+    @Column(precision = 12, scale = 8, nullable = true)
     private BigDecimal precioUnitario;
+
+    @Column(length = 250, nullable = true)
     private String fotoProducto;
+
+    @Column(length = 150, nullable = true)
     private String descripcion;
+
+    @Column(nullable = true)
     private Integer cantidad;
+
     private LocalDateTime fechaProducto;
 
     @ManyToOne

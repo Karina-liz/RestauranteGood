@@ -9,6 +9,7 @@ public class Distrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDistrito;
 
+    @Column(length = 50, nullable = true)
     private String distrito;
 
     // Getters y Setters

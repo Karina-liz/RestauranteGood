@@ -9,6 +9,7 @@ public class Contador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idContador;
 
+    @Column(nullable = true)
     private Integer contador;
 
     @ManyToOne

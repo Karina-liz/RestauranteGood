@@ -9,6 +9,7 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDelivery;
 
+    @Column(length = 50, nullable = true)
     private String estado;
 
     @ManyToOne

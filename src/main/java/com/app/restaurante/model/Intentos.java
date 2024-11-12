@@ -9,7 +9,10 @@ public class Intentos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idIntentos;
 
+    @Column(nullable = true)
     private Integer fallos;
+
+    @Column(nullable = true)
     private Integer ingresos;
 
     @ManyToOne

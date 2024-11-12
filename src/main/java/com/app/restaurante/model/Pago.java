@@ -21,6 +21,7 @@ public class Pago {
     @JoinColumn(name = "IDFactura")
     private Factura factura;
 
+    @Column(nullable = true)
     private Integer estado;
 
     // Getters y Setters

@@ -9,7 +9,10 @@ public class Direccion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDireccion;
 
+    @Column(length = 150, nullable = true)
     private String direccion;
+
+    @Column(length = 150, nullable = true)
     private String referencia;
 
     @ManyToOne

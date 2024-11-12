@@ -9,7 +9,10 @@ public class TipoProducto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTipo;
 
+    @Column(length = 50, nullable = true)
     private String nomTipo;
+
+    @Column(length = 150, nullable = true)
     private String descripcion;
 
     @ManyToOne
