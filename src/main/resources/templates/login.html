@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Nextclass</title>
+    <!--link rel="stylesheet" type="text/css" href="./css/login.css"-->
+    <link th:include="components/link"></link>
+</head>
+<body class="body-login">
+    <div class="registro-container login">
+        <form action="/login" method="POST" class="registro-form" id="FormContact" autocomplete="off">
+            <h1>¡Hola!</h1>
+            <hr>
+            <p>Ingresa tus datos</p>
+            <div class="input-box registro-input-box">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" name="email" class="registro-input" placeholder="Correo electrónico" required />
+                <h5>Ejemplo: usuario@dominio.com</h5>
+            </div>
+            <div class="input-box registro-input-box">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" class="registro-input" placeholder="Contraseña" required />
+            </div>
+            
+            <div class="remember-forgot">
+                <a href="#">Restablecer contraseña</a>
+            </div>
+            <input type="submit" value="Iniciar Sesión" class="login-submit" name="iniciar_sesion">
+            <button class="toggle-login btn1" onclick="toggleLogin()">Registrarse</button>
+        </form>
+    </div>
+
+    <div class="registro-container registro">
+        <form action="/registrarse" method="POST" class="registro-form" id="FormContact" autocomplete="off">
+            <h1>¡Registra tu cuenta!</h1>
+            <hr>
+            <p>Ingresa tus datos para registrarte</p>
+            <div class="input-box registro-input-box">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="input registro-input" placeholder="Tu nombre" required />
+            </div>
+
+            <div class="input-box registro-input-box">
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellido" class="input registro-input" placeholder="Tus apellidos" required />
+            </div>
+
+            <div class="input-box registro-input-box">
+                <label for="correo">Correo electrónico:</label>
+                <input type="email" id="correo" name="correo" class="input registro-input" placeholder="Tu correo electrónico" required />
+            </div>
+    
+            <div class="input-box registro-input-box">
+                <label for="usuario">Nombre de usuario:</label>
+                <input type="text" id="usuario" name="usuario" class="input registro-input" placeholder="Tu nombre de usuario" required />
+                <h5>Ejemplo: user123 (nombre de usuario)</h5>
+            </div>
+            
+
+            <div class="input-box registro-input-box">
+                <label for="dni">DNI:</label>
+                <input type="text" id="dni" name="dni" class="input registro-input" placeholder="Tu DNI" required />
+            </div>
+
+            <div class="input-box registro-input-box">
+                <label for="nueva_clave">Contraseña:</label>
+                <input type="password" id="nueva_clave" name="contrasena" class="input registro-input" placeholder="Contraseña nueva" required />
+            </div>
+            
+            <div class="input-box registro-input-box">
+                <label for="repetir_clave">Repetir contraseña:</label>
+                <input type="password" id="repetir_clave" name="repetircontrasena" class="input registro-input" placeholder="Repite la contraseña" required />
+            </div>
+            
+            <div class="input-box registro-input-box">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono" class="input registro-input" placeholder="Tu número de teléfono" required />
+            </div>
+            
+
+            <div class="remember-forgot registro-remember-forgot">
+                <a href="#">¿Ya tienes cuenta?</a>
+            </div>
+      
+            <input type="submit" value="Registrarse" class="login-submit registro-submit" name="registro">
+            <button class="toggle-registro btn1 registro-toggle" onclick="toggleLogin()">Iniciar Sesión</button>
+        </form>    
+    </div>
+</body>
+</html>

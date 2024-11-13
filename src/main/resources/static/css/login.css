@@ -1,0 +1,142 @@
+@import url(colors.css);
+.body-login {
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+    height: 100vh;
+    background: linear-gradient(60deg, #ff5733 50%, #33c1ff 50%);
+}
+
+.login-container, .registro-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(175, 122, 122, 0.1);
+}
+.login{
+    background-color: #e37474;
+}
+.registro{
+    background-color: #ccc;
+}
+
+.login-container h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.login-container hr {
+    border-top: 1px solid #ccc;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.login-container p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.login-container .input-box {
+    margin-bottom: 20px;
+}
+
+.login-container .input-box label {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.login-container .input-box input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+.login-container .remember-forgot {
+    margin-top: 20px;
+}
+
+.login-container .remember-forgot a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container .login-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-container .toggle-login {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.registro .registro-form {
+    margin-top: 20px;
+}
+
+.registro .registro-input-box {
+    margin-bottom: 20px;
+}
+
+.registro .registro-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.registro .registro-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.registro .registro-toggle {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.registro-container .input-box input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .body-login {
+        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+    }
+}
