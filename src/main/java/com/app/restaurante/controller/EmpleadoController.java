@@ -1,4 +1,4 @@
-package com.app.restaurante.controller;
+/* package com.app.restaurante.controller;
 
 import com.app.restaurante.model.Empleado;
 import com.app.restaurante.model.Rol;
@@ -62,3 +62,4 @@ public class EmpleadoController {
         return "redirect:/empleados";
     }
 }
+*/
