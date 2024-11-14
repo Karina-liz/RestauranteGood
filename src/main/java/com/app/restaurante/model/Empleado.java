@@ -12,10 +12,7 @@ public class Empleado {
     private String nombre;
 
     @Column(length = 50, nullable = true)
-    private String apellidoPaterno;
-
-    @Column(length = 50, nullable = true)
-    private String apellidoMaterno;
+    private String apellido;
 
     @Column(length = 50, nullable = true)
     private String usuario;
@@ -44,20 +41,12 @@ public class Empleado {
         this.nombre = nombre;
     }
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getUsuario() {
@@ -88,12 +77,11 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(Integer idEmpleado, String nombre, String apellidoPaterno, String apellidoMaterno, String usuario,
+    public Empleado(Integer idEmpleado, String nombre, String apellido, String usuario,
             String contraseña, Rol rol) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
+        this.apellido = apellido;
         this.usuario = usuario;
         this.contraseña = contraseña;
         this.rol = rol;

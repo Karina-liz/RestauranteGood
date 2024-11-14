@@ -13,10 +13,7 @@ public class Cliente {
     private String nombre;
 
     @Column(length = 50, nullable = true)
-    private String apellidoPaterno;
-
-    @Column(length = 50, nullable = true)
-    private String apellidoMaterno;
+    private String apellido;
 
     @Column(length = 50, nullable = true)
     private String usuario;
