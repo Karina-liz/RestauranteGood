@@ -1,0 +1,222 @@
+@import url('colors.css');
+
+body::-webkit-scrollbar {
+    display: none;
+    /* o 'width: 0;' en lugar de 'display: none;' */
+}
+
+/*----
+ MAIN 
+ ----*/
+.main {
+    padding: 40px 20px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.categorias {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+    height: 400px;
+}
+
+.bebidas,
+.postres,
+.platillos {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.bebidas:hover,
+.postres:hover,
+.platillos:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.bebidas img,
+.postres img,
+.platillos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.bebidas:hover img,
+.postres:hover img,
+.platillos:hover img {
+    transform: scale(1.1);
+}
+
+.categoria-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.bebidas:hover .categoria-info,
+.postres:hover .categoria-info,
+.platillos:hover .categoria-info {
+    transform: translateY(0);
+}
+
+.categoria-info h3 {
+    margin: 0 0 10px;
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.categoria-info p {
+    font-size: 1em;
+    margin: 0;
+    opacity: 0.8;
+}
+
+/*Estilo de los productos*/
+.section {
+    padding: 20px;
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+.carta {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.carta h3 {
+    text-align: center;
+    font-size: 2em;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.carta-container {
+    display: block;
+}
+
+.carta-content {
+    display: block;
+    border: 1px solid #000;
+}
+
+.productos {
+    display: flex;
+    flex-wrap: wrap; /* Esto permite que los items se envuelvan en líneas cuando no haya suficiente espacio */
+    gap: 20px; /* Añade espacio entre los elementos (opcional) */
+}
+
+.carta-item {
+    display: flex;
+    width: 300px; /* Ancho de cada carta-item */
+    border: 1px solid #000;
+    margin-bottom: 20px; /* Espacio entre filas de productos (opcional) */
+}
+
+
+
+.tarjeta-platillo {
+    background-color: var(--color-light);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.tarjeta-platillo:hover {
+    transform: translateY(-5px);
+    background-color: var(--color-primary);
+}
+
+.imagen-platillo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.tarjeta-platillo h4 {
+    font-size: 1.2em;
+    color: var(--text-color);
+    margin: 10px 15px;
+}
+
+.tarjeta-platillo p {
+    font-size: 0.9em;
+    color: var(--color-fourth);
+    margin: 0 15px 10px;
+}
+
+.tarjeta-platillo .precio {
+    display: block;
+    text-align: right;
+    font-weight: bold;
+    color: var(--color-fifth);
+    margin: 0 15px 15px;
+}
+
+h2 {
+    width: 100%;
+}
+
+
+/* Estilos para el modal */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff; 
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40% !important; 
+    overflow-y: auto;
+}
+
+.modal img {
+    max-width: 300px;
+    width: 70%;
+    height: auto;
+    display: block; 
+    margin: 0 auto; 
+}
+
+.close {
+    color: #aaa; 
+    float: right; 
+    font-size: 28px; 
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black; 
+    text-decoration: none; 
+    cursor: pointer;
+}
+

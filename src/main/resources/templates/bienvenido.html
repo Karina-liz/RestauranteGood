@@ -8,7 +8,19 @@
 <body>
     <h1>¡Bienvenido, <span th:text="${cliente.nombre}"></span>!</h1>
     <p>Tu cuenta ha sido registrada exitosamente.</p>
+
     <a href="/login">Iniciar sesión</a>
     <a href="/logout">Cerrar sesión</a> <!-- Esto sería para cerrar la sesión si tienes configurado el logout -->
+    <br>
+
+<!-- Botón en formato de lista en el menú de navegación -->
+<li>
+    <a th:classappend="${activePage == 'carta'} ? 'bg_hover color_dark'" th:href="@{/carta}">
+        <i class="ki-outline ki-book-open"></i> <!-- Icono de carta -->
+        <span>Carta</span>
+    </a>
+</li>
+
+
 </body>
 </html>
