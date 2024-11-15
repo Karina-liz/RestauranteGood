@@ -45,16 +45,12 @@
                 <div class="productos">
                     <div th:if="${bebidas != null and bebidas.size() > 0}" th:each="producto : ${bebidas}" class="carta-item">
                         <div class="producto-image-container">
-                                <img th:src="@{./upload/productos/{producto.FotoProducto}.jpg}" th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
-                                <img th:src="@{/upload/productos/{producto.FotoProducto}.jpg}" th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
-
-                            <br>
-                                <p th:text="${producto.FotoProducto}"></p>  <!-- Esto imprimirá el valor de FotoProducto -->
-
+                            <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
+                            th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
                         </div>
                         <div class="producto-info">
-                            <h5 th:text="${producto.nomProd}" class="producto-title"></h5>
-                            <p th:text="${producto.descripcion}" class="producto-description"></p>
+                            <h5 th:text="${producto.nomProducto}" class="producto-title"></h5>
+                            <!--p th:text="${producto.descripcion}" class="producto-description"></p-->
                             <p th:text="'Precio: ' + ${producto.precioUnitario}" class="producto-price"></p>
                         </div>
                     </div>
@@ -64,19 +60,14 @@
                 <div class="productos">
                     <div th:if="${platillos != null and platillos.size() > 0}" th:each="producto : ${platillos}" class="carta-item">
                         <div class="producto-image-container">
-                            <!-- Asegúrate de que el valor de FotoProducto sea correcto -->
-                            <img th:src="@{/upload/productos/{producto.FotoProducto}(fotoProducto=${producto.FotoProducto})}" 
-                                 th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
-
-                                 <img th:src="@{/upload/productos/{producto.FotoProducto}.jpg}" th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
-                                 <img th:src="@{upload/productos/{producto.FotoProducto}.jpg}" th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
-
+                            <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
+                            th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
                         </div>
                         
                         <div class="producto-info">
-                            <h5 th:text="${producto.nomProd}" class="producto-title"></h5>
-                            <p th:text="${producto.descripcion}" class="producto-description"></p>
-                            <p th:text="'Precio: ' + ${producto.precioUnitario}" class="producto-price"></p>
+                            <h5 th:text="${producto.nomProducto}" class="producto-title"></h5>
+                            <!--p th:text="${producto.descripcion}" class="producto-description"></p-->
+                            <p th:text="'S/. ' + ${producto.precioUnitario}" class="producto-price"></p>
                         </div>
                     </div>
                 </div>
@@ -85,14 +76,12 @@
                 <div class="productos">
                     <div th:if="${postres != null and postres.size() > 0}" th:each="producto : ${postres}" class="producto carta-item">
                         <div class="producto-image-container">
-                            <img th:src="@{/static/images/img-producto/{fotoProd}.jpg(name=${producto.fotoProducto})}" th:alt="'Imagen de ' + ${producto.nomProd}" class="producto-image">
-
-                            <img th:src="@{/upload/productos/{producto.FotoProducto}.jpg}" th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
-
+                            <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
+                            th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
                         </div>
                         <div class="producto-info">
-                            <h5 th:text="${producto.nomProd}" class="producto-title"></h5>
-                            <p th:text="${producto.descripcion}" class="producto-description"></p>
+                            <h5 th:text="${producto.nomProducto}" class="producto-title"></h5>
+                            <!--p th:text="${producto.descripcion}" class="producto-description"></p-->
                             <p th:text="'Precio: ' + ${producto.precioUnitario}" class="producto-price"></p>
                         </div>
                     </div>

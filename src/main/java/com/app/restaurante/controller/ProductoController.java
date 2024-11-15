@@ -23,23 +23,27 @@ public class ProductoController {
         List<Productos> postres = productosDAO.obtenerPorCategoria("Postres");
         List<Productos> platillos = productosDAO.obtenerPorCategoria("Platillos");
     
-        // Verifica los productos para ver si la propiedad FotoProducto está llegando
         for (Productos producto : bebidas) {
+            //System.out.println("Antes de asignar default, FotoProducto: " + producto.getFotoProducto());
             if (producto.getFotoProducto() == null || producto.getFotoProducto().isEmpty()) {
-                producto.setFotoProducto("default.jpg");
+                producto.setFotoProducto("default");
             }
+            //System.out.println("Después de asignar default, FotoProducto: " + producto.getFotoProducto());
         }
         
+        
         for (Productos producto : postres) {
+            //System.out.println("Antes de asignar default, FotoProducto: " + producto.getFotoProducto());
             if (producto.getFotoProducto() == null || producto.getFotoProducto().isEmpty()) {
-                producto.setFotoProducto("default.jpg");
+                producto.setFotoProducto("default");
             }
+            //System.out.println("Después de asignar default, FotoProducto: " + producto.getFotoProducto());
         }
         
         for (Productos producto : platillos) {
             if (producto.getFotoProducto() == null || producto.getFotoProducto().isEmpty()) {
-                producto.setFotoProducto("default.jpg");
-            }
+                producto.setFotoProducto("default");
+            }            
         }
         
     
@@ -47,6 +51,9 @@ public class ProductoController {
         model.addAttribute("postres", postres);
         model.addAttribute("platillos", platillos);
         model.addAttribute("activePage", "carta");
+
+                // Verifica el contenido de los productos antes de retornarlos
+
     
         return "carta";
     }

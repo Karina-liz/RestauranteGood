@@ -110,26 +110,56 @@ body::-webkit-scrollbar {
 
 .carta-container {
     display: block;
+    max-width: 1700px;
 }
-
 .carta-content {
+    padding: 20px;
     display: block;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #000;
 }
-
 .productos {
     display: flex;
     flex-wrap: wrap; /* Esto permite que los items se envuelvan en líneas cuando no haya suficiente espacio */
-    gap: 20px; /* Añade espacio entre los elementos (opcional) */
+    gap: 15px; /* Añade espacio entre los elementos (opcional) */
 }
-
 .carta-item {
     display: flex;
-    width: 300px; /* Ancho de cada carta-item */
+    width: 400px;
     border: 1px solid #000;
-    margin-bottom: 20px; /* Espacio entre filas de productos (opcional) */
+    
+    height: 250px;
+    position: relative; /* Necesario para posicionar el precio dentro de este contenedor */
+    border-radius: 20px;
+    padding: 10px;
 }
-
+.producto-info {
+    padding: 10px;
+    flex: 1; /* Para que ocupe el espacio restante */
+}
+.producto-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 230px;
+    height: 230px;
+    border: 1px solid #000;
+}
+.producto-price {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    bottom: 10px;
+    right: 10px;
+    padding: 5px;
+    border: 1px solid #000;
+    background-color: rgb(78, 124, 109);
+    color: #f0f0f0;
+    border-radius: 40px;
+}
 
 
 .tarjeta-platillo {

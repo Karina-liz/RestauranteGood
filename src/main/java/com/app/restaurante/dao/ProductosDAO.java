@@ -17,13 +17,14 @@ public class ProductosDAO {
     }
 
     public List<Productos> obtenerPorCategoria(String categoria) {
-        String sql = "SELECT idProducto, NomProducto, FotoProducto FROM producto WHERE idCategoria = (SELECT idCategoria FROM categoriaproducto WHERE NomCategoria = ?);";
+        String sql = "SELECT idProducto, NomProducto, PrecioUnitario, FotoProducto, Descripcion, Cantidad FROM producto WHERE idCategoria = (SELECT idCategoria FROM categoriaproducto WHERE NomCategoria = ?);";
         List<Productos> productos = jdbcTemplate.query(sql, new Object[]{categoria}, new BeanPropertyRowMapper<>(Productos.class));
 
     
         // Verifica el contenido de los productos antes de retornarlos
         for (Productos producto : productos) {
-            System.out.println("Producto: " + producto.getNomProd() + ", FotoProducto: " + producto.getFotoProducto());
+            System.out.println("Producto: " + producto.getNomProducto() + ", FotoProducto: " + producto.getFotoProducto() + 
+            ", Precio" + producto.getPrecioUnitario() + ", Cantidad" + producto.getCantidad() + "./");
         }
     
         return productos;

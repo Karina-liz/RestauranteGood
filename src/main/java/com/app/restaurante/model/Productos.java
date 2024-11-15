@@ -3,7 +3,7 @@ package com.app.restaurante.model;
 public class Productos {
 
     private Long idProducto;
-    private String NomProd;
+    private String nomProducto;
     private double PrecioUnitario;
     private String descripcion;
     private int cantidad;
@@ -18,11 +18,11 @@ public class Productos {
     }
 
     // Constructor con todos los atributos (opcional)
-    public Productos(Long idProducto, String NomProd, double PrecioUnitario, String descripcion, 
+    public Productos(Long idProducto, String nomProducto, double PrecioUnitario, String descripcion, 
                      int cantidad, String FechaProducto, String FotoProducto, 
                      Long idCategoria, Long idTipo) {
         this.idProducto = idProducto;
-        this.NomProd = NomProd;
+        this.nomProducto = nomProducto;
         this.PrecioUnitario = PrecioUnitario;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
@@ -36,9 +36,13 @@ public class Productos {
     public Long getIdProducto() {        return idProducto;    }
     public void setIdProducto(Long idProducto) {        this.idProducto = idProducto;    }
 
-    public String getNomProd() {        return NomProd;    }
-    public void setNomProd(String NomProd) {        this.NomProd = NomProd;    }
+    public String getNomProducto() {  // o getNomProd()
+        return nomProducto;
+    }
 
+    public void setNomProducto(String nomProducto) {
+        this.nomProducto = nomProducto;
+    }
     public double getPrecioUnitario() {        return PrecioUnitario;    }
     public void setPrecioUnitario(double PrecioUnitario) {        this.PrecioUnitario = PrecioUnitario;    }
 
