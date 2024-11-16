@@ -1,4 +1,4 @@
-package com.app.restaurante.Service;
+package com.app.restaurante.service;
 
 import com.app.restaurante.model.Rol;
 import com.app.restaurante.dao.RolDAO; // Asegúrate de tener un DAO para los roles

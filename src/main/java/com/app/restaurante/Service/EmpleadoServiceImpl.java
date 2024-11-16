@@ -1,4 +1,4 @@
-package com.app.restaurante.Service;
+package com.app.restaurante.service;
 
 import com.app.restaurante.model.Empleado;
 import com.app.restaurante.dao.EmpleadoDAO;
