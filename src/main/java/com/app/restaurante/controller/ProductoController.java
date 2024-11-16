@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,5 +60,23 @@ public class ProductoController {
         return "carta";
     }
     
+    @GetMapping("/modalproducto.html")
+    public String obtenerProductoModal(@RequestParam("idProducto") int idProducto, Model model) {
+        Productos producto = productosDAO.obtenerProductoPorId(idProducto);  // Método que obtiene el producto
+        model.addAttribute("producto", producto);
+        return "modalproducto";  // Thymeleaf renderizará modalproducto.html
+    }
+
+    @GetMapping("/producto/{idProducto}")
+    public String obtenerDetalleProducto(@PathVariable("idProducto") int idProducto, Model model) {
+        Productos producto = productosDAO.obtenerProductoPorId(idProducto);
+        model.addAttribute("producto", producto);
+        return "modalproducto"; // nombre de la página HTML de detalles
+    }
+    
+    
+    
+
+
     
 }

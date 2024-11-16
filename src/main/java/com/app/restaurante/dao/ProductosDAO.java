@@ -29,5 +29,12 @@ public class ProductosDAO {
     
         return productos;
     }
+
+    public Productos obtenerProductoPorId(int idProducto) {
+        String sql = "SELECT idProducto, NomProducto, PrecioUnitario, FotoProducto, Descripcion FROM producto WHERE idProducto = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{idProducto}, new BeanPropertyRowMapper<>(Productos.class));
+    }
+    
+    
     
 }
