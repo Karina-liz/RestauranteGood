@@ -18,75 +18,69 @@ import java.security.NoSuchAlgorithmException;
 public class RegistroController {
 
     @Autowired
-    private ClienteDAO clienteDAO; // Inyectamos el ClienteDAO
+    private ClienteDAO clienteDAO;
 
     @Autowired
-    private HttpSession session; // Inyección de la sesión HTTP
+    private HttpSession session;
 
-    // Método para mostrar el formulario de registro
+    // Endpoint para mostrar formulario de registro inicial
     @GetMapping("/registrarse")
     public String showRegistro(Model model) {
-        // Aquí puedes añadir otros atributos si es necesario
-        return "registrarse";  // Retorna el formulario de registro
+        return "registrarse";
     }
 
-    // Método para registrar un nuevo cliente
-    @PostMapping("/registrarse")
+    // Endpoint principal para procesar el registro de nuevos clientes
+    @PostMapping("/registrarse") 
     public String registrarCliente(@RequestParam("nombre") String nombre,
                                    @RequestParam("apellido") String apellido,
                                    @RequestParam("dni") String dni,
                                    @RequestParam("correo") String correo,
                                    @RequestParam("usuario") String usuario,
                                    @RequestParam("contrasena") String contrasena,
-                                   @RequestParam("repetircontrasena") String repetirContrasena,
-                                   @RequestParam("telefono") String telefono,
-                                   //@RequestParam("fotoCliente") String fotoCliente,
+                                   @RequestParam("repetircontrasena") String repetirContrasena,                                                                   
                                    RedirectAttributes redirectAttributes) {
 
-        // Validar que las contraseñas coinciden
+        // Validación de contraseñas
         if (!contrasena.equals(repetirContrasena)) {
             redirectAttributes.addFlashAttribute("error", "Las contraseñas no coinciden");
             return "redirect:/registrarse";
         }
 
-        // Encriptar la contraseña usando MD5
+        // Encriptación de contraseña por seguridad
         String hashedPassword;
         try {
-            hashedPassword = Validation.md5(contrasena); // Asegúrate de tener este método para encriptar
+            hashedPassword = Validation.md5(contrasena);
         } catch (NoSuchAlgorithmException e) {
             redirectAttributes.addFlashAttribute("error", "Error al encriptar la contraseña");
             return "redirect:/registrarse";
         }
 
-        // Crear un nuevo cliente
+        // Creación y población del objeto Cliente
         Cliente nuevoCliente = new Cliente();
         nuevoCliente.setNombre(nombre);
         nuevoCliente.setApellido(apellido);
         nuevoCliente.setDni(dni);
         nuevoCliente.setCorreo(correo);
         nuevoCliente.setUsuario(usuario);
-        nuevoCliente.setContrasena(hashedPassword);  // Guardar la contraseña encriptada
-        nuevoCliente.setTelefono(telefono);
-        //nuevoCliente.setFotoCliente(fotoCliente);
+        nuevoCliente.setContrasena(hashedPassword);
 
-        // Guardar el nuevo cliente en la base de datos
+        // Persistencia del cliente en BD
         clienteDAO.save(nuevoCliente);
 
-        // Crear una sesión para el nuevo cliente
+        // Inicio de sesión automático post-registro
         session.setAttribute("cliente", nuevoCliente);
 
-        // Redirigir a la página de registro exitoso o a otra página de tu elección
         return "redirect:/registro_completar";
     }
 
-    // Método para mostrar la página de bienvenida
+    // Endpoint para página de bienvenida post-registro
     @GetMapping("/registro_completar")
     public String showBienvenido(Model model) {
         Cliente cliente = (Cliente) session.getAttribute("cliente");
         if (cliente == null) {
-            return "redirect:/login"; // Si no hay cliente en sesión, redirige al login
+            return "redirect:/login";
         }
-        model.addAttribute("cliente", cliente);  // Agregamos el cliente al modelo para mostrarlo
-        return "bienvenido";  // Muestra la página de bienvenida
+        model.addAttribute("cliente", cliente);
+        return "bienvenido";
     }
 }

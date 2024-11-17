@@ -18,7 +18,7 @@ public class ClienteDAO {
 
     // Método que devuelve el nombre de la tabla en la base de datos donde se almacenan los clientes
     protected String getTableName() {
-        return "clientes"; // Nombre de la tabla en la base de datos
+        return "cliente"; // Nombre de la tabla en la base de datos
     }
 
     // Método que devuelve el RowMapper para mapear los resultados a objetos Cliente
@@ -33,8 +33,7 @@ public class ClienteDAO {
                 cliente.setUsuario(rs.getString("usuario"));
                 cliente.setContrasena(rs.getString("contrasena"));
                 cliente.setCorreo(rs.getString("correo"));
-                cliente.setFotoCliente(rs.getString("fotoCliente"));
-                cliente.setTelefono(rs.getString("telefono"));
+                cliente.setFotoCliente(rs.getString("fotoCliente"));                
                 return cliente;
             }
         };
@@ -44,16 +43,15 @@ public class ClienteDAO {
     public void save(Cliente cliente) {
         if (cliente.getIdCliente() == null) {
             // Si el cliente no tiene ID, es un nuevo cliente, hacemos un INSERT
-            String sql = "INSERT INTO " + getTableName() + " (nombre, apellido, usuario, contrasena, correo, fotoCliente, telefono) " +
-                         "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO " + getTableName() + " (nombre, apellido, usuario, correo, contrasena, dni) " +
+                         "VALUES (?, ?, ?, ?, ?, ?)";
             jdbcTemplate.update(sql,
                 cliente.getNombre(),
                 cliente.getApellido(),
                 cliente.getUsuario(),
-                cliente.getContrasena(),
                 cliente.getCorreo(),
-                cliente.getFotoCliente(),
-                cliente.getTelefono()
+                cliente.getContrasena(),                
+                cliente.getDni()
             );
         } else {
             // Si el cliente tiene ID, es un cliente existente, hacemos un UPDATE
@@ -63,11 +61,9 @@ public class ClienteDAO {
                 cliente.getNombre(),
                 cliente.getApellido(),
                 cliente.getUsuario(),
-                cliente.getContrasena(),
                 cliente.getCorreo(),
-                cliente.getFotoCliente(),
-                cliente.getTelefono(),
-                cliente.getIdCliente()
+                cliente.getContrasena(),                
+                cliente.getDni()
             );
         }
     }
@@ -79,6 +75,7 @@ public class ClienteDAO {
     }
 
     // Método para obtener un cliente por ID
+    @SuppressWarnings("deprecation")
     public Cliente findById(Long idCliente) {
         String sql = "SELECT * FROM " + getTableName() + " WHERE idCliente = ?";
         List<Cliente> clientes = jdbcTemplate.query(sql, new Object[] { idCliente }, getRowMapper());
@@ -86,8 +83,9 @@ public class ClienteDAO {
     }
 
     // Método para obtener un cliente por correo electrónico (puedes agregar más métodos de búsqueda si lo deseas)
+    @SuppressWarnings("deprecation")
     public Cliente findByCorreo(String correo) {
-        String sql = "SELECT * FROM " + getTableName() + " WHERE email = ?";
+        String sql = "SELECT * FROM " + getTableName() + " WHERE correo = ?";
         List<Cliente> clientes = jdbcTemplate.query(sql, new Object[] { correo }, getRowMapper());
         return clientes.isEmpty() ? null : clientes.get(0);
     }

@@ -8,9 +8,7 @@
     <link th:include="components/link"></link>
 </head>
 <body>
-    <header class="header">
-        <div id="menu-container"></div>
-    </header>
+    <header th:include="components/nav_panel"></header>
 
     <main class="main">
         <div class="categorias">
@@ -44,7 +42,7 @@
                 <!-- Productos en carta.html -->
                 <h4 class="carta-category-title">Bebidas</h4>
                 <div class="productos">
-                    <div th:if="${postres != null and postres.size() > 0}" th:each="producto : ${postres}" class="carta-item">
+                    <div th:if="${bebidas != null and bebidas.size() > 0}" th:each="producto : ${bebidas}" class="carta-item">
                         <a th:href="@{'/producto/' + ${producto.idProducto}}" class="producto-modal-trigger">
                             <div class="producto-image-container">
                                 <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
@@ -62,7 +60,7 @@
                 <!-- Categoría Platillos -->
                 <h4 class="carta-category-title">Platillos</h4>
                 <div class="productos">
-                    <div th:if="${postres != null and postres.size() > 0}" th:each="producto : ${postres}" class="carta-item">
+                    <div th:if="${platillos != null and platillos.size() > 0}" th:each="producto : ${platillos}" class="carta-item">
                         <a th:href="@{'/producto/' + ${producto.idProducto}}" class="producto-modal-trigger">
                             <div class="producto-image-container">
                                 <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 

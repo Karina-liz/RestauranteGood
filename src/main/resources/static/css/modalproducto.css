@@ -1,71 +1,66 @@
-/* Estilos para el modalproducto */
-.modal_producto {
+
+.modal-producto-contenedor {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    max-width: 600px;
+    padding: 2rem;
+    max-width: 800px;
     margin: 0 auto;
-    background-color: #f9f9f9;
+    background-color: #420808 !important;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-.producto-detalle {
+
+.modal-producto-detalle {
+    width: 100%;
     text-align: center;
-    margin-bottom: 20px;
 }
-.producto-title {
-    font-size: 1.75rem;
+
+.modal-producto-titulo {
+    font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 15px;
     color: #333;
+    margin-bottom: 1.5rem;
 }
-.producto-image {
+
+.modal-producto-imagen {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
 }
-.producto-price {
-    font-size: 1.2rem;
-    color: #27ae60;
+
+.modal-producto-precio {
+    font-size: 1.5rem;
+    color: #2ecc71;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
-.producto-description {
+
+.modal-producto-descripcion {
     font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
 }
-.users_btn {
+
+.modal-producto-botones {
+    width: 100%;
     display: flex;
     justify-content: center;
 }
-.button {
-    padding: 10px 20px;
-    font-size: 1rem;
+
+.modal-producto-boton-agregar {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background-color: #3498db;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-.button_2 {
-    background-color: #007bff;
-    color: #fff;
-}
-.button_2:hover {
-    background-color: #0056b3;
-}
-.bg_dark {
-    background-color: #333;
-}
-.color_light {
-    color: #fff;
-}
-.sz16 {
-    font-size: 1rem;
-}
-.font_w500 {
-    font-weight: 500;
-}
 
+.modal-producto-boton-agregar:hover {
+    background-color: #2980b9;
+}

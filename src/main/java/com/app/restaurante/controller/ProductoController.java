@@ -59,13 +59,7 @@ public class ProductoController {
     
         return "carta";
     }
-    
-    @GetMapping("/modalproducto.html")
-    public String obtenerProductoModal(@RequestParam("idProducto") int idProducto, Model model) {
-        Productos producto = productosDAO.obtenerProductoPorId(idProducto);  // Método que obtiene el producto
-        model.addAttribute("producto", producto);
-        return "modalproducto";  // Thymeleaf renderizará modalproducto.html
-    }
+
 
     @GetMapping("/producto/{idProducto}")
     public String obtenerDetalleProducto(@PathVariable("idProducto") int idProducto, Model model) {
@@ -73,10 +67,6 @@ public class ProductoController {
         model.addAttribute("producto", producto);
         return "modalproducto"; // nombre de la página HTML de detalles
     }
-    
-    
-    
-
 
     
 }

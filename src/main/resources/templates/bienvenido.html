@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido</title>
+    <link th:include="components/link"></link>
 </head>
 <body>
+
+    <header th:include="components/nav_panel"></header>
+    
     <h1>¡Bienvenido, <span th:text="${cliente.nombre}"></span>!</h1>
     <p>Tu cuenta ha sido registrada exitosamente.</p>
 

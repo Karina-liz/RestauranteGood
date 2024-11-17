@@ -1,0 +1,31 @@
+
+<nav class="menu">
+    <div class="menu-container">
+        <div class="logo"><img src="./icons/restaurant.png" alt="" class="logo-img"></div>
+        <ul class="nav-links">
+            <li>
+                <a th:classappend="${activePage == 'bienvenido'} ? 'bg_hover color_dark'" th:href="@{/registro_completar}">
+                    <i class="ki-outline ki-book-open"></i> <!-- Icono de carta -->
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a th:classappend="${activePage == 'carta'} ? 'bg_hover color_dark'" th:href="@{/carta}">
+                    <i class="ki-outline ki-book-open"></i> <!-- Icono de carta -->
+                    <span>Carta</span>
+                </a>
+            </li>
+
+            <li><a href="">Nosotros</a></li>
+        </ul>
+        <div class="user-actions">
+
+            <span th:text="${cliente != null ? cliente.usuario : 'Nombre Usuario'}">Cliente</span>
+
+            <a href="#" class="icon" title="Carrito">🛒</a>
+            <a href="#" class="icon" title="Usuario">👤</a>
+            <a href="#" title="Iniciar Sesión">Iniciar Sesión</a>
+            <button class="dark-mode-toggle" title="Cambiar modo oscuro">🌓</button>
+        </div>
+    </div>
+</nav>
