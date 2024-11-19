@@ -1,32 +1,50 @@
 package com.app.restaurante.service;
 
 import com.app.restaurante.model.Empleado;
-import com.app.restaurante.dao.EmpleadoDAO;
+import com.app.restaurante.repository.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class EmpleadoServiceImpl {
+public class EmpleadoServiceImpl implements EmpleadoService{
 
     @Autowired
-    private EmpleadoDAO empleadoDAO;
+    private EmpleadoRepository empleadoRepository;
 
-    public List<Empleado> findAll() {
-        return empleadoDAO.findAll();
+    @Override
+    public List<Empleado> listarEmpleados() {
+        return empleadoRepository.findAll();
     }
 
-    public Optional<Empleado> findById(Integer id) {
-        return empleadoDAO.findById(id);
+    @Override
+    public Empleado guardarEmpleado(Empleado empleado) {
+        return empleadoRepository.save(empleado);
     }
 
-    public Empleado save(Empleado empleado) {
-        return empleadoDAO.save(empleado);
+    @Override
+    public Empleado obtenerEmpleadoPorId(Long id) {
+        return empleadoRepository.findById(id).orElse(null);
     }
 
-    public void deleteById(Integer id) {
-        empleadoDAO.deleteById(id);
+    @Override
+    public Empleado actualizarEmpleado(Empleado empleado) {
+        return empleadoRepository.save(empleado);
+    }
+
+    @Override
+    public void eliminarEmpleado(Long id) {
+        empleadoRepository.deleteById(id);
+    }
+
+    @Override
+    public Empleado buscarPorEmail(String email) {
+        return empleadoRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<Empleado> obtenerTodosEmpleados() {
+        return empleadoRepository.findAll();
     }
 }

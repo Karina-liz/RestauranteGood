@@ -88,7 +88,9 @@ public class Empleado {
     }
 
     
-    
+    @Override
+    public String toString() {
+        return "Empleado [idEmpleado=" + idEmpleado + ", nombre=" + nombre + ", apellido =" + apellido + ", usuario=" + usuario + ", contraseña=" + contraseña + ", rol=" + rol +"]"; }
 }
 
 
