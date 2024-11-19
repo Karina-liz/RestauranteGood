@@ -1,18 +1,15 @@
 package com.app.restaurante.service;
 
-import com.app.restaurante.model.Rol;
-import com.app.restaurante.repository.RolRepository; // Asegúrate de tener un repository para los roles
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
-public class RolService {
+import com.app.restaurante.model.Rol;
 
-    @Autowired
-    private RolRepository rolRepository;
+public interface RolService {
+    public List<Rol> listarRol();
 
-    public List<Rol> findAll() {
-        return rolRepository.findAll();
-    }
+    public Rol guardarRol(Rol rol);
+
+    public Rol obtenerRolPorId(Integer id);
+    
+    public void eliminarRol(Integer id);
 }
