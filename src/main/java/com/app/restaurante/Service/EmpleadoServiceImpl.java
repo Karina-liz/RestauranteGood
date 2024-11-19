@@ -24,7 +24,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     }
 
     @Override
-    public Empleado obtenerEmpleadoPorId(Long id) {
+    public Empleado obtenerEmpleadoPorId(Integer id) {
         return empleadoRepository.findById(id).orElse(null);
     }
 
@@ -34,17 +34,8 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     }
 
     @Override
-    public void eliminarEmpleado(Long id) {
+    public void eliminarEmpleado(Integer id) {
         empleadoRepository.deleteById(id);
     }
 
-    @Override
-    public Empleado buscarPorEmail(String email) {
-        return empleadoRepository.findByEmail(email);
-    }
-
-    @Override
-    public List<Empleado> obtenerTodosEmpleados() {
-        return empleadoRepository.findAll();
-    }
 }

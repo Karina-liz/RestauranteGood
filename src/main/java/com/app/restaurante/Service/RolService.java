@@ -1,7 +1,7 @@
 package com.app.restaurante.service;
 
 import com.app.restaurante.model.Rol;
-import com.app.restaurante.dao.RolDAO; // Asegúrate de tener un DAO para los roles
+import com.app.restaurante.repository.RolRepository; // Asegúrate de tener un repository para los roles
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 public class RolService {
 
     @Autowired
-    private RolDAO rolDAO;
+    private RolRepository rolRepository;
 
     public List<Rol> findAll() {
-        return rolDAO.findAll();
+        return rolRepository.findAll();
     }
 }

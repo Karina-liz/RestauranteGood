@@ -8,11 +8,10 @@ public interface EmpleadoService {
 
     public Empleado guardarEmpleado(Empleado empleado);
 
-    public Empleado obtenerEmpleadoPorId(Long id);
+    public Empleado obtenerEmpleadoPorId(Integer id);
 
     public Empleado actualizarEmpleado(Empleado empleado);
     
-    public void eliminarEmpleado(Long id);
+    public void eliminarEmpleado(Integer id);
 
-    Empleado buscarPorEmail(String email);
 }
