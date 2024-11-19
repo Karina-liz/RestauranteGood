@@ -31,7 +31,10 @@ public class LoginController {
         
         if (cliente != null) {
             // Almacena el cliente en la sesión
-            session.setAttribute("cliente", cliente);
+            session.setAttribute("idCliente", cliente.getIdCliente()); // Almacena el ID del cliente
+            session.setAttribute("usuario", cliente.getUsuario()); // Almacena el usuario del cliente
+            session.setAttribute("nombre", cliente.getNombre()); // Almacena el nombre del cliente
+            //session.setAttribute("cliente", cliente);
             
             // Redirige a la página de bienvenida o completar registro
             return new ModelAndView("redirect:/registro_completar");
@@ -47,7 +50,7 @@ public class LoginController {
     // Nuevo método para manejar el cierre de sesión
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate(); // Invalida la sesión actual
+        session.invalidate(); // Invalida la sesión actual y destruye todos los datos
         return "redirect:/login"; // Redirige a la página de inicio de sesión
     }
 }

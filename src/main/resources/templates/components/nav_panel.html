@@ -1,8 +1,15 @@
 
+<!-- 
+ Barra de navegación principal del sitio 
+ se incluira en varios paginas
+-->
 <nav class="menu">
     <div class="menu-container">
+
         <div class="logo"><img src="./icons/restaurant.png" alt="" class="logo-img"></div>
+        
         <ul class="nav-links">
+            
             <li>
                 <a th:classappend="${activePage == 'bienvenido'} ? 'bg_hover color_dark'" th:href="@{/registro_completar}">
                     <i class="ki-outline ki-book-open"></i> <!-- Icono de carta -->
@@ -15,16 +22,16 @@
                     <span>Carta</span>
                 </a>
             </li>
-
             <li><a href="">Nosotros</a></li>
         </ul>
         <div class="user-actions">
-
+            <!-- Muestra el nombre del usuario si está logueado, sino muestra texto por defecto -->
             <span th:text="${cliente != null ? cliente.usuario : 'Nombre Usuario'}">Cliente</span>
-
+            <!-- Enlaces a funciones de usuario -->
             <a href="#" class="icon" title="Carrito">🛒</a>
             <a href="#" class="icon" title="Usuario">👤</a>
             <a href="#" title="Iniciar Sesión">Iniciar Sesión</a>
+            <!-- Botón para cambiar entre modo claro/oscuro -->
             <button class="dark-mode-toggle" title="Cambiar modo oscuro">🌓</button>
         </div>
     </div>

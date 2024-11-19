@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido</title>
+    <!-- Incluye los archivos CSS necesarios del components/link.html en  -->
     <link th:include="components/link"></link>
 </head>
 <body>
@@ -14,16 +15,7 @@
     <p>Tu cuenta ha sido registrada exitosamente.</p>
 
     <a href="/login">Iniciar sesión</a>
-    <a href="/logout">Cerrar sesión</a> <!-- Esto sería para cerrar la sesión si tienes configurado el logout -->
-    <br>
-
-<!-- Botón en formato de lista en el menú de navegación -->
-<li>
-    <a th:classappend="${activePage == 'carta'} ? 'bg_hover color_dark'" th:href="@{/carta}">
-        <i class="ki-outline ki-book-open"></i> <!-- Icono de carta -->
-        <span>Carta</span>
-    </a>
-</li>
+    <a href="/logout">Cerrar sesión</a> <!-- Cerrar la sesión conectado al login -->
 
 
 </body>

@@ -32,8 +32,8 @@ public class ClienteDAO {
                 cliente.setApellido(rs.getString("apellido"));
                 cliente.setUsuario(rs.getString("usuario"));
                 cliente.setContrasena(rs.getString("contrasena"));
-                cliente.setCorreo(rs.getString("correo"));
-                cliente.setFotoCliente(rs.getString("fotoCliente"));                
+                cliente.setCorreo(rs.getString("correo"));  
+                cliente.setCorreo(rs.getString("dni"));              
                 return cliente;
             }
         };
