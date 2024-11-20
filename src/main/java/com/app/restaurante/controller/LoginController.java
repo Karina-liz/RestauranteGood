@@ -21,11 +21,13 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private HttpSession session;    
+    
     @PostMapping("/login")
     public ModelAndView login(
             @RequestParam("email") String email, 
-            @RequestParam("contrasena") String password,
-            HttpSession session) throws NoSuchAlgorithmException, IOException, CloneNotSupportedException {
+            @RequestParam("contrasena") String password) throws NoSuchAlgorithmException, IOException, CloneNotSupportedException {
         
         Cliente cliente = loginService.validateUser(email, password);  // Validación de credenciales
         
@@ -46,7 +48,6 @@ public class LoginController {
         }
     }
     
-   
     // Nuevo método para manejar el cierre de sesión
     @GetMapping("/logout")
     public String logout(HttpSession session) {

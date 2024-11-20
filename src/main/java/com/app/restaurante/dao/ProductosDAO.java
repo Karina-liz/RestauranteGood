@@ -127,8 +127,25 @@ public class ProductosDAO {
     -------------------------------------- 
     */
     
+    /*
+     * Método para obtener todas las categorías de productos
+     * @return Lista de categorías de productos
+     */
+    public List<String> findAllCategorias() {
+        // Consulta SQL para obtener todas las categorías distintas
+        String sql = "SELECT IDCategoria, NomCategoria FROM categoriaproducto";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
 
-
+    /*
+     * Método para obtener todos los tipos de productos
+     * @return Lista de tipos de productos
+     */
+    public List<String> findAllTipos() {
+        // Consulta SQL para obtener todos los tipos distintos
+        String sql = "SELECT IDTipo, NomTipo FROM tipoproducto";
+        return jdbcTemplate.queryForList(sql, String.class);
+    }
 
     /* 
     --------------------------------------
