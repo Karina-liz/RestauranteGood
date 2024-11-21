@@ -12,7 +12,7 @@ public class DetalleEmpleado {
     @Column(length = 9, nullable = true)
     private String telefono;
 
-    @Column(length = 100, nullable = true)
+    @Column(length = 100, nullable = false)
     private String correo;
 
     @Column(length = 150, nullable = true)

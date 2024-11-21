@@ -21,10 +21,20 @@
         <input type="text" th:field="*{usuario}" required/>
         <label>Contraseña:</label>
         <input type="password" th:field="*{contraseña}" required/>
+
+        <!-- Campos para DetalleEmpleado -->
+        <h3>Detalles del Empleado</h3>
+        <label>Teléfono:</label>
+        <input type="text" name="telefono" required/>
+        <label>Correo:</label>
+        <input type="email" name="correo" required/>
+        <label>Foto:</label>
+        <input type="text" name="foto" required/>
+
         <label>Rol:</label>
         <select th:field="*{rol.idRol}" required onchange="if(this.value === 'nuevo') redirectToCreateRole()">
             <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nomRol}"></option>
-            <option value="nuevo">Crear Nuevo Rol</option> <!-- Opción para crear un nuevo rol -->
+            <option value="nuevo">Crear Nuevo Rol</option>
         </select>
         <button type="submit">Guardar</button>
     </form>
