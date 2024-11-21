@@ -45,13 +45,16 @@ public class RolController {
     @PostMapping("/{id}/")
     public String actualizarRol(@PathVariable Integer id, @ModelAttribute Rol rol, Model model) {
         Rol rolExistente = rolService.obtenerRolPorId(id);
-        rolExistente.setIdRol(id);
+        if (rolExistente == null) {
+            return "redirect:/roles?error=RolNoEncontrado";
+        }
         rolExistente.setNomRol(rol.getNomRol());
         rolExistente.setDescripcion(rol.getDescripcion());
-
-        rolService.actualizarRol(rol);
+        
+        rolService.actualizarRol(rolExistente);
         return "redirect:/roles";
     }
+
 
     @GetMapping("/{id}/eliminar")
     public String eliminarRol(@PathVariable Integer id) {

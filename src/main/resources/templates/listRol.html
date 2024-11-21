@@ -22,7 +22,7 @@
                 <td th:text="${rol.nomRol}"></td>
                 <td th:text="${rol.descripcion}"></td>
                 <td>
-                    <a th:href="@{/roles/{id}(id=${rol.idRol})}">Editar</a>
+                    <!-- <a th:href="@{/roles/{id}(id=${rol.idRol})}">Editar</a> -->
                     <a th:href="@{/roles/{id}/eliminar(id=${rol.idRol})}" onclick="return confirm('¿Estás seguro de que deseas eliminar este rol?');">Eliminar</a>
                 </td>
             </tr>
