@@ -25,11 +25,11 @@
         <!-- Campos para DetalleEmpleado -->
         <h3>Detalles del Empleado</h3>
         <label>Teléfono:</label>
-        <input type="text" name="telefono" required/>
+        <input type="text" th:field="*{detalleEmpleado.telefono}" required/>
         <label>Correo:</label>
-        <input type="email" name="correo" required/>
+        <input type="email" th:field="*{detalleEmpleado.correo}" required/>
         <label>Foto:</label>
-        <input type="text" name="foto" required/>
+        <input type="text" th:field="*{detalleEmpleado.foto}" required/>
 
         <label>Rol:</label>
         <select th:field="*{rol.idRol}" required onchange="if(this.value === 'nuevo') redirectToCreateRole()">

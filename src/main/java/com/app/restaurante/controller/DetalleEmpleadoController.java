@@ -1,7 +1,6 @@
 package com.app.restaurante.controller;
 
 import com.app.restaurante.model.DetalleEmpleado;
-import com.app.restaurante.model.Empleado;
 import com.app.restaurante.service.DetalleEmpleadoService;
 import com.app.restaurante.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +34,9 @@ public class DetalleEmpleadoController {
     }
 
     @PostMapping
-    public String crearDetalle(@ModelAttribute DetalleEmpleado detalleEmpleado, @RequestParam Integer idEmpleado) {
-        Empleado empleado = empleadoService.obtenerEmpleadoPorId(idEmpleado);
-        detalleEmpleado.setEmpleado(empleado);
-        detalleEmpleadoService.guardarDetalle(detalleEmpleado);
+    public String crearDetalle(@ModelAttribute DetalleEmpleado detalleEmpleado, @RequestParam Integer EmpleadoId) {
+        Integer empleadoId = detalleEmpleado.getEmpleado().getIdEmpleado();
+        detalleEmpleadoService.guardarDetalle(detalleEmpleado, empleadoId);
         return "redirect:/detalle-empleado";
     }
 
@@ -48,11 +46,11 @@ public class DetalleEmpleadoController {
         model.addAttribute("detalleEmpleado", detalleEmpleado);
         return "formDetalleEmpleadoEditar";
     }
-
+//FALTA ARREGLAR
     @PostMapping("/{id}")
-    public String actualizarDetalle(@PathVariable Integer id, @ModelAttribute DetalleEmpleado detalleEmpleado) {
-        detalleEmpleado.setIdDetalleEmp(id);
-        detalleEmpleadoService.guardarDetalle(detalleEmpleado);
+    public String actualizarDetalle(@PathVariable Integer EmpleadoId, @ModelAttribute DetalleEmpleado detalleEmpleado) {
+        Integer empleadoId = detalleEmpleado.getEmpleado().getIdEmpleado();
+        detalleEmpleadoService.guardarDetalle(detalleEmpleado, empleadoId);
         return "redirect:/detalle-empleado";
     }
 
@@ -61,4 +59,4 @@ public class DetalleEmpleadoController {
         detalleEmpleadoService.eliminarDetalle(id);
         return "redirect:/detalle-empleado";
     }
-} 
+}
