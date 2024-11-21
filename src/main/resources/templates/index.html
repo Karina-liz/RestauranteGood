@@ -3,16 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GoodDay</title>
+    <link th:include="components/link"></link>
 </head>
-<body>
-    
-    <h1>Hola</h1>
-    
+<body class="goodday-body">
+        
+    <header th:include="components/nav_panel"></header>
     <!-- Botón que redirige al login -->
     <a href="/login" style="text-decoration: none;">
         <button type="button">Ir al Login</button>
     </a>
 
+    <main>
+        <section class="goodday-banner">
+            <div class="goodday-banner__container">
+                <h1>Good Day</h1>
+            </div>
+        </section>
+
+        <section class="goodday-menu_del_dia">
+            <div class="goodday-menu_del_dia__container">
+                <h2 class="goodday-menu_del_dia__name">MENÚ DEL DÍA</h2>
+                <article class="goodday-menu-item">
+                    <img src="limonada.jpg" alt="Limonada fresca" class="goodday-menu_del_dia__img">
+                    <span class="goodday-bebida">Limonada</span>
+                </article>
+                <article class="goodday-menu-item">
+                    <img src="tallarin.jpg" alt="Tallarines Rojos servidos con queso" class="goodday-menu_del_dia__img">
+                    <span class="goodday-menu">Tallarines Rojos</span>
+                </article>
+                <article class="goodday-menu-item">
+                    <img src="suspiro.jpg" alt="Postre Suspiro a la Limeña" class="goodday-menu_del_dia__img">
+                    <span class="goodday-postre">Suspiro a la Limeña</span>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <section class="goodday-carrusel">
+        <div class="goodday-carrusel_container">
+            <div class="goodday-carrusel__slider">
+                <div class="goodday-carrusel__item">
+                    <img src="arroz_con_pato.jpg" alt="Arroz con Pato" class="goodday-carrusel__img">
+                    <span class="goodday-carrusel__desc">Especialidad de la casa</span>
+                    <h3 class="goodday-carrusel__name">Arroz con Pato</h3>
+                </div>
+                <div class="goodday-carrusel__item">
+                    <img src="aji_de_gallina.jpg" alt="Ají de Gallina" class="goodday-carrusel__img">
+                    <span class="goodday-carrusel__desc">Sugerencia del Chef</span>
+                    <h3 class="goodday-carrusel__name">Ají de Gallina</h3>
+                </div>
+                <div class="goodday-carrusel__item">
+                    <img src="lomo_saltado.jpg" alt="Lomo Saltado" class="goodday-carrusel__img">
+                    <span class="goodday-carrusel__desc">Lo más pedido</span>
+                    <h3 class="goodday-carrusel__name">Lomo Saltado</h3>
+                </div>
+            </div>
+            <div class="goodday-carrusel__buttons">
+                <button class="goodday-carrusel__button_prev" aria-label="Anterior">&#8249;</button>
+                <button class="goodday-carrusel__button_next" aria-label="Siguiente">&#8250;</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="goodday-categoria_menu">
+        <div class="goodday-container_categorias">
+            <div class="goodday-categorias__item">
+                <span class="goodday-categoria__name">Bebidas</span>
+                <img src="bebidas.jpg" alt="Bebidas refrescantes" class="goodday-categorias__img">
+            </div>
+            <div class="goodday-categorias__item">
+                <span class="goodday-categoria__name">Platillo</span>
+                <img src="platillos.jpg" alt="Variedad de platillos" class="goodday-categorias__img">
+            </div>
+            <div class="goodday-categorias__item">
+                <span class="goodday-categoria__name">Postres</span>
+                <img src="postres.jpg" alt="Postres variados" class="goodday-categorias__img">
+            </div>
+        </div>
+    </section>
+
+    <footer class="goodday-footer">
+        <nav class="goodday-footer__nav">
+            <ul class="goodday-footer__nav__list">
+                <li class="goodday-footer__nav__list__item"><a href="#">Ir a la página principal</a></li>
+                <li class="goodday-footer__nav__list__item"><a href="#">Explorar nuestra carta</a></li>
+                <li class="goodday-footer__nav__list__item"><a href="#">Conoce más sobre nosotros</a></li>
+                <li class="goodday-footer__nav__list__item"><a href="#">Inicia sesión en tu cuenta</a></li>
+                <li class="goodday-footer__nav__list__item"><a href="#">Ver tu carrito de compras</a></li>
+            </ul>
+        </nav>        
+        <div class="goodday-social_media">
+            <a href="#"><img src="facebook.jpg" alt="facebook" class="goodday-redes_logo"></a>
+            <a href="#"><img src="instagram.jpg" alt="instagram" class="goodday-redes_logo"></a>
+            <a href="#"><img src="twitter.jpg" alt="twitter" class="goodday-redes_logo"></a>
+        </div>
+        <p class="goodday-footer_desc">Diseño y desarrollo: <a href="#">Good Day</a></p>
+        <p class="goodday-footer_desc">Todos los derechos reservados &copy; 2024 GOOD DAY</p>
+    </footer>
+    <script src="main.js"></script>
+
 </body>
+
+
 </html>

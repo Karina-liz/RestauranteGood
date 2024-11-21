@@ -6,6 +6,46 @@
     <title>Login | Nextclass</title>
     <!--link rel="stylesheet" type="text/css" href="./css/login.css"-->
     <link th:include="components/link"></link>
+    <script>
+        function validarDNI(input) {
+            // Eliminar caracteres no numéricos
+            input.value = input.value.replace(/[^0-9]/g, '');
+            
+            // Limitar a 8 dígitos
+            if (input.value.length > 8) {
+                input.value = input.value.slice(0, 8);
+            }
+        }
+
+        function validarContrasenas() {
+            const password = document.getElementById('nueva_clave').value;
+            const confirmPassword = document.getElementById('repetir_clave').value;
+            const mensajeError = document.getElementById('mensaje-error');
+            const submitBtn = document.getElementById('submit-registro');
+
+            if (password !== confirmPassword) {
+                mensajeError.style.display = 'block';
+                mensajeError.textContent = 'Las contraseñas no coinciden';
+                submitBtn.disabled = true;
+                setTimeout(() => {
+                    mensajeError.style.display = 'none';
+                    submitBtn.disabled = false;
+                }, 2000);
+                return false;
+            }
+            return true;
+        }
+
+        function validarEnTiempoReal() {
+            const password = document.getElementById('nueva_clave');
+            const confirmPassword = document.getElementById('repetir_clave');
+            
+            password.addEventListener('input', validarContrasenas);
+            confirmPassword.addEventListener('input', validarContrasenas);
+        }
+
+        window.onload = validarEnTiempoReal;
+    </script>
 </head>
 <body class="body-login">
     
@@ -33,7 +73,7 @@
     </div>
 
     <div class="registro-container registro">
-        <form action="/registrarse" method="POST" class="registro-form" id="FormContact" autocomplete="off">
+        <form action="/registrarse" method="POST" class="registro-form" id="FormContact" autocomplete="off" onsubmit="return validarContrasenas()">
             <h1>¡Registra tu cuenta!</h1>
             <hr>
             <p>Ingresa tus datos para registrarte</p>
@@ -61,7 +101,7 @@
             
             <div class="input-box registro-input-box">
                 <label for="dni">DNI:</label>
-                <input type="text" id="dni" name="dni" class="input registro-input" placeholder="Tu DNI" required />
+                <input type="text" id="dni" name="dni" class="input registro-input" placeholder="Tu DNI" maxlength="8" oninput="validarDNI(this)" required />
             </div>
 
             <div class="input-box registro-input-box">
@@ -72,13 +112,14 @@
             <div class="input-box registro-input-box">
                 <label for="repetir_clave">Repetir contraseña:</label>
                 <input type="password" id="repetir_clave" name="repetircontrasena" class="input registro-input" placeholder="Repite la contraseña" required />
+                <div id="mensaje-error" style="display: none; color: red; margin-top: 5px;"></div>
             </div>
 
             <div class="remember-forgot registro-remember-forgot">
                 <a href="#">¿Ya tienes cuenta?</a>
             </div>
       
-            <input type="submit" value="Registrarse" class="login-submit registro-submit" name="registro">
+            <input type="submit" value="Registrarse" class="login-submit registro-submit" name="registro" id="submit-registro">
             <button class="toggle-registro btn1 registro-toggle" onclick="toggleLogin()">Iniciar Sesión</button>
         </form>    
     </div>

@@ -10,9 +10,6 @@ public class Validation {
 
     /**
      * Método que genera un hash MD5 de una contraseña
-     * @param contrasena La contraseña a encriptar
-     * @return String con el hash MD5 generado
-     * @throws NoSuchAlgorithmException Si el algoritmo MD5 no está disponible
      */
     public static String md5(String contrasena) throws NoSuchAlgorithmException {
         // Obtiene una instancia del algoritmo MD5

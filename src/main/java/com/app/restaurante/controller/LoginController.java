@@ -27,7 +27,8 @@ public class LoginController {
     @PostMapping("/login")
     public ModelAndView login(
             @RequestParam("email") String email, 
-            @RequestParam("contrasena") String password) throws NoSuchAlgorithmException, IOException, CloneNotSupportedException {
+            @RequestParam("contrasena") String password)
+             throws NoSuchAlgorithmException, IOException, CloneNotSupportedException {
         
         Cliente cliente = loginService.validateUser(email, password);  // Validación de credenciales
         
@@ -42,6 +43,9 @@ public class LoginController {
             return new ModelAndView("redirect:/registro_completar");
         } else {
             // Si las credenciales son incorrectas, redirige al login con un mensaje de error
+            // Mensaje del producto agregado
+            //redirectAttributes.addFlashAttribute("mensaje", "Producto agregado al carrito exitosamente.");
+
             ModelAndView mav = new ModelAndView("login");
             mav.addObject("error", "Correo electrónico o contraseña inválidos");
             return mav;

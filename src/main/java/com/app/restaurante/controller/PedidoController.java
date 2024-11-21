@@ -9,7 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.app.restaurante.dao.PedidoDAO;
 
 import jakarta.servlet.http.HttpSession;
-
+//Posible eliminar codigo muerto TODO ESTA EN CARRITO
 @Controller
 public class PedidoController {
     
