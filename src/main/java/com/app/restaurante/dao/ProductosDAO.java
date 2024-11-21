@@ -1,6 +1,6 @@
 package com.app.restaurante.dao;
 
-import com.app.restaurante.model.Cliente;
+//import com.app.restaurante.model.Cliente;
 import com.app.restaurante.model.Productos;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -9,6 +9,8 @@
 </head>
 <body>
     <header th:include="components/nav_panel"></header>
+    
+    <div th:include="components/mensajes"></div>
 
     <main class="main">
         <div class="categorias">
@@ -98,5 +100,14 @@
     </section>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Esperar 3 segundos y ocultar el mensaje
+        setTimeout(function() {
+            const mensajeContainer = document.querySelector('.mensaje-container');
+            if (mensajeContainer) {
+                mensajeContainer.style.display = 'none';
+            }
+        }, 3000);
+    </script>
 </body>
 </html>

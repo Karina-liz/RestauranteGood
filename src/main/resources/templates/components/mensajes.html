@@ -2,9 +2,9 @@
     <!--
     Mensajes para mostrar el error, observaciones o acciones
     -->
-
-    <div th:fragment="mostrarMensaje(mensaje)" class="mensaje-container">
+    <div th:fragment="mostrarMensaje(mensaje)" class="mensaje-container" th:if="${mensaje != null}">
         <div class="alert alert-info" role="alert">
             <span th:text="${mensaje}"></span>
         </div>
     </div>
+    

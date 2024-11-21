@@ -30,7 +30,7 @@
     }
 
     .modal-producto-imagen {
-        max-width: 100%;
+        width: 50%;
         height: auto;
         border-radius: 8px;
         margin-bottom: 1.5rem;
@@ -71,52 +71,77 @@
         background-color: #2980b9;
     }
 </style>
+
+    <link th:include="components/link"></link>
 </head>
 <body>
     <header th:include="components/nav_panel"></header>
 
+
     <section class="modal-producto-contenedor">
-        <div class="modal-producto-detalle">
-            <span th:text="${producto.idProducto}"></span>
-            <h4 th:text="${producto.nomProducto}" class="modal-producto-titulo"></h4>
-            <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
-                 th:alt="'Imagen de ' + ${producto.FotoProducto}" class="modal-producto-imagen">
-            <p th:text="'Precio: S/. ' + ${producto.precioUnitario}" class="modal-producto-precio"></p>
-            <p th:text="${producto.descripcion}" class="modal-producto-descripcion"></p>
-            
-            <div class="cantidad-container mt-3">
-                <button id="btn-decrementar" class="btn btn-secondary">-</button>
-                <span id="cantidad" class="mx-2">1</span>
-                <button id="btn-incrementar" class="btn btn-secondary">+</button>
+        <form id="form-agregar" action="/carrito/agregar" method="POST">
+            <div class="modal-producto-detalle">
+                <!-- Agrega un campo oculto para enviar el idProducto -->
+                <input type="hidden" name="idproducto" th:value="${producto.idProducto}">
+        
+                <span th:text="${producto.idProducto}" name="productoId"></span>
+                <h4 th:text="${producto.nomProducto}" class="modal-producto-titulo"></h4>
+                <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
+                     th:alt="'Imagen de ' + ${producto.FotoProducto}" class="modal-producto-imagen">
+                <p th:text="'Precio: S/. ' + ${producto.precioUnitario}" class="modal-producto-precio"></p>
+                <p th:text="${producto.descripcion}" class="modal-producto-descripcion"></p>
+        
+                <div class="cantidad-container mt-3">
+                    <button type="button" id="btn-decrementar" class="btn btn-secondary">-</button>
+                    <span id="cantidad" class="mx-2">1</span>
+                    <button type="button" id="btn-incrementar" class="btn btn-secondary">+</button>
+                </div>
+                <input type="hidden" name="cantidad" id="cantidad-input" value="1">
+                <input type="hidden" name="precioProducto" id="precio-input" value="0">
             </div>
-        </div>
-        <div class="modal-producto-botones">
-            <button id="btn-agregar" class="btn btn-success mt-3">Agregar al carrito</button>
-            <button id="btn-comprar" class="btn btn-primary mt-3">Comprar</button>
-        </div>
+            <div class="modal-producto-botones">
+                <button type="submit" class="btn btn-success mt-3">Agregar al carrito</button>
+                <button id="btn-comprar" class="btn btn-primary mt-3" onclick="comprarProducto()">Comprar</button>
+            </div>
+        </form>        
     </section>
     
-    <!--Script para manejar la cantidad solicitada del producto-->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const btnDecrementar = document.getElementById('btn-decrementar');
             const btnIncrementar = document.getElementById('btn-incrementar');
             const cantidadSpan = document.getElementById('cantidad');
-            
+            const cantidadInput = document.getElementById('cantidad-input');
+            const precioInput = document.getElementById('precio-input');
+
             let cantidad = 1;
 
             btnDecrementar.addEventListener('click', function() {
                 if (cantidad > 1) {
                     cantidad--;
                     cantidadSpan.textContent = cantidad;
+                    cantidadInput.value = cantidad; // Actualiza el valor del input oculto
                 }
             });
 
             btnIncrementar.addEventListener('click', function() {
                 cantidad++;
                 cantidadSpan.textContent = cantidad;
+                cantidadInput.value = cantidad; // Actualiza el valor del input oculto
             });
+
+            // Establecer el precio unitario en el input oculto
+            const precioUnitario = parseFloat(document.querySelector('p[th\\:text="\'Precio: S/. \' + ${producto.precioUnitario}"]').textContent.replace('Precio: S/. ', ''));
+            precioInput.value = cantidad * precioUnitario; // Inicializa el precio total
         });
     </script>
 </body>
+
+<script>
+    function comprarProducto() {
+        alert('Botón Comprar presionado.'); // Mensaje al presionar el botón Comprar
+        // Aquí puedes agregar más lógica si es necesario
+    }
+</script>
+
 </html>

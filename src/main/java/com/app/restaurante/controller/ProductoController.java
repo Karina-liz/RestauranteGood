@@ -1,7 +1,11 @@
 package com.app.restaurante.controller;
 
 import com.app.restaurante.dao.ProductosDAO;
+import com.app.restaurante.model.Cliente;
 import com.app.restaurante.model.Productos;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,11 +27,11 @@ public class ProductoController {
     @Autowired
     private ProductosDAO productosDAO;
 
+    @Autowired
+    private HttpSession session;   
+
     /**
      * Método que maneja la solicitud GET para mostrar la carta de productos
-     * Obtiene los productos por categoría y establece una imagen por defecto si no tienen una asignada
-     * @param model Modelo para pasar datos a la vista
-     * @return Vista 'carta' con los productos organizados por categoría
      */
     @GetMapping("/carta")
     public String mostrarCarta(Model model) {
@@ -63,17 +67,23 @@ public class ProductoController {
         model.addAttribute("platillos", platillos);
         model.addAttribute("activePage", "carta");
     
+        //Incorpora los atributos del Cliente
+        Cliente cliente = (Cliente) session.getAttribute("cliente");
+        model.addAttribute("cliente", cliente); 
+
         return "carta";
     }
 
     /**
      * Método que maneja la solicitud GET para obtener los detalles de un producto específico
-     * @param idProducto ID del producto a consultar
-     * @param model Modelo para pasar datos a la vista
-     * @return Vista 'modalproducto' con los detalles del producto
      */
     @GetMapping("/producto/{idProducto}")
     public String obtenerDetalleProducto(@PathVariable("idProducto") int idProducto, Model model) {
+
+        //Incorpora los atributos del Cliente
+        Cliente cliente = (Cliente) session.getAttribute("cliente");
+        model.addAttribute("cliente", cliente); 
+        
         Productos producto = productosDAO.obtenerProductoPorId(idProducto);
         model.addAttribute("producto", producto);
         return "modalproducto";
@@ -85,14 +95,6 @@ public class ProductoController {
      */
     /**
      * Método que maneja la solicitud POST para registrar un nuevo producto
-     * @param nomProducto Nombre del producto
-     * @param precioUnitario Precio unitario del producto
-     * @param descripcion Descripción del producto
-     * @param cantidad Cantidad disponible del producto
-     * @param idCategoria ID de la categoría del producto
-     * @param idTipo ID del tipo de producto
-     * @param fotoProducto URL de la foto del producto
-     * @return Redirección a la página de productos con mensaje de éxito
      */
     @PostMapping("/registrar_producto")
     public String registrarProducto(@RequestParam("nomProducto") String nomProducto,
@@ -124,8 +126,6 @@ public class ProductoController {
 
     /**
      * Método que muestra todos los productos disponibles
-     * @param model Modelo para pasar datos a la vista
-     * @return Vista con todos los productos listados
      */
     @GetMapping("/productocarta")
     public String mostrarTodosProductos(Model model) {
