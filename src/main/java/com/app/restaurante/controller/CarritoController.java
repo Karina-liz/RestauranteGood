@@ -2,7 +2,6 @@ package com.app.restaurante.controller;
 
 import com.app.restaurante.dao.*;
 import com.app.restaurante.model.Cliente;
-import com.app.restaurante.model.Productos;
 import com.app.restaurante.model.Carrito;
 
 import jakarta.servlet.http.HttpSession;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,32 +31,40 @@ public class CarritoController {
     @PostMapping("/carrito/agregar")
     public String agregarAlCarrito(@RequestParam("idproducto") Long idProducto,
                                    @RequestParam("cantidad") int cantidad,
-                                   @RequestParam("precioProducto") double precioProducto,
-                                   RedirectAttributes redirectAttributes) {  // Usamos RedirectAttributes
-                                
+                                   @RequestParam("precioUnitario") double precioUnitario,
+                                   RedirectAttributes redirectAttributes) {
+                                 
         Cliente cliente = (Cliente) session.getAttribute("cliente");
-        if (cliente == null) {            
+        if (cliente == null) {
             return "redirect:/login";
         }
 
-        carritoDAO.guardarEnCarrito(cliente.getIdCliente(), idProducto, cantidad, precioProducto);
+        // Calcular el precioProducto
+        double precioProducto = cantidad * precioUnitario;
+
+        // Verificar si existe un pedido activo hoy para el cliente
+        Integer idPedido = carritoDAO.obtenerUltimoPedidoPorCliente(cliente.getIdCliente());
+        if (idPedido == null) {
+            // Si no existe un pedido activo hoy, se crea uno nuevo
+            idPedido = carritoDAO.crearNuevoPedido(cliente.getIdCliente());
+        }
+
+        // Guardar el producto en el carrito del pedido
+        carritoDAO.guardarEnCarrito(cliente.getIdCliente(), idProducto, cantidad, precioProducto, idPedido);
 
         // Retraso de 2 segundos antes de redirigir
         try {
             Thread.sleep(2000); 
         } catch (InterruptedException e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
 
-        //Mensaje del producto agregado
+        // Mensaje del producto agregado
         redirectAttributes.addFlashAttribute("mensaje", "Producto agregado al carrito exitosamente.");
 
         // Redirigir a la página "carta"
         return "redirect:/carta";
     }
-
-
-
 
     /**
      * Método que maneja la solicitud GET para mostrar el carrito de compras por ID de pedido
@@ -103,4 +108,3 @@ public class CarritoController {
         return "carrito";  // Retorna la vista "carrito.html"
     }
 }
-

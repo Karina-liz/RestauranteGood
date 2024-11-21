@@ -1,61 +1,56 @@
 package com.app.restaurante.dao;
 
 import java.util.List;
-
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository; 
-
+import org.springframework.stereotype.Repository;
 import com.app.restaurante.model.Carrito;
 
-@Repository  // Agregar esta anotación
+@Repository
 public class CarritoDAO {
-    // Inyección de dependencia de JdbcTemplate para ejecutar consultas SQL
     private final JdbcTemplate jdbcTemplate;
 
-    /**
-     * Constructor que recibe el JdbcTemplate
-     */
     public CarritoDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // Método que devuelve el nombre de la tabla en la base de datos donde se almacenan los clientes
     protected String getTableName() {
-        return "carrito"; // Nombre de la tabla en la base de datos
+        return "carrito";
     }
 
     /*
-     * Metodo para agregar un producto al carrito
+     * Método para agregar un producto al carrito asociado a un pedido
      */
-    public void guardarEnCarrito(Long idCliente, Long idProducto, int cantidad, double precioUnitario) {
-        // Primero crear un nuevo pedido si no existe uno
-        Integer idPedido = obtenerUltimoPedidoPorCliente(idCliente);
-        if (idPedido == null) {
-            String sqlPedido = "INSERT INTO pedido (IDCliente, FechaPedido, MontoFinal) VALUES (?, NOW(), 0)";
-            jdbcTemplate.update(sqlPedido, idCliente);
-            idPedido = obtenerUltimoPedidoPorCliente(idCliente);
-        }
-
+    public void guardarEnCarrito(Long idCliente, Long idProducto, int cantidad, double precioUnitario, Integer idPedido) {
         // Insertar el producto en el carrito
-        String sqlCarrito = "INSERT INTO carrito (IDPedido, IDProducto, Cantidad) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sqlCarrito, idPedido, idProducto, cantidad);
+        String sqlCarrito = "INSERT INTO carrito (IDPedido, IDProducto, Cantidad, PrecioProducto) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(sqlCarrito, idPedido, idProducto, cantidad, precioUnitario);
 
-        // Actualizar el monto final del pedido
-        String sqlActualizarMonto = "UPDATE pedido SET MontoFinal = MontoFinal + ? WHERE IDPedido = ?";
-        jdbcTemplate.update(sqlActualizarMonto, cantidad * precioUnitario, idPedido);
+        // Actualizar el monto final del pedido sumando todos los productos del carrito
+        String sqlActualizarMonto = "UPDATE pedido p SET p.MontoFinal = (SELECT SUM(c.PrecioProducto * c.Cantidad) FROM carrito c WHERE c.IDPedido = ?) WHERE p.IDPedido = ?";
+        jdbcTemplate.update(sqlActualizarMonto, idPedido, idPedido);
     }
 
-    
-
     /**
-     * Método para obtener el último ID de pedido de un cliente
+     * Método para obtener el último ID de pedido de un cliente (solo si es del día de hoy)
      */
     @SuppressWarnings("deprecation")
     public Integer obtenerUltimoPedidoPorCliente(Long idCliente) {
-        String sql = "SELECT IDPedido FROM pedido WHERE IDCliente = ? ORDER BY FechaPedido DESC LIMIT 1";
+        String sql = "SELECT IDPedido FROM pedido WHERE IDCliente = ? AND DATE(FechaPedido) = CURDATE() AND Estado = 'Activo' ORDER BY FechaPedido DESC LIMIT 1";
         List<Integer> resultados = jdbcTemplate.queryForList(sql, new Object[]{idCliente}, Integer.class);
         return resultados.isEmpty() ? null : resultados.get(0);
+    }
+
+    /**
+     * Método para crear un nuevo pedido para el cliente
+     */
+    public Integer crearNuevoPedido(Long idCliente) {
+        String sqlPedido = "INSERT INTO pedido (IDCliente, FechaPedido, MontoFinal, Estado) VALUES (?, NOW(), 0, 'Activo')";
+        jdbcTemplate.update(sqlPedido, idCliente);
+
+        // Obtener el ID del nuevo pedido
+        String sql = "SELECT LAST_INSERT_ID()";
+        return jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
     /**

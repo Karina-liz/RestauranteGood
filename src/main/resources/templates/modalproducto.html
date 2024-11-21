@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${producto.nomProducto}">Detalles del Producto</title>
-    
     <style>
         .modal-producto-contenedor {
         display: flex;
@@ -70,13 +69,11 @@
     .modal-producto-boton-agregar:hover {
         background-color: #2980b9;
     }
-</style>
-
+    </style>
     <link th:include="components/link"></link>
 </head>
 <body>
     <header th:include="components/nav_panel"></header>
-
 
     <section class="modal-producto-contenedor">
         <form id="form-agregar" action="/carrito/agregar" method="POST">
@@ -88,7 +85,9 @@
                 <h4 th:text="${producto.nomProducto}" class="modal-producto-titulo"></h4>
                 <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
                      th:alt="'Imagen de ' + ${producto.FotoProducto}" class="modal-producto-imagen">
-                <p th:text="'Precio: S/. ' + ${producto.precioUnitario}" class="modal-producto-precio"></p>
+                     
+                <input type="hidden" name="precioUnitario" id="precio-input" th:value="${producto.precioUnitario}">
+
                 <p th:text="${producto.descripcion}" class="modal-producto-descripcion"></p>
         
                 <div class="cantidad-container mt-3">
@@ -97,7 +96,6 @@
                     <button type="button" id="btn-incrementar" class="btn btn-secondary">+</button>
                 </div>
                 <input type="hidden" name="cantidad" id="cantidad-input" value="1">
-                <input type="hidden" name="precioProducto" id="precio-input" value="0">
             </div>
             <div class="modal-producto-botones">
                 <button type="submit" class="btn btn-success mt-3">Agregar al carrito</button>
@@ -112,7 +110,6 @@
             const btnIncrementar = document.getElementById('btn-incrementar');
             const cantidadSpan = document.getElementById('cantidad');
             const cantidadInput = document.getElementById('cantidad-input');
-            const precioInput = document.getElementById('precio-input');
 
             let cantidad = 1;
 
@@ -129,10 +126,6 @@
                 cantidadSpan.textContent = cantidad;
                 cantidadInput.value = cantidad; // Actualiza el valor del input oculto
             });
-
-            // Establecer el precio unitario en el input oculto
-            const precioUnitario = parseFloat(document.querySelector('p[th\\:text="\'Precio: S/. \' + ${producto.precioUnitario}"]').textContent.replace('Precio: S/. ', ''));
-            precioInput.value = cantidad * precioUnitario; // Inicializa el precio total
         });
     </script>
 </body>
@@ -140,7 +133,6 @@
 <script>
     function comprarProducto() {
         alert('Botón Comprar presionado.'); // Mensaje al presionar el botón Comprar
-        // Aquí puedes agregar más lógica si es necesario
     }
 </script>
 
