@@ -2,16 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario de Empleado</title>
-    <script>
-        function redirectToCreateRole() {
-            window.location.href = '/roles/nuevo'; // Redirige a la página de creación de rol
-        }
-    </script>
+    <title th:text="${empleado.idEmpleado} == null ? 'Agregar Empleado' : 'Editar Empleado'"></title>
 </head>
 <body>
     <h1 th:text="${empleado.idEmpleado} == null ? 'Agregar Empleado' : 'Editar Empleado'"></h1>
-    <form th:action="@{/empleados}" th:object="${empleado}" method="post">
+    <form th:action="@{/empleados/{id}(id=${empleado.idEmpleado})}" th:object="${empleado}" method="post">
         <input type="hidden" th:field="*{idEmpleado}"/>
         <label>Nombre:</label>
         <input type="text" th:field="*{nombre}" required/>
@@ -22,9 +17,8 @@
         <label>Contraseña:</label>
         <input type="password" th:field="*{contraseña}" required/>
         <label>Rol:</label>
-        <select th:field="*{rol.idRol}" required onchange="if(this.value === 'nuevo') redirectToCreateRole()">
-            <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nomRol}"></option>
-            <option value="nuevo">Crear Nuevo Rol</option> <!-- Opción para crear un nuevo rol -->
+        <select th:field="*{rol.idRol}" required>
+            <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nomRol}"></option> 
         </select>
         <button type="submit">Guardar</button>
     </form>

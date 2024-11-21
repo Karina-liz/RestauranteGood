@@ -51,6 +51,10 @@ public class Rol {
         this.descripcion = descripcion;
     }
 
+    @Override
+    public String toString() {
+        return "Rol [idRol=" + idRol + ", nomRol=" + nomRol + ", descripcion=" + descripcion + "]";
+    }
     
 }
 

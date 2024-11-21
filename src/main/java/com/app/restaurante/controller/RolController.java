@@ -32,26 +32,30 @@ public class RolController {
     @PostMapping
     public String crearRol(@ModelAttribute Rol rol) {
         rolService.guardarRol(rol);
-        return "redirect:/formEmpleado";
+        return "redirect:/roles";
     }
 
-    @GetMapping("/{id}/editar")
-    public String mostrarFormularioEdicion(@PathVariable Integer id, Model model) {
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEdicion(@PathVariable Integer id, Model model) {  
         Rol rol = rolService.obtenerRolPorId(id);
         model.addAttribute("rol", rol);
-        return "formRol";
+        return "formRolEditar";
     }
 
-    @PostMapping("/{id}")
-    public String actualizarRol(@PathVariable Integer id, @ModelAttribute Rol rol) {
-        rol.setIdRol(id);
-        rolService.guardarRol(rol);
-        return "redirect:/formEmpleado";
+    @PostMapping("/{id}/")
+    public String actualizarRol(@PathVariable Integer id, @ModelAttribute Rol rol, Model model) {
+        Rol rolExistente = rolService.obtenerRolPorId(id);
+        rolExistente.setIdRol(id);
+        rolExistente.setNomRol(rol.getNomRol());
+        rolExistente.setDescripcion(rol.getDescripcion());
+
+        rolService.actualizarRol(rol);
+        return "redirect:/roles";
     }
 
     @GetMapping("/{id}/eliminar")
     public String eliminarRol(@PathVariable Integer id) {
         rolService.eliminarRol(id);
-        return "redirect:/formEmpleado";
+        return "redirect:/roles";
     }
 }

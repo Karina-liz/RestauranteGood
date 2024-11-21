@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Empleados</title>
+</head>
+<body>
+    <h1>Lista de Empleados</h1>
+    <a href="/empleados/nuevo">Agregar Nuevo Empleado</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Usuario</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="empleado : ${empleados}">
+                <td th:text="${empleado.idEmpleado}"></td>
+                <td th:text="${empleado.nombre}"></td>
+                <td th:text="${empleado.apellido}"></td>
+                <td th:text="${empleado.usuario}"></td>
+                <td th:text="${empleado.rol.nomRol}"></td>
+                <td>
+                    <a th:href="@{/empleados/{id}/editar(id=${empleado.idEmpleado})}">Editar</a>
+                    <a th:href="@{/empleados/{id}/eliminar(id=${empleado.idEmpleado})}" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
