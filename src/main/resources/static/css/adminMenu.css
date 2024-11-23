@@ -1,0 +1,69 @@
+/* Estilos para la barra de navegación del menú de administración */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex; /* Usar flexbox para alinear el navbar y el contenido */
+    height: 100vh; /* Hacer que el contenedor ocupe toda la altura de la ventana */
+}
+
+.navbar {
+    width: 250px; /* Ancho fijo para la barra de navegación */
+    background-color: #007bff; /* Color de fondo de la navbar */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 0; /* Sin bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+    position: fixed; /* Fijar la barra de navegación */
+    height: 100%; /* Hacer que la navbar ocupe toda la altura */
+}
+
+h1 {
+    color: white; /* Color del texto del título */
+    text-align: center; /* Centrar el título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+nav {
+    margin: 0; /* Sin margen */
+}
+
+.menu {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+}
+
+.menu li {
+    margin: 10px 0; /* Espacio entre los elementos del menú */
+}
+
+.menu a {
+    display: block; /* Hacer que el enlace ocupe todo el ancho */
+    padding: 10px; /* Espaciado interno */
+    color: white; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para el hover */
+}
+
+.menu a:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}
+
+footer {
+    margin-left: 20px; /* Margen a la izquierda para el footer */
+    text-align: center; /* Centrar el texto del footer */
+    margin-top: 20px; /* Espacio encima del footer */
+}
+
+footer a {
+    color: #007bff; /* Color del enlace del footer */
+    text-decoration: none; /* Sin subrayado */
+}
+
+footer a:hover {
+    text-decoration: underline; /* Subrayar al pasar el mouse */
+}
