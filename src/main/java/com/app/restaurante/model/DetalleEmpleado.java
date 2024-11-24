@@ -74,5 +74,9 @@ public class DetalleEmpleado {
     }
 
     // Getters y Setters
+    @Override
+    public String toString() { 
+        return "DetalleEmpleado{" + "idDetalleEmp=" + idDetalleEmp + ", telefono=" + telefono + ", correo=" + correo + ", foto=" + foto + ", empleado=" + empleado + '}'; 
+        }
     
 }
