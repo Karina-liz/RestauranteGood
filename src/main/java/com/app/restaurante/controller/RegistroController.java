@@ -5,14 +5,17 @@ import com.app.restaurante.model.Cliente;
 import com.app.restaurante.utils.Validation;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.client.RestTemplate;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 @Controller
 public class RegistroController {
@@ -23,6 +26,13 @@ public class RegistroController {
     @Autowired
     private HttpSession session;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
+    private final String API_URL = "https://apiperu.dev/api/dni/";
+    
+    private final String API_TOKEN = "5374cc314f74f8d7193c53d6299c6b24a33afec5502bd3fec6869b38029ee5fa";
+
     // Endpoint para mostrar formulario de registro inicial
     @GetMapping("/registrarse")
     public String showRegistro(Model model) {
@@ -30,57 +40,91 @@ public class RegistroController {
     }
 
     // Endpoint principal para procesar el registro de nuevos clientes
-    @PostMapping("/registrarse") 
+    @PostMapping("/registrarse")
     public String registrarCliente(@RequestParam("nombre") String nombre,
                                    @RequestParam("apellido") String apellido,
                                    @RequestParam("dni") String dni,
                                    @RequestParam("correo") String correo,
                                    @RequestParam("usuario") String usuario,
                                    @RequestParam("contrasena") String contrasena,
-                                   @RequestParam("repetircontrasena") String repetirContrasena,                                                                   
+                                   @RequestParam("repetircontrasena") String repetirContrasena,
                                    RedirectAttributes redirectAttributes) {
 
-        // Validación de contraseñas
+        // Validar si las contraseñas coinciden
         if (!contrasena.equals(repetirContrasena)) {
             redirectAttributes.addFlashAttribute("error", "Las contraseñas no coinciden");
-            return "redirect:/registrarse";
+            return "redirect:/login";
         }
 
-        // Encriptación de contraseña por seguridad
+        // Validar si el DNI es válido usando el API
+        Map<String, Object> dniData = validarDni(dni);
+        if (dniData == null || dniData.isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "DNI inválido o no encontrado");
+            return "redirect:/login";
+        }
+
+        // Encriptar la contraseña
         String hashedPassword;
         try {
             hashedPassword = Validation.md5(contrasena);
         } catch (NoSuchAlgorithmException e) {
             redirectAttributes.addFlashAttribute("error", "Error al encriptar la contraseña");
-            return "redirect:/registrarse";
+            return "redirect:/login";
         }
 
-        // Creación y población del objeto Cliente
-        Cliente nuevoCliente = new Cliente();
-        nuevoCliente.setNombre(nombre);
-        nuevoCliente.setApellido(apellido);
-        nuevoCliente.setDni(dni);
-        nuevoCliente.setCorreo(correo);
-        nuevoCliente.setUsuario(usuario);
-        nuevoCliente.setContrasena(hashedPassword);
+        // Crear y guardar el cliente
+        Cliente cliente = new Cliente();
+        cliente.setNombre(nombre);
+        //nuevoCliente.setNombre((String) dniData.get("nombres"));
+        cliente.setApellido(apellido);
+        //nuevoCliente.setApellido(dniData.get("apellido_paterno") + " " + dniData.get("apellido_materno"));
+        cliente.setDni(dni);
+        cliente.setCorreo(correo);
+        cliente.setUsuario(usuario);
+        cliente.setContrasena(hashedPassword);
 
-        // Persistencia del cliente en BD
-        clienteDAO.save(nuevoCliente);
+        clienteDAO.save(cliente);
 
-        // Inicio de sesión automático post-registro
-        session.setAttribute("cliente", nuevoCliente);
+        // Iniciar sesión automáticamente
+        session.setAttribute("cliente", cliente);
 
         return "redirect:/registro_completar";
     }
 
-    // Endpoint para página de bienvenida post-registro
+    // Método para validar el DNI mediante el API
+    private Map<String, Object> validarDni(String dni) {
+        try {
+            String url = API_URL + dni + "?api_token=" + API_TOKEN;
+            ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+
+            // Validar respuesta del API
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                Map<String, Object> body = response.getBody();
+                if (body.get("data") != null) {
+                    return (Map<String, Object>) body.get("data"); // Datos del DNI
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // Si falla la validación o no se encuentra
+    }
+
+    // Endpoint para mostrar página de bienvenida post-registro
     @GetMapping("/registro_completar")
     public String showBienvenido(Model model) {
         Cliente cliente = (Cliente) session.getAttribute("cliente");
+        System.out.println("Cliente en sesión: " + cliente);
+
         if (cliente == null) {
             return "redirect:/login";
         }
         model.addAttribute("cliente", cliente);
+        session.setAttribute("idCliente", cliente.getIdCliente());
+        session.setAttribute("usuario", cliente.getUsuario());
+        session.setAttribute("nombre", cliente.getNombre());
+
+
         return "bienvenido";
     }
 }

@@ -32,7 +32,7 @@ public class CarritoDAO {
     }
 
     /**
-     * Método para obtener el último ID de pedido de un cliente (solo si es del día de hoy)
+     * Método para obtener el último ID de pedido de un cliente
      */
     @SuppressWarnings("deprecation")
     public Integer obtenerUltimoPedidoPorCliente(Long idCliente) {
@@ -61,7 +61,7 @@ public class CarritoDAO {
         String sql = "SELECT p.NomProducto AS Producto, c.Cantidad AS Cantidad, " +
                     "p.PrecioUnitario AS PrecioUnitario, (c.Cantidad * p.PrecioUnitario) AS TotalProducto, " +
                     "c.IDCarrito, c.IDProducto, c.IDPedido, pe.MontoFinal AS TotalCarrito, " +
-                    "cli.Nombre AS ClienteNombre, cli.Apellido AS ClienteApellido " +
+                    "cli.Nombre AS ClienteNombre, cli.Apellido AS ClienteApellido " +                
                     "FROM carrito c " +
                     "JOIN producto p ON c.IDProducto = p.IDProducto " +
                     "JOIN pedido pe ON c.IDPedido = pe.IDPedido " +
@@ -70,4 +70,13 @@ public class CarritoDAO {
 
         return jdbcTemplate.query(sql, new Object[]{idPedido}, new BeanPropertyRowMapper<>(Carrito.class));
     }
+
+    /*
+    * Metodo para eliminar un producto del carrito
+    */
+    public void eliminarProducto(Long idCarrito, Long idPedido) {
+        String sql = "DELETE FROM carrito WHERE idCarrito = ? AND idPedido = ?";
+        jdbcTemplate.update(sql, idCarrito, idPedido);
+    }
+
 }

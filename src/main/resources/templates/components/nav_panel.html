@@ -28,7 +28,7 @@
         
         <div class="user-actions">
             <!-- Muestra el nombre del usuario si está logueado, sino muestra texto por defecto -->
-            <span th:text="${session.usuario != null ? session.usuario : 'Nombre Usuario'}">Cliente</span>
+            <span th:text="${session.usuario != null ? session.usuario : (session.cliente != null ? session.cliente.usuario : 'Nombre Usuario')}">Cliente</span>
 
             <!-- Enlaces a funciones de usuario -->
             <a th:classappend="${activePage == 'carrito'} ? 'bg_hover color_dark'" th:href="@{/carrito_compra}" title="Carrito">

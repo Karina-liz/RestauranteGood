@@ -26,5 +26,4 @@ public class RestauranteGoodApplication {
     public String login() {
         return "login"; 
     }
- 
 }

@@ -1,0 +1,75 @@
+body{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/*----
+-Diseño de las alertas
+------*/
+.custom-alert {
+    color: var(--color-light);
+    padding: 20px;
+    border: 3px solid var(--color-verify);
+    background-color: var(--color-fifth);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000 !important;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+    /*animation: borderMove 1s infinite; /* Añadir animación al borde que se repite indefinidamente */
+}
+
+.mensaje-container {
+    border-radius: 20px; /* Bordes redondeados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+
+/*----
+-Estilo principal de botones
+----*/
+.button-p{
+    padding:  10px 26px;
+    background-color: #f9f1fb;
+    border: 2px solid #111827;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+    box-shadow: 4px 4px 0 rgba(17, 24, 39, 1); /* Sombra en lugar de pseudo-elemento */
+}
+.button-p:hover{
+    background-color: #111827;
+    color: #f9f1fb;
+    box-shadow: 0 0 0 rgba(17, 24, 39, 0.5); /* Elimina la sombra al pasar el ratón */
+}
+
+/* Nueva animación para el borde */
+@keyframes borderMove {
+    0% {
+        border-color: var(--color-verify);
+    }
+    50% {
+        border-color: var(--color-light); /* Cambiar a color claro en el medio */
+    }
+    100% {
+        border-color: var(--color-verify); /* Regresar al color original */
+    }
+}
+
+@keyframes BigColors{
+    0% {
+        background-color: var(--primary-color);
+    }
+    50% {
+        background-color: var(--second-color); /* Cambiar a color claro en el medio */
+    }
+    100% {
+        background-color: var(--primary-color); /* Regresar al color original */
+    }
+}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.app.restaurante.model.Cliente;
 import com.app.restaurante.service.LoginService;
@@ -27,7 +28,8 @@ public class LoginController {
     @PostMapping("/login")
     public ModelAndView login(
             @RequestParam("email") String email, 
-            @RequestParam("contrasena") String password)
+            @RequestParam("contrasena") String password,
+            RedirectAttributes redirectAttributes)
              throws NoSuchAlgorithmException, IOException, CloneNotSupportedException {
         
         Cliente cliente = loginService.validateUser(email, password);  // Validación de credenciales
@@ -36,19 +38,14 @@ public class LoginController {
             // Almacena el cliente en la sesión
             session.setAttribute("idCliente", cliente.getIdCliente()); // Almacena el ID del cliente
             session.setAttribute("usuario", cliente.getUsuario()); // Almacena el usuario del cliente
-            session.setAttribute("nombre", cliente.getNombre()); // Almacena el nombre del cliente
-            //session.setAttribute("cliente", cliente);
-            
+            session.setAttribute("nombre", cliente.getNombre()); // Almacena el nombre del cliente        
+           
             // Redirige a la página de bienvenida o completar registro
             return new ModelAndView("redirect:/registro_completar");
         } else {
             // Si las credenciales son incorrectas, redirige al login con un mensaje de error
-            // Mensaje del producto agregado
-            //redirectAttributes.addFlashAttribute("mensaje", "Producto agregado al carrito exitosamente.");
-
-            ModelAndView mav = new ModelAndView("login");
-            mav.addObject("error", "Correo electrónico o contraseña inválidos");
-            return mav;
+            redirectAttributes.addFlashAttribute("error", "Correo electrónico o contraseña inválidos");
+            return new ModelAndView("redirect:/login");
         }
     }
     

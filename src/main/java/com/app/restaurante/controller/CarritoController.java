@@ -7,9 +7,11 @@ import com.app.restaurante.model.Carrito;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -107,4 +109,13 @@ public class CarritoController {
 
         return "carrito";  // Retorna la vista "carrito.html"
     }
+
+    // Metodo para eliminar el producto del carrito
+    @PostMapping("/carrito/eliminar/{idCarrito}/{idPedido}")
+    public ResponseEntity<Void> eliminarProducto(@PathVariable Long idCarrito, @PathVariable Long idPedido) {
+        carritoDAO.eliminarProducto(idCarrito, idPedido); // Llamada directa al DAO
+        return ResponseEntity.ok().build();
+    }
+
+    
 }

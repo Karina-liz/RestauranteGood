@@ -27,7 +27,10 @@
                         <th>Precio</th>
                         <th>Cantidad</th>
                         <th>Subtotal</th>
-                        <th>Acciones</th>
+                        <th>Acciones</th>                        
+                        <th>idProducto</th>
+                        <th>idCarrito</th>
+                        <th>idPedido</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,16 +46,21 @@
                         <td th:text="${'S/. ' + item.precioUnitario * item.cantidad}"></td>
                         <td>
                             <button class="btn btn-danger btn-sm" 
-                                    th:onclick="'eliminarProducto(' + ${item.idProducto} + ')'">
+                                    th:onclick="'eliminarProducto(' + ${item.idCarrito} + ', ' + ${item.idPedido} + ')'">
                                 Eliminar
                             </button>
-                        </td>
+                        </td>                        
+                        <td th:text="${item.idProducto}"></td>
+                        <td th:text="${item.idCarrito}"></td>
+                        <td th:text="${item.idPedido}"></td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="3" class="text-end"><strong>Total:</strong></td>
                         <td th:text="${'S/. ' + total}"></td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                     </tr>
                 </tfoot>
@@ -77,9 +85,9 @@
             }).then(() => window.location.reload());
         }
 
-        function eliminarProducto(idProducto) {
+        function eliminarProducto(idCarrito, idPedido) {
             if(confirm('¿Estás seguro de eliminar este producto?')) {
-                fetch(`/carrito/eliminar/${idProducto}`, {
+                fetch(`/carrito/eliminar/${idCarrito}/${idPedido}`, {
                     method: 'POST'
                 }).then(() => window.location.reload());
             }

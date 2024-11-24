@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public class Cliente {
 
-    // Atributos
+    // Atributos en la tabla cliente
     private Long idCliente;
     private String nombre;
     private String apellido;
@@ -12,8 +12,10 @@ public class Cliente {
     private String correo;
     private String usuario;
     private String contrasena;
+    // Atributos en la tabla detallecliente
     private String telefono;
     private Optional<String> fotoCliente;
+    
 
     // Constructor vacío
     public Cliente() {}
