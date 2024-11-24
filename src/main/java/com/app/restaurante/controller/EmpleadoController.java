@@ -1,6 +1,7 @@
 package com.app.restaurante.controller;
 
 import com.app.restaurante.model.Empleado;
+import com.app.restaurante.model.DetalleEmpleado;
 import com.app.restaurante.service.EmpleadoService;
 import com.app.restaurante.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,7 @@ public class EmpleadoController {
     @GetMapping("/nuevo")
     public String mostrarFormEmpleado(Model model) {
         model.addAttribute("empleado", new Empleado());
+        model.addAttribute("detalleEmpleado", new DetalleEmpleado());
         model.addAttribute("roles", rolService.listarRol());
         return "formEmpleados";
     }
@@ -51,7 +53,7 @@ public class EmpleadoController {
     }
 
     @PostMapping("/{id}")
-    public String actualizarEmpleado(@PathVariable Integer id, @ModelAttribute Empleado empleado) throws IOException{
+    public String actualizarEmpleado(@PathVariable Integer id, @ModelAttribute Empleado empleado) throws IOException {
         Integer rolId = empleado.getRol().getIdRol();
         empleado.setIdEmpleado(id);
         empleadoService.guardarEmpleado(empleado, rolId);
@@ -64,3 +66,4 @@ public class EmpleadoController {
         return "redirect:/empleados";
     }
 }
+

@@ -1,6 +1,8 @@
 package com.app.restaurante.controller;
 
 import com.app.restaurante.model.DetalleEmpleado;
+import com.app.restaurante.model.Empleado;
+import com.app.restaurante.model.EmpleadoDetalleDTO;
 import com.app.restaurante.service.DetalleEmpleadoService;
 import com.app.restaurante.service.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +29,16 @@ public class DetalleEmpleadoController {
         return "listDetalleEmpleado";
     }
 
-    @GetMapping("/nuevo")
-    public String mostrarFormularioCreacion(Model model) {
-        model.addAttribute("detalleEmpleado", new DetalleEmpleado());
-        return "formDetalleEmpleado";
-    }
-
     @PostMapping
-    public String crearDetalle(@ModelAttribute DetalleEmpleado detalleEmpleado, @RequestParam Integer EmpleadoId) {
-        Integer empleadoId = detalleEmpleado.getEmpleado().getIdEmpleado();
-        detalleEmpleadoService.guardarDetalle(detalleEmpleado, empleadoId);
-        return "redirect:/detalle-empleado";
+    public String guardarEmpleadoDetalle(@ModelAttribute EmpleadoDetalleDTO empleadoDetalleDTO) {
+        Empleado empleado = empleadoDetalleDTO.getEmpleado();
+        empleadoService.guardarEmpleado(empleado, empleado.getRol().getIdRol());
+
+        DetalleEmpleado detalleEmpleado = empleadoDetalleDTO.getDetalleEmpleado();
+        detalleEmpleado.setEmpleado(empleado);
+        detalleEmpleadoService.guardarDetalle(detalleEmpleado, empleado.getIdEmpleado());
+
+        return "redirect:/empleados";
     }
 
     @GetMapping("/{id}/editar")
@@ -46,11 +47,10 @@ public class DetalleEmpleadoController {
         model.addAttribute("detalleEmpleado", detalleEmpleado);
         return "formDetalleEmpleadoEditar";
     }
-//FALTA ARREGLAR
+
     @PostMapping("/{id}")
-    public String actualizarDetalle(@PathVariable Integer EmpleadoId, @ModelAttribute DetalleEmpleado detalleEmpleado) {
-        Integer empleadoId = detalleEmpleado.getEmpleado().getIdEmpleado();
-        detalleEmpleadoService.guardarDetalle(detalleEmpleado, empleadoId);
+    public String actualizarDetalle(@PathVariable Integer id, @ModelAttribute DetalleEmpleado detalleEmpleado) {
+        detalleEmpleadoService.guardarDetalle(detalleEmpleado, id);
         return "redirect:/detalle-empleado";
     }
 
