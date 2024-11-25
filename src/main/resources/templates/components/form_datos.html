@@ -1,0 +1,25 @@
+<!--Componente que sirve como modal, sera un registro de los datos que faltan del cliente-->
+
+<section>
+    
+    <div>
+        <label for="distrito">Distrito:</label>
+        <select id="distrito" name="distrito" required>
+            <option value="">Seleccione un distrito</option>
+            <c:forEach var="distrito" items="${distritos}">
+                <option value="${distrito}">${distrito}</option>
+            </c:forEach>
+        </select>
+    </div>
+    
+    <div>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required>
+    </div>
+    
+    <div>
+        <label for="direccion">Referencia:</label>
+        <input type="text" id="referencia" name="referencia" required>
+    </div>
+
+</section>

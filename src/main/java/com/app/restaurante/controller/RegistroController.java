@@ -110,21 +110,22 @@ public class RegistroController {
         return null; // Si falla la validación o no se encuentra
     }
 
-    // Endpoint para mostrar página de bienvenida post-registro
+    
     @GetMapping("/registro_completar")
     public String showBienvenido(Model model) {
         Cliente cliente = (Cliente) session.getAttribute("cliente");
-        System.out.println("Cliente en sesión: " + cliente);
-
         if (cliente == null) {
             return "redirect:/login";
         }
-        model.addAttribute("cliente", cliente);
-        session.setAttribute("idCliente", cliente.getIdCliente());
-        session.setAttribute("usuario", cliente.getUsuario());
-        session.setAttribute("nombre", cliente.getNombre());
 
+        // Verificar si el cliente ya tiene dirección registrada
+        boolean tieneDireccion = clienteDAO.hasDireccion(cliente.getIdCliente()); // Método en DAO
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("mostrarModal", !tieneDireccion); // Muestra el modal si no tiene dirección
 
         return "bienvenido";
     }
+
+
 }
+

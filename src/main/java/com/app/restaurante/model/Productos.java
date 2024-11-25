@@ -36,13 +36,9 @@ public class Productos {
     public Long getIdProducto() {        return idProducto;    }
     public void setIdProducto(Long idProducto) {        this.idProducto = idProducto;    }
 
-    public String getNomProducto() {  // o getNomProd()
-        return nomProducto;
-    }
+    public String getNomProducto() {        return nomProducto;    }
+    public void setNomProducto(String nomProducto) {        this.nomProducto = nomProducto;    }
 
-    public void setNomProducto(String nomProducto) {
-        this.nomProducto = nomProducto;
-    }
     public double getPrecioUnitario() {        return PrecioUnitario;    }
     public void setPrecioUnitario(double PrecioUnitario) {        this.PrecioUnitario = PrecioUnitario;    }
 

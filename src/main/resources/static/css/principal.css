@@ -1,11 +1,8 @@
 @import url(colors.css);
-@import url(font.css);
-@import url(basic.css);
+/*@import url(font.css);
+@import url(basic.css);*/
 @import url(https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap);
 
-* {
-    box-sizing: border-box;
-}
 
 .goodday-body {
     margin: 0px;

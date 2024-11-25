@@ -16,12 +16,12 @@ public class ClienteDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate; // Inyección de JdbcTemplate para ejecutar consultas SQL
 
-    // Método que devuelve el nombre de la tabla en la base de datos donde se almacenan los clientes
+    // Metodo que devuelve el nombre de la tabla en la base de datos donde se almacenan los clientes
     protected String getTableName() {
         return "cliente"; // Nombre de la tabla en la base de datos
     }
 
-    // Método que devuelve el RowMapper para mapear los resultados a objetos Cliente
+    // Metodo que devuelve el RowMapper para mapear los resultados a objetos Cliente
     protected RowMapper<Cliente> getRowMapper() {
         return new RowMapper<Cliente>() {
             @Override
@@ -39,7 +39,7 @@ public class ClienteDAO {
         };
     }
 
-    // Método para guardar o actualizar un cliente
+    // Metodo para guardar o actualizar un cliente
     public void save(Cliente cliente) {
         if (cliente.getIdCliente() == null) {
             // Si el cliente no tiene ID, es un nuevo cliente, hacemos un INSERT
@@ -68,13 +68,13 @@ public class ClienteDAO {
         }
     }
 
-    // Método para obtener todos los clientes
+    // Metodo para obtener todos los clientes
     public List<Cliente> findAll() {
         String sql = "SELECT * FROM " + getTableName();
         return jdbcTemplate.query(sql, getRowMapper());
     }
 
-    // Método para obtener un cliente por ID
+    // Metodo para obtener un cliente por ID
     @SuppressWarnings("deprecation")
     public Cliente findById(Long idCliente) {
         String sql = "SELECT * FROM " + getTableName() + " WHERE idCliente = ?";
@@ -82,7 +82,7 @@ public class ClienteDAO {
         return clientes.isEmpty() ? null : clientes.get(0); // Si no se encuentra el cliente, retornamos null
     }
 
-    // Método para obtener un cliente por correo electrónico (puedes agregar más métodos de búsqueda si lo deseas)
+    // Metodo para obtener un cliente por correo electrónico (puedes agregar más métodos de búsqueda si lo deseas)
     @SuppressWarnings("deprecation")
     public Cliente findByCorreo(String correo) {
         String sql = "SELECT * FROM " + getTableName() + " WHERE correo = ?";
@@ -90,10 +90,39 @@ public class ClienteDAO {
         return clientes.isEmpty() ? null : clientes.get(0);
     }
 
-    // Método para encontrar un usuario por su correo electrónico y contraseña
+    // Metodo para encontrar un usuario por su correo electrónico y contraseña
     public Cliente findByEmailAndPassword(String email, String password) {
         String sql = "SELECT * FROM " + getTableName() + " WHERE correo = ? AND contrasena = ?";
         List<Cliente> results = jdbcTemplate.query(sql, getRowMapper(), email, password);
         return results.isEmpty() ? null : results.get(0);
     }
+
+    // Metodo para detectar si el cliente tiene una direccion
+    public Cliente findDireccionByID(Long idCliente) {
+        String sql = "SELECT * FROM cliente cli " +
+                     "JOIN direccion d ON cli.idCliente = d.idCliente " +
+                     "WHERE cli.idCliente = ?";
+        List<Cliente> results = jdbcTemplate.query(sql, getRowMapper(), idCliente);
+        return results.isEmpty() ? null : results.get(0);
+    }
+    
+    // Metodo para almacenar una direccion para el cliente
+    public boolean saveDireccion(Long idCliente, String direccion, String ciudad) {
+        try { 
+            String sql = "INSERT INTO direccion (idCliente, direccion, ciudad) VALUES (?, ?, ?)";
+            int rows = jdbcTemplate.update(sql, idCliente, direccion, ciudad);
+            return rows > 0; // Devuelve true si se insertó al menos una fila
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Devuelve false en caso de error
+        }
+    }    
+
+    public boolean hasDireccion(Long idCliente) {
+        String sql = "SELECT COUNT(*) FROM direccion WHERE idCliente = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, idCliente);
+        return count != null && count > 0;
+    }
+    
+
 }

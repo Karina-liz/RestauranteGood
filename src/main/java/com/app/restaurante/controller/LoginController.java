@@ -1,5 +1,7 @@
 package com.app.restaurante.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
@@ -49,10 +51,26 @@ public class LoginController {
         }
     }
     
-    // Nuevo método para manejar el cierre de sesión
+    /* Nuevo método para manejar el cierre de sesión
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // Invalida la sesión actual y destruye todos los datos
         return "redirect:/login"; // Redirige a la página de inicio de sesión
+    }*/
+    // Ver cual si  es efectivo
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        // Aquí puedes agregar la lógica para invalidar la sesión
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // Invalida la sesión
+        }
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+        response.setDateHeader("Expires", 0); // Proxies
+        // Redirige al usuario a la página de inicio de sesión
+        return "redirect:/login"; // Asegúrate de que esta ruta sea correcta
     }
+
 }
+
