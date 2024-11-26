@@ -19,7 +19,7 @@ public class DetalleEmpleado {
     private String foto;
 
     @OneToOne
-    @JoinColumn(name = "IDEmpleado")
+    @JoinColumn(name = "IDEmpleado", nullable = true)
     private Empleado empleado;
 
     public Integer getIdDetalleEmp() {
