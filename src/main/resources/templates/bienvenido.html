@@ -17,9 +17,9 @@
     <div id="modal" th:classappend="${mostrarModal} ? 'active' : ''" class="modal">
         <div class="modal-content">
             <h2>Completa tu Dirección</h2>
-            <form th:action="@{/guardarDireccion}" method="post">
+            <form th:action="@{/guardarDireccion}" method="post" class="form-direccion">
                 <main th:include="components/form_datos"></main>
-                <button type="submit">Guardar</button>
+                <button type="submit" class="button-p2">Guardar</button>
             </form>
             <a th:href="@{/logout}" title="Cerrar Sesión">Cerrar Sesión</a>
         </div>

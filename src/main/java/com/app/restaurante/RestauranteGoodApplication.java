@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 @Controller  // Indica que esta clase maneja solicitudes HTTP
 public class RestauranteGoodApplication {
 
+    
     public static void main(String[] args) {
         SpringApplication.run(RestauranteGoodApplication.class, args);
     }

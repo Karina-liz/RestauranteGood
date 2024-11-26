@@ -10,45 +10,52 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.app.restaurante.dao.ClienteDAO;
+import com.app.restaurante.dao.DireccionDAO;
 import com.app.restaurante.model.Cliente;
+import com.app.restaurante.model.Direccion;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class DireccionController {
 
     @Autowired
-    private ClienteDAO clienteDAO;
+    private DireccionDAO direccionDAO;
+
 
     @Autowired
     private HttpSession session;
 
     @PostMapping("/guardarDireccion")
-    public String guardarDireccion(@RequestParam("direccion") String direccion,
-                                   @RequestParam("ciudad") String ciudad,
+    public String guardarDireccion(@RequestParam("direccion") String direccion,                                   
+                                   @RequestParam("distrito") Long distritoId,
+                                   @RequestParam("referencia") String referencia,
                                    RedirectAttributes redirectAttributes,
                                    @SessionAttribute("cliente") Cliente cliente) {
+        // Verificar que el cliente esté presente en la sesión
         if (cliente == null) {
-            return "redirect:/login";
+            return "redirect:/login"; // Redirigir a login si no hay cliente en sesión
         }
-    
-        clienteDAO.saveDireccion(cliente.getIdCliente(), direccion, ciudad);
-    
-        redirectAttributes.addFlashAttribute("success", "Dirección registrada exitosamente");
-        return "redirect:/registro_completar";
+        
+        Direccion direccioncli = new Direccion();
+        direccioncli.setDireccion(direccion);
+        direccioncli.setIdDistrito(distritoId);
+        direccioncli.setReferencia(referencia);
+        direccioncli.setIdCliente(cliente.getIdCliente());
+        
+        direccionDAO.saveDireccion(direccioncli);
+
+        return "redirect:/bienvenido";
+        //redirectAttributes.addFlashAttribute("success", "Dirección registrada exitosamente");
+        //return "redirect:/registro_completar"; // Redirigir a una página de éxito o continuar el proceso
     }
 
-    // Mostramos los distritos
-    @GetMapping("/obtenerDistritos")
-    public List<String> obtenerDistritos() {
-        List<String> distritos = new ArrayList<>();
-        // Agregar distritos según sea necesario
-        distritos.add("Distrito 1");
-        distritos.add("Distrito 2");
-        distritos.add("Distrito 3");
-        return distritos;
+    @GetMapping("/registro_direccion")
+    public String getMethodName(@RequestParam String param) {
+        return new String();
     }
     
 

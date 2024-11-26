@@ -1,6 +1,8 @@
 package com.app.restaurante.dao;
 
 import com.app.restaurante.model.Cliente;
+import com.app.restaurante.model.Direccion;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -125,4 +127,17 @@ public class ClienteDAO {
     }
     
 
+    // Método para obtener la lista de distritos
+    public List<Direccion> findAllDistritos() {
+        String sql = "SELECT IDDistrito, distrito FROM distrito"; // Consulta que obtiene tanto el ID como el nombre del distrito
+        return jdbcTemplate.query(sql, (rs, rowNum) -> {
+            Direccion direccion = new Direccion();
+            direccion.setIdDistrito(rs.getLong("IDDistrito")); // Asignar ID del distrito
+            direccion.setDistrito(rs.getString("distrito")); // Asignar nombre del distrito
+            return direccion;
+        });
+    }
+
+    
+    
 }

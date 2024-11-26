@@ -2,6 +2,7 @@ package com.app.restaurante.controller;
 
 import com.app.restaurante.dao.ClienteDAO;
 import com.app.restaurante.model.Cliente;
+import com.app.restaurante.model.Direccion;
 import com.app.restaurante.utils.Validation;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.client.RestTemplate;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -122,6 +124,11 @@ public class RegistroController {
         boolean tieneDireccion = clienteDAO.hasDireccion(cliente.getIdCliente()); // Método en DAO
         model.addAttribute("cliente", cliente);
         model.addAttribute("mostrarModal", !tieneDireccion); // Muestra el modal si no tiene dirección
+
+        // Obtener distritos de la base de datos (a través del DAO)
+        List<Direccion> distritos = clienteDAO.findAllDistritos(); // Lista de Direccion con idDistrito y nombreDistrito
+        model.addAttribute("distritos", distritos); // Pasamos la lista de distritos a la vista
+
 
         return "bienvenido";
     }
