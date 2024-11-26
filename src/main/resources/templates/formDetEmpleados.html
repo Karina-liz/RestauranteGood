@@ -8,7 +8,7 @@
 <body>
     <div th:include="components/adminMenu"></div>
     <h1 th:text="${detalleEmpleado.idDetalleEmp} == null ? 'Agregar Detalle Empleado' : 'Editar Detalle Empleado'"></h1>
-    <form th:action="@{/detalle-empleados}" th:object="${detalleEmpleado}" method="post">
+    <form th:action="@{/detalle-empleados}" th:object="${detalleEmpleado}" method="post" enctype="multipart/form-data">
         <input type="hidden" th:field="*{idDetalleEmp}"/>
         <input type="hidden" th:field="*{empleado.idEmpleado}" th:value="${empleado != null ? empleado.idEmpleado : ''}"/>
         
@@ -18,8 +18,8 @@
         <label>Correo Electrónico:</label>
         <input type="email" th:field="*{correo}" required/>
 
-        <label>Foto:</label>
-        <input type="text" th:field="*{foto}" />
+            <label for="foto" class="form-label">Imagen</label>
+            <input type="file" id="foto" name="file" class="form-control">
 
         <!--<label>Empleado:</label>
         <select th:field="*{empleado.idEmpleado}">

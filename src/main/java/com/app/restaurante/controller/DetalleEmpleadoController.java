@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/detalle-empleados")
@@ -31,8 +33,8 @@ public class DetalleEmpleadoController {
     }
 
     @PostMapping
-    public String guardarDetEmpleado(@ModelAttribute DetalleEmpleado detalleEmpleado) {
-        detEmpleadoService.guardarDetEmpleado(detalleEmpleado);
+    public String guardarDetEmpleado(@RequestPart MultipartFile file, @ModelAttribute DetalleEmpleado detalleEmpleado) throws IOException {
+        detEmpleadoService.guardarDetEmpleado(detalleEmpleado, file);
         return "redirect:/empleados";
     }
 
@@ -45,14 +47,14 @@ public class DetalleEmpleadoController {
     }
 
     @PostMapping("/{id}")
-    public String actualizarDetEmpleado(@PathVariable Integer id, @ModelAttribute DetalleEmpleado detalleEmpleado) {
+    public String actualizarDetEmpleado(@PathVariable Integer id, @RequestPart MultipartFile file, @ModelAttribute DetalleEmpleado detalleEmpleado) throws IOException {
         detalleEmpleado.setIdDetalleEmp(id);
-        detEmpleadoService.actualizarDetEmpleado(detalleEmpleado);
+        detEmpleadoService.actualizarDetEmpleado(detalleEmpleado, file);
         return "redirect:/detalle-empleados";
     }
 
     @GetMapping("/{id}/eliminar")
-    public String eliminarDetEmpleado(@PathVariable Integer id) {
+    public String eliminarDetEmpleado(@PathVariable Integer id) throws IOException {
         detEmpleadoService.eliminarDetEmpleado(id);
         return "redirect:/detalle-empleados";
     }
