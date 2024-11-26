@@ -15,7 +15,7 @@ import java.util.Objects;
 @Service
 public class UploadServicio {
 
-    private final String url = "src/main/resources/static/upload/";
+    private final String url = "src/main/resources/static/upload/empleados/";
 
     public String saveUpload(MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
