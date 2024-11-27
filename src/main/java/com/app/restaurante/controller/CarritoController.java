@@ -90,13 +90,12 @@ public class CarritoController {
         // Obtener los detalles del carrito asociados al idPedido
         List<Carrito> carritoDelPedido = carritoDAO.obtenerDetallesCarrito(idPedido);
 
-        // Si no hay elementos en el carrito, agregar un mensaje
         if (carritoDelPedido.isEmpty()) {
             model.addAttribute("mensaje", "No hay productos en el carrito.");
         }
 
-        // Agregar los datos al modelo
         model.addAttribute("carrito", carritoDelPedido);
+        model.addAttribute("idPedido", idPedido);
 
         // Calcular el total del carrito
         double total = carritoDelPedido.stream()
@@ -107,7 +106,7 @@ public class CarritoController {
         // Agregar información del cliente al modelo
         model.addAttribute("cliente", cliente);
 
-        return "carrito";  // Retorna la vista "carrito.html"
+        return "carrito"; 
     }
 
     // Metodo para eliminar el producto del carrito

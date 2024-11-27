@@ -66,3 +66,77 @@
 .logo-img {
     width: 50px;
 }
+
+
+/**/
+.main-container-cuenta {
+    display: flex;
+    padding: 20px;
+}
+.header-cuenta-info {
+    max-width: 400px;
+}
+.section-cuenta-info {
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    width: 100%;
+}
+.nav-container-cuenta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left; /* Alinea el contenido a la izquierda */
+    background-color: #f8f9fa; /* Color de fondo */
+    border: 2px solid #333;
+    padding: 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    width:350px;
+    height: 80vh;    
+}
+.principal-img-cuenta {
+    width: 300px; 
+    padding: 10px;    
+}
+.nav-item-cuenta {
+    margin-bottom: 10px; /* Espaciado entre los elementos de la lista */
+}
+.nav-link-cuenta {
+    display: flex; /* Flexbox para alinear icono y texto */
+    align-items: center; /* Centra verticalmente el contenido */
+    text-decoration: none; /* Sin subrayado */
+    color: #333; /* Color del texto */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 3px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para el hover */
+}
+.nav-link-cuenta:hover {
+    background-color: #e2e6ea; /* Color de fondo al pasar el mouse */
+}
+.nav-icon-cuenta {
+    margin-right: 8px; /* Espaciado entre el icono y el texto */
+}
+
+.datos-cliente-form {
+    display: grid;
+}
+.datos-cliente-form div {
+    display: flex;
+    
+    label {
+        width: 200px;
+    }
+}
+.datos-cliente-form button {
+    width: 100%;
+}
+
+.section-cuenta-info > div {
+    display: none;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.section-cuenta-info > div {
+    display: block;
+    opacity: 1;
+}

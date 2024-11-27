@@ -20,6 +20,8 @@
 
         <div th:unless="${#lists.isEmpty(carrito)}" class="table-responsive">
 
+            <p th:text="'Pedido N° ' + ${idPedido}"></p>
+
             <table class="table">
                 <thead>
                     <tr>
@@ -68,31 +70,60 @@
 
             <div class="d-flex justify-content-between mt-3">
                 <a href="/carta" class="btn btn-secondary">Seguir Comprando</a>
-                <a href="/checkout" class="btn btn-primary">Proceder al Pago</a>
+
+                <a href="#" class="btn btn-primary" 
+                th:onclick="'abrirModalPago(' + ${idPedido} + ', ' + ${total} + ')'">Procesar Pago</a>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Modal de del formulario de pago -->
+    <div id="modal" th:classappend="${mostrarModal} ? 'active' : ''" class="modal">
+        <div class="modal-content">
+            <h2>Completa tu Dirección</h2>
+            <form th:action="@{/guardarPago}" method="post" class="form-direccion">
+                <main th:include="components/form_pago"></main>
+                <button type="submit" class="button-p2">Pagar</button>
+            </form>
+            <button onclick="cerrarModal()">Cerrar</button>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script>
-        function actualizarCantidad(input) {
-            const idProducto = input.getAttribute('data-id');
-            const cantidad = input.value;
-            
-            fetch(`/carrito/actualizar/${idProducto}/${cantidad}`, {
+<script>
+    function actualizarCantidad(input) {
+        const idProducto = input.getAttribute('data-id');
+        const cantidad = input.value;
+        
+        fetch(`/carrito/actualizar/${idProducto}/${cantidad}`, {
+            method: 'POST'
+        }).then(() => window.location.reload());
+    }
+
+    function eliminarProducto(idCarrito, idPedido) {
+        if(confirm('¿Estás seguro de eliminar este producto?')) {
+            fetch(`/carrito/eliminar/${idCarrito}/${idPedido}`, {
                 method: 'POST'
             }).then(() => window.location.reload());
         }
+    }
+</script>
 
-        function eliminarProducto(idCarrito, idPedido) {
-            if(confirm('¿Estás seguro de eliminar este producto?')) {
-                fetch(`/carrito/eliminar/${idCarrito}/${idPedido}`, {
-                    method: 'POST'
-                }).then(() => window.location.reload());
-            }
-        }
-    </script>
+<script>
+    function abrirModalPago(idPedido, total) {
+        // Asignar los valores al modal
+        document.getElementById('modalIdPedido').value = idPedido;
+        document.getElementById('modalTotal').value = total;
+        
+        // Mostrar el modal
+        document.getElementById('modal').style.display = 'block';
+    }
 
-</body>
+    function cerrarModal() {
+        // Ocultar el modal
+        document.getElementById('modal').style.display = 'none';
+    }
+</script>
 </html>

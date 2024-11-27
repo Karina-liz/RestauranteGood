@@ -1,0 +1,9 @@
+<div th:each="direccion : ${direcciones}">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Dirección</h5>
+            <p class="card-text" th:text="${direccion.direccion}">Dirección del cliente</p>
+            <p class="card-text" th:text="${direccion.referencia}">Referencia</p>
+        </div>
+    </div>
+</div>

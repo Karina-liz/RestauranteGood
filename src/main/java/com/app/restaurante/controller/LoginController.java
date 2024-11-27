@@ -57,6 +57,7 @@ public class LoginController {
         session.invalidate(); // Invalida la sesión actual y destruye todos los datos
         return "redirect:/login"; // Redirige a la página de inicio de sesión
     }*/
+    
     // Ver cual si  es efectivo
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {

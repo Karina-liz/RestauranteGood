@@ -37,7 +37,7 @@
             
             <!-- Mostrar configuración y cerrar sesión solo si hay sesión activa -->
             <div th:if="${session.usuario != null}">
-                <a th:href="@{/configuracion}" title="Configuración">⚙️</a>
+                <a th:href="@{/micuenta}" title="Mi Cuenta">Mi Cuenta</a>
                 <a th:href="@{/logout}" title="Cerrar Sesión">Cerrar Sesión</a>
             </div>
             

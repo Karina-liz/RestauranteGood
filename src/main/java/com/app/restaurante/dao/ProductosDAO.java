@@ -153,8 +153,6 @@ public class ProductosDAO {
 
     /**
      * Método para obtener productos por categoría
-     * @param categoria Nombre de la categoría a buscar
-     * @return Lista de productos de la categoría especificada
      */
     @SuppressWarnings("deprecation")
     public List<Productos> obtenerPorCategoria(String categoria) {
