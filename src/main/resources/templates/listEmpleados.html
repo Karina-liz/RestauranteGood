@@ -27,7 +27,7 @@
                 <td th:text="${empleado.nombre}"></td>
                 <td th:text="${empleado.apellido}"></td>
                 <td th:text="${empleado.usuario}"></td>
-                <td th:text="${empleado.rol.nomRol}"></td>
+                <td th:text="${empleado.rol != null ? empleado.rol.nomRol : 'Sin rol'}"></td>
                 <td>
                     <a th:href="@{/empleados/{id}/editar(id=${empleado.idEmpleado})}">Editar</a>
                     <a th:href="@{/empleados/{id}/eliminar(id=${empleado.idEmpleado})}" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">Eliminar</a>
