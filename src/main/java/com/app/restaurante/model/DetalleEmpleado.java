@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "detalleempleado")
 public class DetalleEmpleado {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDetalleEmp;
@@ -17,8 +18,9 @@ public class DetalleEmpleado {
 
     @Column(length = 150, nullable = true)
     private String foto;
-
+    
     @OneToOne
+    @MapsId // Indica que este ID está vinculado al ID de 'Empleado'
     @JoinColumn(name = "IDEmpleado", nullable = true)
     private Empleado empleado;
 

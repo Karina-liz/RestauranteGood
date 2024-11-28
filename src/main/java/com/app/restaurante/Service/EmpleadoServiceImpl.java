@@ -1,5 +1,6 @@
 package com.app.restaurante.service;
 
+import com.app.restaurante.model.DetalleEmpleado;
 import com.app.restaurante.model.Empleado;
 import com.app.restaurante.model.Rol;
 import com.app.restaurante.repository.EmpleadoRepository;
@@ -23,6 +24,19 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public List<Empleado> listarEmpleados() {
         return empleadoRepository.findAll();
     }
+
+    @Override
+    public Empleado guardarEmpleadoConDetalle(Empleado empleado, DetalleEmpleado detalle, Integer rolId) {
+        Rol rol = rolService.obtenerRolPorId(rolId);
+        empleado.setRol(rol);
+
+        // Configura la relación uno a uno
+        empleado.setDetalleEmpleado(detalle);
+
+        // Guarda el empleado (y automáticamente el detalle)
+        return empleadoRepository.save(empleado);
+    }
+
 
     @Override
     public Empleado guardarEmpleado(Empleado empleado, @RequestParam Integer rolId) throws IOException {

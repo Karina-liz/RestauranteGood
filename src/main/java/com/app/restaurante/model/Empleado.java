@@ -24,7 +24,20 @@ public class Empleado {
     @JoinColumn(name = "IDRol")
     private Rol rol;
 
+    @OneToOne(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
+    private DetalleEmpleado detalleEmpleado;
+
     // Getters y Setters
+    public DetalleEmpleado getDetalleEmpleado() {
+        return detalleEmpleado;
+    }
+
+    public void setDetalleEmpleado(DetalleEmpleado detalleEmpleado) {
+        this.detalleEmpleado = detalleEmpleado;
+        detalleEmpleado.setEmpleado(this); // Relación bidireccional
+    }
+
+
     public Integer getIdEmpleado() {
         return idEmpleado;
     }
