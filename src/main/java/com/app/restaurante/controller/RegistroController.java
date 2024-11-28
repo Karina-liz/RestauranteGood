@@ -52,6 +52,12 @@ public class RegistroController {
                                    @RequestParam("repetircontrasena") String repetirContrasena,
                                    RedirectAttributes redirectAttributes) {
 
+         // Validar si el DNI ya está registrado
+        if (clienteDAO.existsByDni(dni)) { // Método que debes implementar en ClienteDAO
+            redirectAttributes.addFlashAttribute("error", "El DNI ya está registrado");
+            return "redirect:/login";
+        }
+
         // Validar si las contraseñas coinciden
         if (!contrasena.equals(repetirContrasena)) {
             redirectAttributes.addFlashAttribute("error", "Las contraseñas no coinciden");

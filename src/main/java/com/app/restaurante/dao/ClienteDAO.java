@@ -57,15 +57,13 @@ public class ClienteDAO {
             );
         } else {
             // Si el cliente tiene ID, es un cliente existente, hacemos un UPDATE
-            String sql = "UPDATE " + getTableName() + " SET nombre = ?, apellido = ?, usuario = ?, contrasena = ?, " +
-                         "email = ?, fotoCliente = ?, telefono = ? WHERE idCliente = ?";
+            String sql = "UPDATE " + getTableName() + " SET nombre = ?, apellido = ?, usuario = ?, " +
+                         "correo = ? WHERE idCliente = ?";
             jdbcTemplate.update(sql,
                 cliente.getNombre(),
                 cliente.getApellido(),
                 cliente.getUsuario(),
-                cliente.getCorreo(),
-                cliente.getContrasena(),                
-                cliente.getDni()
+                cliente.getCorreo()
             );
         }
     }
@@ -74,6 +72,13 @@ public class ClienteDAO {
     public List<Cliente> findAll() {
         String sql = "SELECT * FROM " + getTableName();
         return jdbcTemplate.query(sql, getRowMapper());
+    }
+
+    // Método para verificar si existe un cliente por DNI
+    public boolean existsByDni(String dni) {
+        String sql = "SELECT COUNT(*) FROM " + getTableName() + " WHERE dni = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, dni);
+        return count != null && count > 0;
     }
 
     // Metodo para obtener un cliente por ID

@@ -40,11 +40,14 @@ public class DireccionController {
             return "redirect:/login"; // Redirigir a login si no hay cliente en sesión
         }
         
+        // Obtener el idCliente de la sesión (ajusta según tu implementación)
+        Long idCliente = (Long) session.getAttribute("idCliente");
+
         Direccion direccioncli = new Direccion();
         direccioncli.setDireccion(direccion);
         direccioncli.setIdDistrito(distritoId);
         direccioncli.setReferencia(referencia);
-        direccioncli.setIdCliente(cliente.getIdCliente());
+        direccioncli.setIdCliente(idCliente);
         
         direccionDAO.saveDireccion(direccioncli);
 
