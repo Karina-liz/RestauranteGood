@@ -40,7 +40,7 @@ public class DetEmpleadoServiceImpl implements DetEmpleadoService{
         detEmpleado.setFoto(nombreArchivo);
         
         // Obtener el empleado más reciente
-        Empleado ultimoEmpleado = empleadoRepository.findTopByOrderByIdEmpleadoDesc();
+        Empleado ultimoEmpleado = empleadoRepository.findTopByOrderByIDEmpleadoDesc();
         if (ultimoEmpleado != null) {
             detEmpleado.setEmpleado(ultimoEmpleado);
         }

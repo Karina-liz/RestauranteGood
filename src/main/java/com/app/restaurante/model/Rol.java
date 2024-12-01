@@ -7,12 +7,13 @@ import jakarta.persistence.*;
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "IDRol")
     private Integer idRol;
 
-    @Column(length = 50, nullable = true)
+    @Column(name = "NomRol", length = 50, nullable = true)
     private String nomRol;
 
-    @Column(length = 100, nullable = true)
+    @Column(name = "Descripcion", length = 100, nullable = true)
     private String descripcion;
 
     //getters y setters
@@ -45,6 +46,7 @@ public class Rol {
     public Rol() {
     }
 
+    // Constructor con parámetros
     public Rol(Integer idRol, String nomRol, String descripcion) {
         this.idRol = idRol;
         this.nomRol = nomRol;
@@ -53,8 +55,7 @@ public class Rol {
 
     @Override
     public String toString() {
-        return "Rol [idRol=" + idRol + ", nomRol=" + nomRol + ", descripcion=" + descripcion + "]";
+        return "Rol [idRol=" + idRol + ", nomRol=" + nomRol + ", descripcion=" + descripcion +  "]";
     }
-    
 }
 

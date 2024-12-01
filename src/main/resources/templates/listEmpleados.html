@@ -15,7 +15,8 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
                 <th>Usuario</th>
                 <th>Rol</th>
                 <th>Acciones</th>
@@ -25,7 +26,8 @@
             <tr th:each="empleado : ${empleados}">
                 <td th:text="${empleado.idEmpleado}"></td>
                 <td th:text="${empleado.nombre}"></td>
-                <td th:text="${empleado.apellido}"></td>
+                <td th:text="${empleado.apellidoPaterno}"></td>
+                <td th:text="${empleado.apellidoMaterno}"></td>
                 <td th:text="${empleado.usuario}"></td>
                 <td th:text="${empleado.rol != null ? empleado.rol.nomRol : 'Sin rol'}"></td>
                 <td>
