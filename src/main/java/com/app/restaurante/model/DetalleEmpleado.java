@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class DetalleEmpleado {
     
     @Id
-    @Column(name = "idDetalleEmp")
+    @Column(name = "IDDetalleEmp")
     private Integer idDetalleEmp;
 
     @Column(name = "Telefono", length = 9, nullable = true)
