@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Empleados</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    
 </head>
 <body>
+    <div th:include="components/adminMenu"></div>
     <h1>Lista de Empleados</h1>
     <a href="/empleados/nuevo">Agregar Nuevo Empleado</a>
     <table>
@@ -12,7 +15,8 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
                 <th>Usuario</th>
                 <th>Rol</th>
                 <th>Acciones</th>
@@ -22,9 +26,10 @@
             <tr th:each="empleado : ${empleados}">
                 <td th:text="${empleado.idEmpleado}"></td>
                 <td th:text="${empleado.nombre}"></td>
-                <td th:text="${empleado.apellido}"></td>
+                <td th:text="${empleado.apellidoPaterno}"></td>
+                <td th:text="${empleado.apellidoMaterno}"></td>
                 <td th:text="${empleado.usuario}"></td>
-                <td th:text="${empleado.rol.nomRol}"></td>
+                <td th:text="${empleado.rol != null ? empleado.rol.nomRol : 'Sin rol'}"></td>
                 <td>
                     <a th:href="@{/empleados/{id}/editar(id=${empleado.idEmpleado})}">Editar</a>
                     <a th:href="@{/empleados/{id}/eliminar(id=${empleado.idEmpleado})}" onclick="return confirm('¿Estás seguro de que deseas eliminar este empleado?');">Eliminar</a>

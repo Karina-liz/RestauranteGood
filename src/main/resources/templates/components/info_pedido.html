@@ -1,0 +1,90 @@
+<!--Componente que muestra los pedidos que realizo el cliente y un contador de la cantidad de pedidos-->
+
+<div>
+    <h2 class="titulo-pedidos">Lista de pedidos</h2> 
+    <p class="total-pedidos" th:text="'Total de pedidos: ' + ${pedidos.size()}">Total de pedidos</p>
+</div>
+<div th:each="pedido : ${pedidos}">
+    <div class="card pedido-card">
+        <h5 class="card-title pedido-titulo">Pedido </h5>
+        <div class="card-body">            
+            <p class="card-text pedido-id" th:text="${pedido.idPedido}">ID del Pedido</p>
+            <p class="card-text pedido-estado" th:text="${pedido.estadoPedido}">Estado del Pedido</p>
+            <p class="card-text pedido-fecha" th:text="${pedido.fechaPedido}">Fecha del Pedido</p>
+            <p class="card-text pedido-fecha-pago" th:text="${pedido.fechaPago}">Fecha de Pago</p>
+            <p class="card-text pedido-total" th:text="${pedido.totalPago}">Total del Pago</p>
+            <p class="card-text pedido-monto-final" th:text="${pedido.montoFinal}">Monto Final</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilo para el título de la lista de pedidos */
+.titulo-pedidos {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilo para el total de pedidos */
+.total-pedidos {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Estilo para la tarjeta de cada pedido */
+.pedido-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    width: 300px;
+}
+
+/* Estilo para el título de cada pedido */
+.pedido-titulo {
+    font-size: 20px;
+    color: #007bff;
+}
+
+/* Estilo para el texto de cada pedido */
+.card-text {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+}
+
+/* Estilo específico para el ID del pedido */
+.pedido-id {
+    font-weight: bold;
+}
+
+/* Estilo específico para el estado del pedido */
+.pedido-estado {
+    color: #28a745; /* Verde para estado exitoso */
+}
+
+/* Estilo específico para la fecha del pedido */
+.pedido-fecha {
+    color: #6c757d; /* Gris para la fecha */
+}
+
+/* Estilo específico para la fecha de pago */
+.pedido-fecha-pago {
+    color: #17a2b8; /* Cian para la fecha de pago */
+}
+
+/* Estilo específico para el total del pago */
+.pedido-total {
+    font-weight: bold;
+    color: #dc3545; /* Rojo para el total */
+}
+
+/* Estilo específico para el monto final */
+.pedido-monto-final {
+    font-weight: bold;
+    color: #343a40; /* Negro para el monto final */
+}
+</style>

@@ -5,21 +5,23 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "detalleempleado")
 public class DetalleEmpleado {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "IDDetalleEmp")
     private Integer idDetalleEmp;
 
-    @Column(length = 9, nullable = true)
+    @Column(name = "Telefono", length = 9, nullable = true)
     private String telefono;
 
-    @Column(length = 100, nullable = false)
+    @Column(name = "Correo", length = 100, nullable = true)
     private String correo;
 
-    @Column(length = 150, nullable = true)
+    @Column(name = "Foto", length = 150, nullable = true)
     private String foto;
-
+    
     @OneToOne
-    @JoinColumn(name = "IDEmpleado")
+    @MapsId // Indica que este ID está vinculado al ID de 'Empleado'
+    @JoinColumn(name = "IDEmpleado", nullable = true)
     private Empleado empleado;
 
     public Integer getIdDetalleEmp() {
@@ -74,9 +76,9 @@ public class DetalleEmpleado {
     }
 
     // Getters y Setters
-    @Override
-    public String toString() { 
-        return "DetalleEmpleado{" + "idDetalleEmp=" + idDetalleEmp + ", telefono=" + telefono + ", correo=" + correo + ", foto=" + foto + ", empleado=" + empleado + '}'; 
+    @Override 
+    public String toString() {
+        return "DetalleEmpleado [idDetalleEmp=" + idDetalleEmp + ", telefono=" + telefono + ", correo=" + correo + ", foto=" + foto + ", empleado=" + empleado + "] ";
         }
     
 }

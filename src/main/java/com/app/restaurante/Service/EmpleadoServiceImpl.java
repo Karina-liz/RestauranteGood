@@ -28,7 +28,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     public Empleado guardarEmpleado(Empleado empleado, @RequestParam Integer rolId) throws IOException {
         Rol rol = rolService.obtenerRolPorId(rolId);
         empleado.setRol(rol);
-        return empleadoRepository.save(empleado);
+        return empleadoRepository.save(empleado); // Retorna el empleado guardado
     }
 
     @Override

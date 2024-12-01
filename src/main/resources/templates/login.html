@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Nextclass</title>
+    <!--link rel="stylesheet" type="text/css" href="./css/login.css"-->
+    <link th:include="components/link"></link>
+    <script>
+        function validarDNI(input) {
+            // Eliminar caracteres no numéricos
+            input.value = input.value.replace(/[^0-9]/g, '');
+            
+            // Limitar a 8 dígitos
+            if (input.value.length > 8) {
+                input.value = input.value.slice(0, 8);
+            }
+        }
+
+        function validarContrasenas() {
+            const password = document.getElementById('nueva_clave').value;
+            const confirmPassword = document.getElementById('repetir_clave').value;
+            const mensajeError = document.getElementById('mensaje-error');
+            const submitBtn = document.getElementById('submit-registro');
+
+            if (password !== confirmPassword) {
+                mensajeError.style.display = 'block';
+                mensajeError.textContent = 'Las contraseñas no coinciden';
+                submitBtn.disabled = true;
+                setTimeout(() => {
+                    mensajeError.style.display = 'none';
+                    submitBtn.disabled = false;
+                }, 2000);
+                return false;
+            }
+            return true;
+        }
+
+        function validarEnTiempoReal() {
+            const password = document.getElementById('nueva_clave');
+            const confirmPassword = document.getElementById('repetir_clave');
+            
+            password.addEventListener('input', validarContrasenas);
+            confirmPassword.addEventListener('input', validarContrasenas);
+        }
+
+        window.onload = validarEnTiempoReal;
+    </script>
+</head>
+<body >
+    
+
+    <div th:replace="components/mensajes :: mostrarMensaje(${error})" class="custom-alert"></div>
+
+    <div class="body-login">
+        <div class="registro-container login">
+            <form action="#" th:action="@{/login}" method="POST" class="registro-form" id="FormContact" autocomplete="off">
+                <h1>¡Hola!</h1>
+                <hr>
+                <p>Ingresa tus datos</p>
+                <div class="input-box registro-input-box">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" class="registro-input" placeholder="Correo electrónico" required />
+                    <h5>Ejemplo: usuario@dominio.com</h5>
+                </div>
+                <div class="input-box registro-input-box">
+                    <label for="contrasena">Contraseña:</label>
+                    <input type="password" id="contrasena" name="contrasena" class="registro-input" placeholder="Contraseña" required />
+                </div>
+                
+                <div class="remember-forgot">
+                    <a href="#">Restablecer contraseña</a>
+                </div>
+                <input type="submit" value="Iniciar Sesión" class="button-p" name="iniciar_sesion">               
+            </form>
+        </div>
+    
+        <div class="registro-container registro">
+            <form action="/registrarse" method="POST" class="registro-form" id="FormRegistro" autocomplete="off" onsubmit="return verificarExistenciaYRegistrar(event)">
+                <h1>¡Registra tu cuenta!</h1>
+                <hr>
+                <p>Ingresa tus datos para registrarte</p>
+    
+                <div class="input-box registro-input-box">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" class="input registro-input" placeholder="Tu nombre" required />
+                </div>
+    
+                <div class="input-box registro-input-box">
+                    <label for="apellidos">Apellidos:</label>
+                    <input type="text" id="apellidos" name="apellido" class="input registro-input" placeholder="Tus apellidos" required />
+                </div>
+    
+                <div class="input-box registro-input-box">
+                    <label for="correo">Correo electrónico:</label>
+                    <input type="email" id="correo" name="correo" class="input registro-input" placeholder="Tu correo electrónico" required />
+                </div>
+        
+                <div class="input-box registro-input-box">
+                    <label for="usuario">Nombre de usuario:</label>
+                    <input type="text" id="usuario" name="usuario" class="input registro-input" placeholder="Tu nombre de usuario" required />
+                    <h5>Ejemplo: user123 (nombre de usuario)</h5>
+                </div>
+                
+                <div class="input-box registro-input-box">
+                    <label for="dni">DNI:</label>
+                    <input type="text" id="dni" name="dni" class="input registro-input" placeholder="Tu DNI" maxlength="8" oninput="validarDNI(this)" required />
+                </div>
+    
+                <div class="input-box registro-input-box">
+                    <label for="nueva_clave">Contraseña:</label>
+                    <input type="password" id="nueva_clave" name="contrasena" class="input registro-input" placeholder="Contraseña nueva" required />
+                </div>
+                
+                <div class="input-box registro-input-box">
+                    <label for="repetir_clave">Repetir contraseña:</label>
+                    <input type="password" id="repetir_clave" name="repetircontrasena" class="input registro-input" placeholder="Repite la contraseña" required />
+                    <div id="mensaje-error" style="display: none; color: red; margin-top: 5px;"></div>
+                </div>
+    
+                <div class="remember-forgot registro-remember-forgot">
+                    <a href="#">¿Ya tienes cuenta?</a>
+                </div>
+                <input type="submit" value="Registrarse" class="button-p" name="registro" id="submit-registro">
+            </form>    
+            <br>
+            <!--button id="boton">Buscar DNI</button>
+
+            <div class="res">
+                <input id="doc" readonly="" type="text">
+            </div>
+            <div class="res">
+                <input id="nombre" readonly="" type="text">
+            </div-->
+        </div>
+    </div>    
+</body>
+<script>
+    // Esperar 3 segundos y ocultar el mensaje
+    setTimeout(function() {
+        const mensajeContainer = document.querySelector('.mensaje-container');
+        if (mensajeContainer) {
+            mensajeContainer.style.display = 'none';
+        }
+    }, 3000);
+</script>
+
+</script>
+</html>

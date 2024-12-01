@@ -1,0 +1,42 @@
+<!-- 
+ Barra de navegación principal del sitio se incluira en varias paginas
+-->
+<nav class="nav-container-cuenta">
+    <div>
+        <div><img src="./upload/clientes/generico.jpg" alt="" class="principal-img-cuenta"></div>
+        
+        <ul>            
+            <li class="nav-item-cuenta">
+                <a class="nav-link-cuenta"
+                    th:classappend="${activePage == 'datos_personales'} ? 'bg_hover color_dark'" th:href="@{/datos_personales}">
+                    <i class="ki-outline ki-user nav-icon-cuenta"></i> <!-- Icono de usuario -->
+                    <span>Mis Datos Personales</span>
+                </a>
+            </li>
+            <li class="nav-item-cuenta">
+                <a class="nav-link-cuenta"
+                    th:classappend="${activePage == 'mis_pedidos'} ? 'bg_hover color_dark'" th:href="@{/mis_pedidos}">
+                    <i class="ki-outline ki-shopping-cart nav-icon-cuenta"></i> <!-- Icono de carrito -->
+                    <span>Mis Pedidos</span>
+                </a>
+            </li>
+            <li class="nav-item-cuenta">
+                <a class="nav-link-cuenta"
+                    th:classappend="${activePage == 'mis_direcciones'} ? 'bg_hover color_dark'" th:href="@{/mis_direcciones}">
+                    <i class="ki-outline ki-map-marker nav-icon-cuenta"></i> <!-- Icono de marcador de mapa -->
+                    <span>Mis Direcciones</span>
+                </a>
+            </li>
+            <li class="nav-item-cuenta">
+                <a class="nav-link-cuenta"
+                    th:classappend="${activePage == 'mis_configuraciones'} ? 'bg_hover color_dark'" th:href="@{/mis_configuraciones}">
+                    <i class="ki-outline ki-cog nav-icon-cuenta"></i> <!-- Icono de engranaje -->
+                    <span>Mis Configuraciones</span>
+                </a>
+            </li>
+        </ul>
+
+        
+
+    </div>
+</nav>

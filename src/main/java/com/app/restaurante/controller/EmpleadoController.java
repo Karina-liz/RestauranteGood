@@ -41,7 +41,7 @@ public class EmpleadoController {
     public String guardarEmpleado(@ModelAttribute("empleado") Empleado empleado) throws IOException {
         Integer rolId = empleado.getRol().getIdRol();
         empleadoService.guardarEmpleado(empleado, rolId);
-        return "redirect:/empleados";
+        return "redirect:/detalle-empleados/nuevo";
     }
 
     @GetMapping("/{id}/editar")

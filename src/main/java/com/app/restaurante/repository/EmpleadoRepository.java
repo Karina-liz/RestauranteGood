@@ -7,4 +7,6 @@ import com.app.restaurante.model.Empleado;
 @Repository
 public interface EmpleadoRepository extends JpaRepository<Empleado, Integer>{
 
+    Empleado findTopByOrderByIDEmpleadoDesc();
+
 }

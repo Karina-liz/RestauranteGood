@@ -1,0 +1,53 @@
+
+<!-- 
+ Barra de navegación principal del sitio 
+ se incluira en varios paginas
+-->
+<nav class="menu">
+    <div class="menu-container">
+
+        <div class="logo"><img src="./icons/restaurant.png" alt="" class="logo-img"></div>
+        
+        <ul class="nav-links">
+            
+            <li>
+                <a th:classappend="${activePage == 'bienvenido'} ? 'bg_hover color_dark'" th:href="@{/registro_completar}">
+                    <i class="ki-outline ki-book-open"></i> <!-- Icono de carta -->
+                    <span>Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a th:classappend="${activePage == 'carta'} ? 'bg_hover color_dark'" th:href="@{/carta}">
+                    <i class="ki-outline ki-book-open"></i> <!-- Icono de carta -->
+                    <span>Carta</span>
+                </a>
+            </li>
+            <li><a href="">Nosotros</a></li>
+        </ul>
+
+        
+        <div class="user-actions">
+            <!-- Muestra el nombre del usuario si está logueado, sino muestra texto por defecto -->
+            <span th:text="${session.usuario != null ? session.usuario : (session.cliente != null ? session.cliente.usuario : 'Nombre Usuario')}">Cliente</span>
+
+            <!-- Enlaces a funciones de usuario -->
+            <a th:classappend="${activePage == 'carrito'} ? 'bg_hover color_dark'" th:href="@{/carrito_compra}" title="Carrito">
+                🛒
+            </a>
+            
+            <!-- Mostrar configuración y cerrar sesión solo si hay sesión activa -->
+            <div th:if="${session.usuario != null}">
+                <a th:href="@{/micuenta}" title="Mi Cuenta">Mi Cuenta</a>
+                <a th:href="@{/logout}" title="Cerrar Sesión">Cerrar Sesión</a>
+            </div>
+            
+            <!-- Mostrar iniciar sesión solo si no hay sesión activa -->
+            <div th:unless="${session.usuario != null}">
+                <a href="/login" title="Iniciar Sesión">
+                    Iniciar Sesión
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
