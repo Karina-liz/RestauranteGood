@@ -11,6 +11,8 @@
 <body>
     <header th:include="components/nav_panel"></header>
 
+    <div th:include="components/mensajes"></div>
+
     <div class="container mt-5">
         <h2>Mi Carrito de Compras</h2>
         
@@ -79,9 +81,9 @@
 
     <!-- Modal de del formulario de pago -->
     <div id="modal" th:classappend="${mostrarModal} ? 'active' : ''" class="modal">
-        <div class="modal-content">
-            <h2>Completa tu Dirección</h2>
-            <form th:action="@{/guardarPago}" method="post" class="form-direccion">
+        <div class="modal-content-pago">
+            <h2>Realizar pago</h2>
+            <form th:action="@{/guardarPago}" method="post" class="form-pago">
                 <main th:include="components/form_pago"></main>
                 <button type="submit" class="button-p2">Pagar</button>
             </form>
@@ -125,5 +127,14 @@
         // Ocultar el modal
         document.getElementById('modal').style.display = 'none';
     }
+</script>
+<script>
+    // Esperar 3 segundos y ocultar el mensaje
+    setTimeout(function() {
+        const mensajeContainer = document.querySelector('.mensaje-container');
+        if (mensajeContainer) {
+            mensajeContainer.style.display = 'none';
+        }
+    }, 3000);
 </script>
 </html>

@@ -1,90 +1,129 @@
-<!--Componente que muestra los pedidos que realizo el cliente y un contador de la cantidad de pedidos-->
-
+<!-- Componente que muestra los pedidos que realizó el cliente y un contador de la cantidad de pedidos -->
 <div>
     <h2 class="titulo-pedidos">Lista de pedidos</h2> 
     <p class="total-pedidos" th:text="'Total de pedidos: ' + ${pedidos.size()}">Total de pedidos</p>
 </div>
-<div th:each="pedido : ${pedidos}">
-    <div class="card pedido-card">
-        <h5 class="card-title pedido-titulo">Pedido </h5>
-        <div class="card-body">            
-            <p class="card-text pedido-id" th:text="${pedido.idPedido}">ID del Pedido</p>
-            <p class="card-text pedido-estado" th:text="${pedido.estadoPedido}">Estado del Pedido</p>
-            <p class="card-text pedido-fecha" th:text="${pedido.fechaPedido}">Fecha del Pedido</p>
-            <p class="card-text pedido-fecha-pago" th:text="${pedido.fechaPago}">Fecha de Pago</p>
-            <p class="card-text pedido-total" th:text="${pedido.totalPago}">Total del Pago</p>
-            <p class="card-text pedido-monto-final" th:text="${pedido.montoFinal}">Monto Final</p>
+
+<div class="content-card">
+    <div th:each="pedido : ${pedidos}">
+        <div class="card pedido-card">
+            <h5 class="card-title pedido-titulo">Pedido </h5>
+            <div class="card-body">            
+                <p class="card-text pedido-id" th:text="${pedido.idPedido}">ID del Pedido</p>
+                <p class="card-text pedido-estado" th:text="${pedido.estadoPedido}">Estado del Pedido</p>
+                <p class="card-text pedido-fecha" th:text="${pedido.fechaPedido}">Fecha del Pedido</p>
+                <p class="card-text pedido-fecha-pago" th:text="${pedido.fechaPago}">Fecha de Pago</p>
+                <p class="card-text pedido-total" th:text="${pedido.totalPago}">Total del Pago</p>
+                <p class="card-text pedido-monto-final" th:text="${pedido.montoFinal}">Monto Final</p>
+
+                <!-- Botón para ver la factura, pasando el ID del pedido -->
+                <button class="btn btn-primary" data-id="${pedido.idPedido}" onclick="verFactura(this)">Ver Factura</button>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- Modal de Factura -->
+<div class="modal" tabindex="-1" id="facturaModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Factura del Pedido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="factura-id">Cargando factura...</p>
+                <p id="factura-contenido">Cargando contenido...</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estilos y Script -->
 <style>
     /* Estilo para el título de la lista de pedidos */
-.titulo-pedidos {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-}
+    .titulo-pedidos {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
 
-/* Estilo para el total de pedidos */
-.total-pedidos {
-    font-size: 18px;
-    color: #555;
-}
+    /* Estilo para el total de pedidos */
+    .total-pedidos {
+        font-size: 18px;
+        color: #555;
+    }
 
-/* Estilo para la tarjeta de cada pedido */
-.pedido-card {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    padding: 15px;
-    background-color: #f9f9f9;
-    width: 300px;
-}
+    /* Estilo para la sección de las cartas de los pedidos */
+    .content-card {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 
-/* Estilo para el título de cada pedido */
-.pedido-titulo {
-    font-size: 20px;
-    color: #007bff;
-}
+    /* Estilo para cada tarjeta de pedido */
+    .pedido-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        width: 300px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-/* Estilo para el texto de cada pedido */
-.card-text {
-    font-size: 16px;
-    color: #666;
-    margin: 5px 0;
-}
+    .pedido-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-/* Estilo específico para el ID del pedido */
-.pedido-id {
-    font-weight: bold;
-}
+    /* Estilo para el título de cada tarjeta de pedido */
+    .pedido-titulo {
+        font-size: 20px;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
 
-/* Estilo específico para el estado del pedido */
-.pedido-estado {
-    color: #28a745; /* Verde para estado exitoso */
-}
+    /* Estilo para el texto de cada carta */
+    .card-text {
+        font-size: 16px;
+        color: #666;
+        margin: 5px 0;
+    }
 
-/* Estilo específico para la fecha del pedido */
-.pedido-fecha {
-    color: #6c757d; /* Gris para la fecha */
-}
+    /* Estilo para el botón de ver factura */
+    .btn {
+        margin-top: 10px;
+    }
 
-/* Estilo específico para la fecha de pago */
-.pedido-fecha-pago {
-    color: #17a2b8; /* Cian para la fecha de pago */
-}
-
-/* Estilo específico para el total del pago */
-.pedido-total {
-    font-weight: bold;
-    color: #dc3545; /* Rojo para el total */
-}
-
-/* Estilo específico para el monto final */
-.pedido-monto-final {
-    font-weight: bold;
-    color: #343a40; /* Negro para el monto final */
-}
+    /* Estilo para el modal */
+    .modal-content {
+        padding: 20px;
+    }
 </style>
+
+<!-- Script para manejar la apertura del modal y cargar los datos -->
+<script>
+    function verFactura(button) {
+        // Obtén el ID del pedido desde el atributo 'data-id' del botón
+        var idPedido = button.getAttribute('data-id');
+
+        // Aquí puedes realizar una llamada AJAX para obtener los datos de la factura usando el ID del pedido
+        // Como ejemplo, usaremos un contenido estático (esto se debería reemplazar por una solicitud real)
+        
+        // Cargar el contenido de la factura en el modal
+        document.getElementById('factura-id').innerText = 'Factura ID: ' + idPedido;
+        document.getElementById('factura-contenido').innerText = 'Contenido de la factura del pedido ' + idPedido;
+
+        // Mostrar el modal de la factura
+        var modal = new bootstrap.Modal(document.getElementById('facturaModal'));
+        modal.show();
+    }
+</script>
+
+<!-- Bootstrap JS y Popper.js (necesarios para el modal) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

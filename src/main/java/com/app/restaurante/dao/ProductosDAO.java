@@ -171,8 +171,6 @@ public class ProductosDAO {
 
     /**
      * Método para obtener un producto por su ID
-     * @param idProducto ID del producto a buscar
-     * @return Producto encontrado
      */
     @SuppressWarnings("deprecation")
     public Productos obtenerProductoPorId(int idProducto) {

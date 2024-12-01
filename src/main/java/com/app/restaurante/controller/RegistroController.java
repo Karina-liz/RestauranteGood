@@ -31,8 +31,8 @@ public class RegistroController {
     @Autowired
     private RestTemplate restTemplate;
 
+    // API
     private final String API_URL = "https://apiperu.dev/api/dni/";
-    
     private final String API_TOKEN = "5374cc314f74f8d7193c53d6299c6b24a33afec5502bd3fec6869b38029ee5fa";
 
     // Endpoint para mostrar formulario de registro inicial
@@ -115,7 +115,7 @@ public class RegistroController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null; // Si falla la validación o no se encuentra
+        return null; // Si falla o no encuentra
     }
 
     
