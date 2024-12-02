@@ -49,6 +49,9 @@ public class IndexController {
         return "bienvenido"; // Asegúrate de que hay una vista bienvenido.html
     }    
 
-
+    @GetMapping("/Nosotros")
+public String nosotros() {
+    return "nosotros"; // Asegúrate de que este nombre coincida con el archivo de plantilla
+}
 }
 
