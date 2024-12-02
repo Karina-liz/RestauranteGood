@@ -281,3 +281,88 @@ body{
     background-size: cover; /* Asegura que la imagen cubra toda la tarjeta */
     background-position: center; /* Centra la imagen */
 }
+
+/* CAMBIOS DEL MENU DE NAVEGACION */
+.menu {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los elementos del menú */
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+.list-container {
+    display: flex;
+    flex-grow: 1; /* Permite que la lista ocupe el espacio disponible */
+    justify-content: flex-start; /* Alinea los elementos a la izquierda */
+}
+
+.lists {
+    display: flex;
+    list-style: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+    margin: 0; /* Sin margen */
+}
+
+.lists li {
+    margin: 0 10px; /* Espacio entre los elementos de la lista */
+}
+
+.user-actions {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+    margin-left: auto; /* Empuja este contenedor al extremo derecho */
+}
+
+/* BOTONES DE MENU NAV */
+.user-actions .button {
+    display: inline-flex; /* Asegura que el botón se comporte como un botón */
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px; /* Espaciado interno */
+    background-color: #A43131; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Sin subrayado */
+    transition: background-color 0.3s, transform 0.3s; /* Transición suave para el hover */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+.user-actions .button:hover {
+    background-color: rgb(179, 0, 0); /* Color de fondo al pasar el mouse */
+    transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+}
+
+.user-actions .button i {
+    margin-right: 5px; /* Espacio entre el ícono y el texto */
+}
+
+.user-actions .buttoncerrar {
+    margin-right: 5px; /* Espacio entre el ícono y el texto */
+    color: #000;
+}
+
+/* Espacio entre los botones */
+.user-actions .button + .button {
+    margin-left: 10px; /* Espacio entre los botones */
+}
+
+.toggle-logout{
+    background-color: black;
+}
+/* PARA EL SLIDER */
+.logout-container {
+    position: absolute; /* Permite que el contenedor se superponga */
+    top: 100%; /* Coloca el contenedor justo debajo del botón de la flecha */
+    left: 0; /* Alinea el contenedor a la izquierda */
+    margin-top: 5px; /* Espacio entre el botón y el contenedor de cierre de sesión */
+    background-color: #f8f9fa; /* Color de fondo */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    display: none; /* Oculto por defecto */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+}
+
+.user-info {
+    position: relative; /* Asegura que el contenedor de cierre de sesión se posicione correctamente */
+}

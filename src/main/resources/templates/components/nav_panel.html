@@ -35,25 +35,26 @@
              <ul class="lists">
                  <li><a th:classappend="${activePage == 'bienvenido'} ? 'bg_hover color_dark'" th:href="@{/registro_completar}">Inicio</a></li>
                  <li><a th:classappend="${activePage == 'carta'} ? 'bg_hover color_dark'" th:href="@{/carta}">Carta</a></li>
-                 <li><a th:href="@{/Nosotros}">Nosotros</a>
-                 </li>
-                 <li><a href="#">Contacto</a></li>
-                 <!-- Muestra el nombre del usuario si está logueado, sino muestra texto por defecto -->
-                 <li><a th:text="${session.usuario != null ? session.usuario : (session.cliente != null ? session.cliente.usuario : 'Nombre Usuario')}"></a>Cliente</li>
-                  <!-- Enlaces a funciones de usuario -->
-                 <li><a th:classappend="${activePage == 'carrito'} ? 'bg_hover color_dark'" th:href="@{/carrito_compra}" title="Carrito">
-                    🛒
-                </a></li>
-
-                <!-- Mostrar configuración y cerrar sesión solo si hay sesión activa -->
-                <li th:if="${session.usuario != null}"><a th:href="@{/micuenta}" title="Mi Cuenta">Mi Cuenta</a>
-                    <a th:href="@{/logout}" title="Cerrar Sesión">Cerrar Sesión</a></li>
-
-                <!-- Mostrar iniciar sesión solo si no hay sesión activa -->    
-                <li th:unless="${session.usuario != null}"><a href="/login" title="Iniciar Sesión">
-                    Iniciar Sesión
-                </a></li>
+                 <li><a th:href="@{/Nosotros}">Nosotros</a></li>
              </ul>
+         </div>
+
+         <div class="user-actions">
+             <div th:if="${session.usuario != null}" class="user-info">
+                 <span th:text="'Bienvenido, ' + ${session.usuario}"></span> <!-- Muestra el mensaje de bienvenida -->
+                 <button class="toggle-logout" onclick="toggleLogout(event)" style="background: none; border: none; color: black; font-size: 20px;">▼</button> <!-- Botón para mostrar/ocultar el cierre de sesión -->
+                 <div class="logout-container" style="display: none;">
+                     <a href="/logout" class="buttoncerrar" title="Cerrar Sesión">Cerrar Sesión</a>
+                 </div>
+             </div>
+             <div th:if="${session.usuario == null}">
+                 <a href="/login" title="Iniciar Sesión" class="button">
+                     <i class="fas fa-user"></i> Iniciar Sesión
+                 </a>
+             </div>
+             <a th:classappend="${activePage == 'carrito'} ? 'bg_hover color_dark'" th:href="@{/carrito_compra}" title="Carrito" class="button">
+                 <i class="fas fa-shopping-cart"></i> Carrito
+             </a>
          </div>
      </nav>
      
@@ -61,5 +62,12 @@
 <!-- Scripts -->
 <script src="https://kit.fontawesome.com/35db202371.js" crossorigin="anonymous"></script>
 <script src="/js/app.js"></script>
+<script>
+    function toggleLogout(event) {
+        event.preventDefault();
+        const logoutContainer = document.querySelector('.logout-container');
+        logoutContainer.style.display = logoutContainer.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
 
 </body>
