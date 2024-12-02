@@ -3,102 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recibo de Entrega de Comida</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-top: 20px;
-        }
-        p {
-            margin: 10px 0;
-            text-align: center;
-        }
-        #detalle-pedido {
-            margin: 20px auto;
-            width: 80%;
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        thead {
-            background-color: #f0f0f0;
-        }
-        th {
-            padding: 10px;
-            text-align: left;
-        }
-        td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        .total {
-            font-weight: bold;
-            color: #333;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .info-cliente {
-            margin-top: 20px;
-            text-align: center;
-        }
-    </style>
+    <title>Recibo de Pedido</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Recibo de Entrega de Comida</h1>
-    <p>Gracias por su pedido. A continuación se detallan los productos solicitados:</p>
-    <div id="detalle-pedido">
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio Unitario</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Pizza Hawaiana</td>
-                    <td>2</td>
-                    <td>$15.00</td>
-                    <td>$30.00</td>
-                </tr>
-                <tr>
-                    <td>Ensalada César</td>
-                    <td>1</td>
-                    <td>$8.00</td>
-                    <td>$8.00</td>
-                </tr>
-                <tr>
-                    <td>Bebida Gaseosa</td>
-                    <td>1</td>
-                    <td>$3.00</td>
-                    <td>$3.00</td>
-                </tr>
-            </tbody>
-        </table>
+
+<div class="container mt-5">
+    <h2 class="text-center">Recibo de Pedido</h2>
+
+    <!-- Mensaje de error o éxito -->
+    <!--div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
     </div>
-    <p class="total">El total a pagar es: $41.00</p>
-    <p>Gracias por su preferencia. ¡Buen provecho!</p>
-    <div class="info-cliente">
-        <p>Fecha de entrega: 2023-02-20</p>
-        <p>Hora de entrega: 19:00</p>
-        <p>Nombre del cliente: Juan Pérez</p>
-        <p>Dirección de entrega: Calle 123, Ciudad de México</p>
+    <div th:if="${mensaje}" class="alert alert-success">
+        <p th:text="${mensaje}"></p>
+    </div-->
+
+    <!-- Datos del cliente -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Datos del Cliente</h4>
+            <p><strong>Nombre:</strong> <span th:text="${recibo.nombre} + ' ' + ${recibo.apellido}"></span></p>
+            <p><strong>Dirección:</strong> <span th:text="${recibo.direccion}"></span></p>
+        </div>
     </div>
+
+    <!-- Datos del pedido -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Detalles del Pedido</h4>
+            <p><strong>ID Pedido:</strong> <span th:text="${recibo.idPedido}"></span></p>
+            <p><strong>Total a Pagar:</strong>S/. <span th:text="${recibo.totalPago}"></span></p>
+        </div>
+    </div>
+
+    <!-- Lista de productos -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Productos Comprados</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí iteramos sobre la lista de productos -->
+                    <tr th:each="producto : ${recibo.productos}">
+                        <td th:text="${producto.nomProducto}"></td>
+                        <td th:text="${producto.cantidad}"></td>
+                        <td th:text="${producto.precioUnitario}"></td>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Botón para volver a la página principal o al carrito -->
+    <div class="text-center">
+        <a href="/carrito_compra" class="btn btn-primary">Volver al carrito</a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
