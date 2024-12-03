@@ -83,11 +83,11 @@ public class Empleado {
         this.usuario = usuario;
     }
 
-    public String getContraseña() {
+    public String getContrasena() {
         return contrasena;
     }
 
-    public void setContraseña(String contrasena) {
+    public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
 

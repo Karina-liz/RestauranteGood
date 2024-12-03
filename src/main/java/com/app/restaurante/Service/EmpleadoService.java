@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface EmpleadoService {
     public List<Empleado> listarEmpleados();
 
-    public Empleado guardarEmpleado(Empleado empleado, @RequestParam Integer rolId) throws IOException;
+    public Empleado guardarEmpleado(Empleado empleado, @RequestParam Integer rolId) throws IOException, NoSuchAlgorithmException;
 
     public Empleado obtenerEmpleadoPorId(Integer id);
 
-    public Empleado actualizarEmpleado(Empleado empleado, @RequestParam Integer rolId) throws IOException;
+    public Empleado actualizarEmpleado(Empleado empleado, @RequestParam Integer rolId) throws IOException, NoSuchAlgorithmException;
     
     public void eliminarEmpleado(Integer id);
 

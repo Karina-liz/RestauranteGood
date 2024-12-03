@@ -36,7 +36,7 @@ public class EmpleadoLoginController {
             RedirectAttributes redirectAttributes) throws NoSuchAlgorithmException, IOException {
 
         // Validar las credenciales del empleado
-        Empleado empleado = empleadoService.validateUser(usuario, Validation.md5(password)); // Asegúrate de que este método exista
+        Empleado empleado = empleadoService.validateUser(usuario, password); // La contraseña se hasheará en el servicio
 
         if (empleado != null && empleado.getRol().getIdRol() == 1) { // Verifica que el rol sea 1
             // Almacena el empleado en la sesión

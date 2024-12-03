@@ -24,9 +24,9 @@
         <label>Usuario:</label>
         <input type="text" th:field="*{usuario}" required/>
         <label>Contraseña:</label>
-        <input type="password" th:field="*{contraseña}" required/>
+        <input type="password" th:field="*{contrasena}" required/>
 
-        <!-- Campos para DetalleEmpleado -->
+        <!-- Campos para DetalleEmpleado 
         <h3>Detalles del Empleado</h3>
         <label>Teléfono:</label>
         <input type="text" th:field="*{detalleEmpleado.telefono}" required/>
@@ -40,7 +40,7 @@
             <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nomRol}"></option>
             <option value="nuevo">Crear Nuevo Rol</option>
         </select>
-        <button type="submit">Siguiente</button>
+        <button type="submit">Siguiente</button>-->
     </form>
     <a href="/empleados">Volver a la lista</a>
 </body>
