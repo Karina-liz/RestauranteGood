@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoodDay</title>
     <link th:include="components/link"></link>
 </head>
+
 <body class="goodday-body">
-        
+
     <header th:include="components/nav_panel"></header>
     <header th:include="components/principal"></header>
     <!-- Botón que redirige al login -->
@@ -30,12 +32,15 @@
             </div>
         </div>
     </div>
-<!-- Carrusel -->
+    <!-- Carrusel -->
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -49,10 +54,12 @@
             </div>
         </div>
     </div>
-<br>
-    <center><h1>Nuestra carta</h1></center>
-    <div th:include="components/categoría"></div>
-        
+    <br>
+    <center>
+        <h1>Nuestra carta</h1>
+    </center>
+    <div th:include="components/categorías"></div>
+
     </section>
 
 

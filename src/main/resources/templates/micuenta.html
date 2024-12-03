@@ -1,26 +1,3 @@
-<!--!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi cuenta</title>
-    <link th:include="components/link"></link>
-</head>
-<body>
-    <header th:include="components/nav_panel"></header>
-
-    <main class="main-container-cuenta">
-        <header th:include="components/nav_cuenta" class="header-cuenta-info"></header>
-        <section class="section-cuenta-info">
-            <div th:if="${activePage == 'datos_personales'}" th:include="components/info_cuenta"></div>
-            <div th:if="${activePage == 'mis_pedidos'}" th:include="components/info_pedidos"></div>
-            <div th:if="${activePage == 'mis_direcciones'}" th:include="components/info_direccion"></div>
-            <div th:if="${activePage == 'mis_configuraciones'}" th:include="components/info_configuraciones"></div>
-        </section>
-    </main>
-    
-</body>
-</html-->
 
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
@@ -46,7 +23,9 @@
 
             <!-- Mis Pedidos -->
             <div th:if="${activePage == 'mis_pedidos'}" th:include="components/info_pedido"></div>
-            <!-- Aquí puedes agregar más secciones -->
+
+            <!-- Seguir pedido más actual -->
+
         </section>
     </main>
     

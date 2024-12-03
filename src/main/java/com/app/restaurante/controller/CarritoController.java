@@ -61,10 +61,8 @@ public class CarritoController {
             e.printStackTrace();
         }
 
-        // Mensaje del producto agregado
         redirectAttributes.addFlashAttribute("mensaje", "Producto agregado al carrito exitosamente.");
 
-        // Redirigir a la página "carta"
         return "redirect:/carta";
     }
 
@@ -84,7 +82,7 @@ public class CarritoController {
         Integer idPedido = carritoDAO.obtenerUltimoPedidoPorCliente(cliente.getIdCliente());
         if (idPedido == null) {
             model.addAttribute("mensaje", "No hay pedidos asociados a este cliente.");
-            return "carrito";  // Si no hay pedidos, retorna la vista carrito
+            return "carrito"; 
         }
 
         // Obtener los detalles del carrito asociados al idPedido
@@ -112,7 +110,7 @@ public class CarritoController {
     // Metodo para eliminar el producto del carrito
     @PostMapping("/carrito/eliminar/{idCarrito}/{idPedido}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long idCarrito, @PathVariable Long idPedido) {
-        carritoDAO.eliminarProducto(idCarrito, idPedido); // Llamada directa al DAO
+        carritoDAO.eliminarProducto(idCarrito, idPedido);
         return ResponseEntity.ok().build();
     }
 

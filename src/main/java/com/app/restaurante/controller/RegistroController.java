@@ -31,17 +31,16 @@ public class RegistroController {
     @Autowired
     private RestTemplate restTemplate;
 
+    // API-Peru
     private final String API_URL = "https://apiperu.dev/api/dni/";
-    
     private final String API_TOKEN = "5374cc314f74f8d7193c53d6299c6b24a33afec5502bd3fec6869b38029ee5fa";
 
-    // Endpoint para mostrar formulario de registro inicial
-    @GetMapping("/registrarse")
+    @GetMapping("/registro")
     public String showRegistro(Model model) {
         return "registrarse";
     }
 
-    // Endpoint principal para procesar el registro de nuevos clientes
+    // Recibir y procesar el registro de nuevos clientes
     @PostMapping("/registrarse")
     public String registrarCliente(@RequestParam("nombre") String nombre,
                                    @RequestParam("apellido") String apellido,
@@ -52,26 +51,26 @@ public class RegistroController {
                                    @RequestParam("repetircontrasena") String repetirContrasena,
                                    RedirectAttributes redirectAttributes) {
 
-         // Validar si el DNI ya está registrado
-        if (clienteDAO.existsByDni(dni)) { // Método que debes implementar en ClienteDAO
+        // Valida si el DNI ya está registrado
+        if (clienteDAO.existsByDni(dni)) {
             redirectAttributes.addFlashAttribute("error", "El DNI ya está registrado");
             return "redirect:/login";
         }
 
-        // Validar si las contraseñas coinciden
+        // Valida si las contraseñas coinciden
         if (!contrasena.equals(repetirContrasena)) {
             redirectAttributes.addFlashAttribute("error", "Las contraseñas no coinciden");
             return "redirect:/login";
         }
 
-        // Validar si el DNI es válido usando el API
+        // Valida si el DNI es valido usando el API
         Map<String, Object> dniData = validarDni(dni);
         if (dniData == null || dniData.isEmpty()) {
             redirectAttributes.addFlashAttribute("error", "DNI inválido o no encontrado");
             return "redirect:/login";
         }
 
-        // Encriptar la contraseña
+        // Encripta la contraseña
         String hashedPassword;
         try {
             hashedPassword = Validation.md5(contrasena);
@@ -81,6 +80,8 @@ public class RegistroController {
         }
 
         // Crear y guardar el cliente
+        // Podemos descartar el nombre y apellido en el formulario
+        // Se pueden traer con la consulta del DNI
         Cliente cliente = new Cliente();
         cliente.setNombre(nombre);
         //nuevoCliente.setNombre((String) dniData.get("nombres"));
@@ -93,13 +94,13 @@ public class RegistroController {
 
         clienteDAO.save(cliente);
 
-        // Iniciar sesión automáticamente
+        // Inicia sesion
         session.setAttribute("cliente", cliente);
 
         return "redirect:/registro_completar";
     }
 
-    // Método para validar el DNI mediante el API
+    // Metodo para validar el DNI mediante el API
     private Map<String, Object> validarDni(String dni) {
         try {
             String url = API_URL + dni + "?api_token=" + API_TOKEN;
@@ -115,7 +116,7 @@ public class RegistroController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null; // Si falla la validación o no se encuentra
+        return null; // Si falla o no encuentra
     }
 
     
@@ -126,15 +127,15 @@ public class RegistroController {
             return "redirect:/login";
         }
 
-        // Verificar si el cliente ya tiene dirección registrada
+        // Verifica si el cliente ya tiene dirección registrada
         boolean tieneDireccion = clienteDAO.hasDireccion(cliente.getIdCliente()); // Método en DAO
         model.addAttribute("cliente", cliente);
         model.addAttribute("mostrarModal", !tieneDireccion); // Muestra el modal si no tiene dirección
 
-        // Obtener distritos de la base de datos (a través del DAO)
-        List<Direccion> distritos = clienteDAO.findAllDistritos(); // Lista de Direccion con idDistrito y nombreDistrito
-        model.addAttribute("distritos", distritos); // Pasamos la lista de distritos a la vista
-
+        // Obtenenemos los distritos de la base de datos
+        // Se mostrara el formulario Distrito si no hay
+        List<Direccion> distritos = clienteDAO.findAllDistritos();
+        model.addAttribute("distritos", distritos);
 
         return "bienvenido";
     }

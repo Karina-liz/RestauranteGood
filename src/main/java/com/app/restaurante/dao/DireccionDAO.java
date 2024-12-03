@@ -12,18 +12,19 @@ import com.app.restaurante.model.Direccion;
 public class DireccionDAO {
     
     
-    // Inyección de dependencia de JdbcTemplate para ejecutar consultas SQL
+    // Inyeccion para ejecutar consultas SQL
     private final JdbcTemplate jdbcTemplate;
 
-    // Método que devuelve el nombre de la tabla en la base de datos donde se almacenan las direcciones
+    // Metodo que devuelve el nombre de la tabla en la base de datos donde se almacenan las direcciones
     protected String getTableName() {
         return "direccion"; // Nombre de la tabla en la base de datos
     }
 
-    // Método que devuelve el nombre de la tabla en la base de datos donde se almacenan los distritos
+    // Metodo que devuelve el nombre de la tabla en la base de datos donde se almacenan los distritos
     protected String getDistritosTableName() {
         return "distritos"; // Nombre de la tabla en la base de datos
     }
+
     /**
      * Constructor que recibe el JdbcTemplate
      */
@@ -45,7 +46,7 @@ public class DireccionDAO {
             direccion.setDireccion(rs.getString("direccion"));
             direccion.setReferencia(rs.getString("referencia"));
             direccion.setIdDistrito(rs.getLong("idDistrito"));
-            direccion.setDistrito(rs.getString("distrito")); // Asignar el nombre del distrito
+            direccion.setDistrito(rs.getString("distrito"));
             return direccion;
         });
     }
@@ -68,7 +69,7 @@ public class DireccionDAO {
 
 
     /*
-     * Método para obtener todos los datos de la tabla dirección
+     * Metodo para obtener todos los datos de la tabla dirección
      */
     public List<Direccion> findAllDirecciones() {
         // Consulta SQL para obtener todos los datos de la tabla dirección
@@ -77,7 +78,7 @@ public class DireccionDAO {
     }
 
     /*
-     * Método para obtener todos los datos de la tabla distritos
+     * Metodo para obtener todos los datos de la tabla distritos
      */
     public List<Direccion> findAllDistritos() {
         // Consulta SQL para obtener todos los datos de la tabla distritos

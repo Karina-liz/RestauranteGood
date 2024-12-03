@@ -19,7 +19,7 @@ public class CarritoDAO {
     }
 
     /*
-     * Método para agregar un producto al carrito asociado a un pedido
+     * Metodo para agregar un producto al carrito asociado a un pedido
      */
     public void guardarEnCarrito(Long idCliente, Long idProducto, int cantidad, double precioUnitario, Integer idPedido) {
         // Insertar el producto en el carrito
@@ -32,7 +32,7 @@ public class CarritoDAO {
     }
 
     /**
-     * Método para obtener el último ID de pedido de un cliente
+     * Metodo para obtener el último ID de pedido de un cliente
      */
     @SuppressWarnings("deprecation")
     public Integer obtenerUltimoPedidoPorCliente(Long idCliente) {
@@ -42,7 +42,7 @@ public class CarritoDAO {
     }
 
     /**
-     * Método para crear un nuevo pedido para el cliente
+     * Metodo para crear un nuevo pedido para el cliente
      */
     public Integer crearNuevoPedido(Long idCliente) {
         String sqlPedido = "INSERT INTO pedido (IDCliente, FechaPedido, MontoFinal, Estado) VALUES (?, NOW(), 0, 'Activo')";
@@ -54,7 +54,7 @@ public class CarritoDAO {
     }
 
     /**
-     * Método para obtener detalles completos del carrito por ID de pedido
+     * Metodo para obtener detalles completos del carrito por ID de pedido
      */
     @SuppressWarnings("deprecation")
     public List<Carrito> obtenerDetallesCarrito(int idPedido) {

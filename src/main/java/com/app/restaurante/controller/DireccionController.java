@@ -35,12 +35,12 @@ public class DireccionController {
                                    @RequestParam("referencia") String referencia,
                                    RedirectAttributes redirectAttributes,
                                    @SessionAttribute("cliente") Cliente cliente) {
-        // Verificar que el cliente esté presente en la sesión
+        // Verificar que el cliente este presente en la sesión
         if (cliente == null) {
-            return "redirect:/login"; // Redirigir a login si no hay cliente en sesión
+            return "redirect:/login"; 
         }
         
-        // Obtener el idCliente de la sesión (ajusta según tu implementación)
+        // Obtener el idCliente de la sesion
         Long idCliente = (Long) session.getAttribute("idCliente");
 
         Direccion direccioncli = new Direccion();

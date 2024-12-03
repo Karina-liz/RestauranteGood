@@ -17,7 +17,7 @@ public class Productos {
     public Productos() {
     }
 
-    // Constructor con todos los atributos (opcional)
+    // Constructor con todos los atributos
     public Productos(Long idProducto, String nomProducto, double PrecioUnitario, String descripcion, 
                      int cantidad, String FechaProducto, String FotoProducto, 
                      Long idCategoria, Long idTipo) {
@@ -30,6 +30,14 @@ public class Productos {
         this.FotoProducto = FotoProducto;
         this.idCategoria = idCategoria;
         this.idTipo = idTipo;
+    }
+
+    // Constructor para el RECIBO
+    public Productos(Long idProducto, String nomProducto, Double precio, int cantidad) {
+        this.idProducto = idProducto;
+        this.nomProducto = nomProducto;
+        this.PrecioUnitario = precio;
+        this.cantidad = cantidad;
     }
 
     // Getters y Setters

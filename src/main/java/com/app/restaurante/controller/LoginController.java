@@ -38,14 +38,14 @@ public class LoginController {
         
         if (cliente != null) {
             // Almacena el cliente en la sesión
-            session.setAttribute("idCliente", cliente.getIdCliente()); // Almacena el ID del cliente
-            session.setAttribute("usuario", cliente.getUsuario()); // Almacena el usuario del cliente
-            session.setAttribute("nombre", cliente.getNombre()); // Almacena el nombre del cliente        
+            session.setAttribute("idCliente", cliente.getIdCliente());
+            session.setAttribute("usuario", cliente.getUsuario()); 
+            session.setAttribute("nombre", cliente.getNombre());
            
-            // Redirige a la página de bienvenida o completar registro
             return new ModelAndView("redirect:/registro_completar");
+
         } else {
-            // Si las credenciales son incorrectas, redirige al login con un mensaje de error
+            // Mensaje si las credenciales son incorrectas
             redirectAttributes.addFlashAttribute("error", "Correo electrónico o contraseña inválidos");
             return new ModelAndView("redirect:/login");
         }
@@ -58,19 +58,19 @@ public class LoginController {
         return "redirect:/login"; // Redirige a la página de inicio de sesión
     }*/
     
-    // Ver cual si  es efectivo
+    // Cierra sesion, destruye los datos
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
-        // Aquí puedes agregar la lógica para invalidar la sesión
+        // Invalidar la sesión
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.invalidate(); // Invalida la sesión
+            session.invalidate(); // Invalida la sesión y destruye
         }
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-        response.setDateHeader("Expires", 0); // Proxies
-        // Redirige al usuario a la página de inicio de sesión
-        return "redirect:/login"; // Asegúrate de que esta ruta sea correcta
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache"); 
+        response.setDateHeader("Expires", 0); 
+        
+        return "redirect:/login";
     }
 
 }

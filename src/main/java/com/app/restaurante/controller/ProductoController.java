@@ -31,7 +31,7 @@ public class ProductoController {
     private HttpSession session;   
 
     /**
-     * Método que maneja la solicitud GET para mostrar la carta de productos
+     * Metodo que maneja la solicitud GET para mostrar la carta de productos
      */
     @GetMapping("/carta")
     public String mostrarCarta(Model model) {
@@ -61,7 +61,7 @@ public class ProductoController {
             }            
         }
         
-        // Agrega las listas de productos y la página activa al modelo
+        // Agrega las listas de productos y la pagina activa al modelo
         model.addAttribute("bebidas", bebidas);
         model.addAttribute("postres", postres);
         model.addAttribute("platillos", platillos);
@@ -75,7 +75,7 @@ public class ProductoController {
     }
 
     /**
-     * Método que maneja la solicitud GET para obtener los detalles de un producto específico
+     * Metodo que maneja la solicitud GET para obtener los detalles de un producto especifico
      */
     @GetMapping("/producto/{idProducto}")
     public String obtenerDetalleProducto(@PathVariable("idProducto") int idProducto, Model model) {
@@ -94,7 +94,7 @@ public class ProductoController {
      * 
      */
     /**
-     * Método que maneja la solicitud POST para registrar un nuevo producto
+     * Metodo que maneja la solicitud POST para registrar un nuevo producto
      */
     @PostMapping("/registrar_producto")
     public String registrarProducto(@RequestParam("nomProducto") String nomProducto,
@@ -125,7 +125,7 @@ public class ProductoController {
     }
 
     /**
-     * Método que muestra todos los productos disponibles
+     * Metodo que muestra todos los productos disponibles
      */
     @GetMapping("/productocarta")
     public String mostrarTodosProductos(Model model) {
