@@ -22,12 +22,12 @@ public class LoginService {
     HttpSession session;
     // Método para validar y autenticar un usuario por correo electrónico y
     // contraseña
-    public Cliente validateUser(String email, String password)
+    public Cliente validateUser(String usuario, String password)
             throws NoSuchAlgorithmException, IOException, CloneNotSupportedException {
         // Hashing de la contraseña utilizando MD5
         String hashedPassword = Validation.md5(password);
         // Buscar al usuario por correo electrónico y contraseña hasheada en la base de datos
-        Cliente cliente = clienteDao.findByEmailAndPassword(email, hashedPassword);
+        Cliente cliente = clienteDao.findByEmailAndPassword(usuario, hashedPassword);
         // Si se encuentra al usuario, se guarda en la sesión HTTP
         if (cliente != null) {
             session.setAttribute("cliente", cliente);

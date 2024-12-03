@@ -1,6 +1,7 @@
 package com.app.restaurante.controller;
 
 import com.app.restaurante.model.Empleado;
+import com.app.restaurante.model.DetalleEmpleado;
 import com.app.restaurante.service.EmpleadoService;
 import com.app.restaurante.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Controller
@@ -31,12 +33,14 @@ public class EmpleadoController {
     @GetMapping("/nuevo")
     public String mostrarFormEmpleado(Model model) {
         model.addAttribute("empleado", new Empleado());
+        model.addAttribute("detalleEmpleado", new DetalleEmpleado());
         model.addAttribute("roles", rolService.listarRol());
         return "formEmpleados";
     }
 
     @PostMapping
-    public String guardarEmpleado(@ModelAttribute("empleado") Empleado empleado) throws IOException {
+    public String guardarEmpleado(@ModelAttribute("empleado") Empleado empleado) 
+        throws IOException, NoSuchAlgorithmException {
         Integer rolId = empleado.getRol().getIdRol();
         empleadoService.guardarEmpleado(empleado, rolId);
         return "redirect:/detalle-empleados/nuevo";
@@ -51,7 +55,8 @@ public class EmpleadoController {
     }
 
     @PostMapping("/{id}")
-    public String actualizarEmpleado(@PathVariable Integer id, @ModelAttribute Empleado empleado) throws IOException{
+    public String actualizarEmpleado(@PathVariable Integer id, @ModelAttribute Empleado empleado)
+    throws IOException, NoSuchAlgorithmException {
         Integer rolId = empleado.getRol().getIdRol();
         empleado.setIdEmpleado(id);
         empleadoService.guardarEmpleado(empleado, rolId);
@@ -63,4 +68,20 @@ public class EmpleadoController {
         empleadoService.eliminarEmpleado(id);
         return "redirect:/empleados";
     }
+
+    @GetMapping("/{id}")
+    public Empleado obtenerEmpleado(@PathVariable Integer id) {
+        Empleado empleado = empleadoService.obtenerEmpleadoPorId(id);
+        Empleado empleadoSinContrasena = new Empleado(
+            empleado.getIdEmpleado(),
+            empleado.getNombre(),
+            empleado.getApellidoPaterno(),
+            empleado.getApellidoMaterno(),
+            empleado.getUsuario(),
+            null,
+            empleado.getRol()
+        );
+        return empleadoSinContrasena;
+    }
 }
+

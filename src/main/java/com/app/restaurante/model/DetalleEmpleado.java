@@ -7,16 +7,16 @@ import jakarta.persistence.*;
 public class DetalleEmpleado {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "IDDetalleEmp")
     private Integer idDetalleEmp;
 
-    @Column(length = 9, nullable = true)
+    @Column(name = "Telefono", length = 9, nullable = true)
     private String telefono;
 
-    @Column(length = 100, nullable = true)
+    @Column(name = "Correo", length = 100, nullable = true)
     private String correo;
 
-    @Column(length = 150, nullable = true)
+    @Column(name = "Foto", length = 150, nullable = true)
     private String foto;
     
     @OneToOne

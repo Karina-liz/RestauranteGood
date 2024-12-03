@@ -9,11 +9,14 @@
 </head>
 <body>
     <header th:include="components/nav_panel"></header>
-
+<br>
+<br>
+<br>
+<center>
     <h1>¡Bienvenido, <span th:text="${cliente.nombre}"></span>!</h1>
     <p>Realiza tus compras de manera responsable</p>
 
-    
+</center>
 
     
         <!-- Modal de registro de dirección -->
@@ -26,7 +29,13 @@
             </form>
             <a th:href="@{/logout}" title="Cerrar Sesión" class="link-cerrar-sesion">Cerrar Sesión</a>
         </div>
+<<<<<<< HEAD
     </div>  
+=======
+    </div>
+    
+    <div th:include="components/footer"></div>
+>>>>>>> 2abe777631b528e6f2f4f84ca10a18a89fbe7d52
 </body>
 
 <script>
