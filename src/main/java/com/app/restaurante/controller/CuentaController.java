@@ -134,16 +134,13 @@ public class CuentaController {
                                    @RequestParam("usuario") String usuario,
                                    RedirectAttributes redirectAttributes) {
 
-        // Obtener el idCliente de la sesión (ajusta según tu implementación)
         Long idCliente = (Long) session.getAttribute("idCliente");
                                     
         if (idCliente == null) {
-            // Si no hay idCliente en la sesión, manejar el error
             redirectAttributes.addFlashAttribute("error", "No se pudo obtener el idCliente.");
             return "redirect:/error";
         }
 
-        // Crear y guardar el cliente con el idCliente
         Cliente cliente = new Cliente();
         cliente.setIdCliente(idCliente); 
         cliente.setNombre(nombre);
@@ -151,13 +148,10 @@ public class CuentaController {
         cliente.setCorreo(correo);
         cliente.setUsuario(usuario);
 
-        // Actualizar cliente en la base de datos
         cuentaDAO.update(cliente);
 
-        //
         redirectAttributes.addFlashAttribute("mensaje", "Datos actualizados correctamente.");
 
-        // Redirigir a la cuenta del usuario
         return "redirect:/micuenta";
     }
 }

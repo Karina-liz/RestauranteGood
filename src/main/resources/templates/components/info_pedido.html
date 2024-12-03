@@ -1,51 +1,78 @@
 <!-- Componente que muestra los pedidos que realizó el cliente y un contador de la cantidad de pedidos -->
 <div>
-    <h2 class="titulo-pedidos">Lista de pedidos</h2> 
-    <p class="total-pedidos" th:text="'Total de pedidos: ' + ${pedidos.size()}">Total de pedidos</p>
+    <h2 class="titulo-pedidos-unico">Lista de pedidos</h2>
+    <p class="total-pedidos-unico" th:text="'Total de pedidos: ' + ${pedidos.size()}">Total de pedidos</p>
 </div>
 
-<div class="content-card">
+<div class="contenedor-pedidos-unico">
     <div th:each="pedido : ${pedidos}">
-        <div class="card pedido-card">
-            <h5 class="card-title pedido-titulo">Pedido </h5>
-            <div class="card-body">            
-                <p class="card-text pedido-id" th:text="${pedido.idPedido}">ID del Pedido</p>
-                <p class="card-text pedido-estado" th:text="${pedido.estadoPedido}">Estado del Pedido</p>
-                <p class="card-text pedido-fecha" th:text="${pedido.fechaPedido}">Fecha del Pedido</p>
-                <p class="card-text pedido-fecha-pago" th:text="${pedido.fechaPago}">Fecha de Pago</p>
-                <p class="card-text pedido-total" th:text="${pedido.totalPago}">Total del Pago</p>
-                <p class="card-text pedido-monto-final" th:text="${pedido.montoFinal}">Monto Final</p>
+        <div class="pedido-item-unico">
+            <h5 class="pedido-titulo-unico">Pedido</h5>
+            <div class="pedido-detalles-unico">
+                <p class="pedido-id-unico" th:text="${pedido.idPedido}">ID del Pedido</p>
+                <p class="pedido-estado-unico" th:text="${pedido.estadoPedido}">Estado del Pedido</p>
+                <p class="pedido-fecha-unico" th:text="${pedido.fechaPedido}">Fecha del Pedido</p>
+                <p class="pedido-total-unico" th:text="${pedido.totalPago}">Total del Pago</p>
 
-                <!-- Botón para ver la factura, pasando el ID del pedido -->
-                <button class="btn btn-primary" data-id="${pedido.idPedido}" onclick="verFactura(this)">Ver Recibo</button>
+                <button class="boton-ver-recibo-unico" data-id="${pedido.idPedido}" onclick="verFactura(this)">Ver Recibo</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal de Factura -->
-<div class="modal" tabindex="-1" id="facturaModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Factura del Pedido</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Modal del recibo -->
+<div id="facturaModal" class="modal-unico" style="display:none;">
+    <div class="modal-contenido-unico">
+        <button type="button" class="boton-cerrar-unico" onclick="cerrarModal()">Cerrar</button>
+        <h3>Detalles del Recibo</h3>
+
+        <!-- Aquí irá el contenido del recibo -->
+        <article class="recibo-article" th:include="components/recibo_modal">
+            <!--h2 class="titulo-recibo">Recibo Good Day</h2>
+
+            <div class="recibo-card">
+                <div class="recibo-card-body">
+                    <h4 class="recibo-card-title">Datos del Cliente</h4>
+                    <p><strong>Nombre:</strong> <span id="clienteNombre"></span></p>
+                    <p><strong>Dirección:</strong> <span id="clienteDireccion"></span></p>
+                </div>
             </div>
-            <div class="modal-body">
-                <p id="factura-id">Cargando factura...</p>
-                <p id="factura-contenido">Cargando contenido...</p>
+
+            <div class="recibo-card">
+                <div class="recibo-card-body">
+                    <h4 class="recibo-card-title">Detalles del Pedido</h4>
+                    <p><strong>ID Pedido:</strong> <span id="pedidoId"></span></p>
+                    <p><strong>Total a Pagar:</strong>S/. <span id="totalPago"></span></p>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
+
+            <div class="recibo-card">
+                <div class="recibo-card-body">
+                    <h4 class="recibo-card-title">Productos Comprados</h4>
+                    <table class="recibo-table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unitario</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productosComprados">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div-->
+        </article>
+
+        <button type="button" class="boton-descargar-unico">Descargar Recibo</button>
     </div>
 </div>
 
-<!-- Estilos y Script -->
+<!-- Estilos -->
 <style>
     /* Estilo para el título de la lista de pedidos */
-    .titulo-pedidos {
+    .titulo-pedidos-unico {
         font-size: 24px;
         font-weight: bold;
         color: #333;
@@ -53,77 +80,197 @@
     }
 
     /* Estilo para el total de pedidos */
-    .total-pedidos {
+    .total-pedidos-unico {
         font-size: 18px;
         color: #555;
     }
 
-    /* Estilo para la sección de las cartas de los pedidos */
-    .content-card {
+    /* Estilo para la sección de los pedidos */
+    .contenedor-pedidos-unico {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
     }
 
-    /* Estilo para cada tarjeta de pedido */
-    .pedido-card {
-        border: 1px solid #ccc;
-        border-radius: 5px;
+    /* Estilo para cada pedido */
+    .pedido-item-unico {
+        border: 1px solid #ddd;
+        border-radius: 8px;
         padding: 15px;
         background-color: #f9f9f9;
         width: 300px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .pedido-card:hover {
+    .pedido-item-unico:hover {
         transform: translateY(-5px);
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
     }
 
-    /* Estilo para el título de cada tarjeta de pedido */
-    .pedido-titulo {
+    /* Estilo para el título de cada pedido */
+    .pedido-titulo-unico {
         font-size: 20px;
         color: #007bff;
         margin-bottom: 10px;
     }
 
-    /* Estilo para el texto de cada carta */
-    .card-text {
+    /* Estilo para el texto de cada pedido */
+    .pedido-detalles-unico p {
         font-size: 16px;
         color: #666;
         margin: 5px 0;
     }
 
     /* Estilo para el botón de ver factura */
-    .btn {
+    .boton-ver-recibo-unico {
+        margin-top: 10px;
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .boton-ver-recibo-unico:hover {
+        background-color: #0056b3;
+    }
+
+    /* Estilos para el modal */
+    .modal-unico {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-contenido-unico {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    .boton-cerrar-unico {
+        background-color: #ccc;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .boton-cerrar-unico:hover {
+        background-color: #aaa;
+    }
+
+    .boton-descargar-unico {
+        margin-top: 20px;
+        background-color: #28a745;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .boton-descargar-unico:hover {
+        background-color: #218838;
+    }
+
+    /* Estilos para el recibo */
+    .titulo-recibo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+    }
+
+    .recibo-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
+        padding: 15px;
+    }
+
+    .recibo-card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #007bff;
+    }
+
+    .recibo-card-body p {
+        font-size: 16px;
+        color: #666;
+        margin: 5px 0;
+    }
+
+    .recibo-table {
+        width: 100%;
+        border-collapse: collapse;
         margin-top: 10px;
     }
 
-    /* Estilo para el modal */
-    .modal-content {
-        padding: 20px;
+    .recibo-table th, .recibo-table td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    .recibo-table th {
+        background-color: #007bff;
+        color: white;
     }
 </style>
 
-<!-- Script para manejar la apertura del modal y cargar los datos -->
+<!-- Script para mostrar y cerrar el modal -->
 <script>
+    // Función para mostrar el modal con el recibo
     function verFactura(button) {
-        // Obtén el ID del pedido desde el atributo 'data-id' del botón
         var idPedido = button.getAttribute('data-id');
-
-        // Aquí puedes realizar una llamada AJAX para obtener los datos de la factura usando el ID del pedido
-        // Como ejemplo, usaremos un contenido estático (esto se debería reemplazar por una solicitud real)
         
-        // Cargar el contenido de la factura en el modal
-        document.getElementById('factura-id').innerText = 'Factura ID: ' + idPedido;
-        document.getElementById('factura-contenido').innerText = 'Contenido de la factura del pedido ' + idPedido;
+        // Simular el contenido del recibo
+        document.getElementById('clienteNombre').textContent = 'Juan Pérez'; // Simular el nombre
+        document.getElementById('clienteDireccion').textContent = 'Av. Siempre Viva 123'; // Simular la dirección
+        document.getElementById('pedidoId').textContent = idPedido; // ID del pedido
+        document.getElementById('totalPago').textContent = '100.00'; // Total a pagar
 
-        // Mostrar el modal de la factura
-        var modal = new bootstrap.Modal(document.getElementById('facturaModal'));
-        modal.show();
+        var productos = [
+            { nomProducto: 'Producto A', cantidad: 2, precioUnitario: '50.00' }
+        ];
+
+        var productosTable = document.getElementById('productosComprados');
+        productosTable.innerHTML = ''; // Limpiar la tabla antes de agregar
+
+        productos.forEach(function(producto) {
+            var row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${producto.nomProducto}</td>
+                <td>${producto.cantidad}</td>
+                <td>${producto.precioUnitario}</td>
+            `;
+            productosTable.appendChild(row);
+        });
+
+        // Mostrar el modal
+        document.getElementById('facturaModal').style.display = 'flex';
+    }
+
+    // Función para cerrar el modal
+    function cerrarModal() {
+        document.getElementById('facturaModal').style.display = 'none';
     }
 </script>
-
-<!-- Bootstrap JS y Popper.js (necesarios para el modal) -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

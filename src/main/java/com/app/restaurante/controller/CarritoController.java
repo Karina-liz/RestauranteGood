@@ -65,7 +65,7 @@ public class CarritoController {
         redirectAttributes.addFlashAttribute("mensaje", "Producto agregado al carrito exitosamente.");
 
         // Redirigir a la página "carta"
-        return "redirect:/carrito_compra";
+        return "redirect:/carta";
     }
 
     /**

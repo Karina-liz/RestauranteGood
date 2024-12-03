@@ -57,6 +57,29 @@ public class ReciboController {
         // Retornar la vista que mostrará el recibo
         return "recibo";  // Asegúrate de que esta vista exista en tu proyecto
     }
+
+    @GetMapping("/recibo_modal/{idPedido}")
+    public String modalRecibo(@PathVariable("idPedido") int idPedido, 
+                              HttpSession session,
+                              Model model, 
+                              RedirectAttributes redirectAttributes) {
+        Cliente cliente = (Cliente) session.getAttribute("cliente");
+        if (cliente == null) {
+            redirectAttributes.addFlashAttribute("error", "Debe iniciar sesión para continuar.");
+            return "redirect:/login";
+        }
+    
+        Recibo recibo = reciboDao.obtenerReciboPorIdPedido(idPedido);
+        if (recibo == null) {
+            redirectAttributes.addFlashAttribute("error", "No se encontró el recibo para este pedido.");
+            return "redirect:/pedidos";
+        }
+    
+        model.addAttribute("recibo", recibo);
+        return "components/recibo_modal :: recibo_modal";
+    }
+    
+    
     
     /* 
     En la base de datos hemos creado una tabla que puede o no estar relacionada con el pago

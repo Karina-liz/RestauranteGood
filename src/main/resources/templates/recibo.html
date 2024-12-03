@@ -1,74 +1,225 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recibo de Pedido</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        .container {
+            background-image: url(../img/fonto_recibo.png);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            width: 150mm; /* Ancho ajustado */
+            height: 200mm; /* Alto ajustado */
+            margin: auto;
+            position: relative;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px; /* Opcional, bordes redondeados */
+            color: black;
+        }
+
+        /* Pseudo-elemento para agregar la capa con opacidad sobre la imagen */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5); /* Fondo oscuro con opacidad (ajusta según lo necesites) */
+            z-index: 1; /* Asegura que la capa esté encima de la imagen pero debajo del contenido */
+        }
+
+        .container > * {
+            position: relative;
+            z-index: 13; /* Asegura que el contenido quede encima de la capa */
+        }
+
+        .col {
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+
+        .card {
+            opacity: 1; /* Mantiene la opacidad del 100% en el elemento y sus hijos */
+            background: transparent;
+        }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .card-title {
+            margin-bottom: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .datos-linea {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .datos-linea .col {
+            flex: 1;
+        }
+
+        .datos-linea p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .productos-table tr {
+            background: rgba(0, 0, 0, 0);
+        }
+
+        /* Eliminar borde en la tabla */
+        .productos-table,
+        .productos-table th,
+        .productos-table td {
+            border: none;
+        }
+
+        /* Reducir la altura de las filas */
+        .productos-table th,
+        .productos-table td {
+            padding: 5px 10px; /* Menos padding para filas más cortas */
+            text-align: center;
+        }
+
+        .productos-table {
+            width: 100%;
+        }
+
+        .titulo-recibo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .titulo-recibo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        footer {
+            display: flex;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #888;
+            text-align: center;
+            justify-content: end;
+            font-size: 12px;
+            color: #888; /* Gris claro */
+        }
+
+        footer p {
+            margin: 0px 0;
+        }
+
+        footer a {
+            color: #888; /* Gris claro */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="container mt-5">
-    <h2 class="text-center">Recibo de Pedido</h2>
-
-    <!-- Mensaje de error o éxito -->
-    <!--div th:if="${error}" class="alert alert-danger">
-        <p th:text="${error}"></p>
-    </div>
-    <div th:if="${mensaje}" class="alert alert-success">
-        <p th:text="${mensaje}"></p>
-    </div-->
-
-    <!-- Datos del cliente -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h4 class="card-title">Datos del Cliente</h4>
-            <p><strong>Nombre:</strong> <span th:text="${recibo.nombre} + ' ' + ${recibo.apellido}"></span></p>
-            <p><strong>Dirección:</strong> <span th:text="${recibo.direccion}"></span></p>
+    <div class="container mt-5">
+        <div class="titulo-recibo">
+            <img src="../img/logo_recibo.png" alt="Logo" />
+            <h2 class="text-center">Recibo de Pedido</h2>
         </div>
-    </div>
 
-    <!-- Datos del pedido -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h4 class="card-title">Detalles del Pedido</h4>
-            <p><strong>ID Pedido:</strong> <span th:text="${recibo.idPedido}"></span></p>
-            <p><strong>Total a Pagar:</strong>S/. <span th:text="${recibo.totalPago}"></span></p>
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="datos-linea">
+                    <p><strong>ID Pedido:</strong> <span id="idPedido" th:text="${recibo.idPedido}"></span></p>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Lista de productos -->
-    <div class="card mb-4">
-        <div class="card-body">
-            <h4 class="card-title">Productos Comprados</h4>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unitario</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Aquí iteramos sobre la lista de productos -->
-                    <tr th:each="producto : ${recibo.productos}">
-                        <td th:text="${producto.nomProducto}"></td>
-                        <td th:text="${producto.cantidad}"></td>
-                        <td th:text="${producto.precioUnitario}"></td>                        
-                    </tr>
-                </tbody>
-            </table>
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="datos-linea">
+                    <div class="col">
+                        <h4 class="card-title">Información del Cliente</h4>
+                        <p><strong>Nombre:</strong> <span id="nombreCliente" th:text="${recibo.nombre} + ' ' + ${recibo.apellido}"></span></p>
+                        <p><strong>Dirección:</strong> <span id="direccionCliente" th:text="${recibo.direccion}"></span></p>
+                    </div>
+                    <div class="col">
+                        <h4 class="card-title">Información del Pedido</h4>                        
+                        <p><strong>Total:</strong> S/. <span id="totalPago" th:text="${recibo.totalPago}"></span></p>
+                        <p><strong>Fecha:</strong> <span id="fechaPago" th:text="${recibo.fechaPago}"></span></p>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Productos Comprados</h4>
+                <table class="table productos-table" id="productosTable">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="producto : ${recibo.productos}">
+                            <td th:text="${producto.nomProducto}"></td>
+                            <td th:text="${producto.cantidad}"></td>
+                            <td th:text="${producto.precioUnitario}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pie de página -->
+        <footer>
+            <p>Puedes comunicarte con nosotros al <a href="tel:999222111">999-222-111</a> o enviarnos un correo electrónico a <a href="mailto:contacto@goodday.com">contacto@goodday.com</a>.</p>
+        </footer>
     </div>
 
-    <!-- Botón para volver a la página principal o al carrito -->
     <div class="text-center">
         <a href="/carrito_compra" class="btn btn-primary">Volver al carrito</a>
+        <button onclick="descargarRecibo()" class="btn btn-success">Descargar Recibo PDF</button>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        function descargarRecibo() {
+            const { jsPDF } = window.jspdf;
+            const container = document.querySelector(".container");
 
+            html2canvas(container, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL("image/png");
+                const pdf = new jsPDF("p", "mm", [150, 200]); // Dimensiones ajustadas
+                const pageWidth = 150; 
+                const imgWidth = pageWidth;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+                pdf.save("recibo-pedido.pdf");
+            });
+        }
+    </script>
 </body>
+
 </html>

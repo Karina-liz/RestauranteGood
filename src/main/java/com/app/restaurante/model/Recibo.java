@@ -1,5 +1,6 @@
 package com.app.restaurante.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Recibo {
@@ -13,6 +14,7 @@ public class Recibo {
     private List<Productos> productos;
     private int idPago;
     private double totalPago;
+    private LocalDateTime fechaPago;  // Cambio aquí a LocalDateTime
 
     public Recibo() {}
     
@@ -32,83 +34,37 @@ public class Recibo {
     }
 
     // Getters y setters para todos los atributos
-    public int getIdCliente() {
-        return idCliente;
-    }
+    public int getIdCliente() {        return idCliente;    }
+    public void setIdCliente(int idCliente) {        this.idCliente = idCliente;    }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
+    public String getNombre() {        return nombre;    }
+    public void setNombre(String nombre) {        this.nombre = nombre;    }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getApellido() {        return apellido;    }
+    public void setApellido(String apellido) {        this.apellido = apellido;    }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public int getIdDireccion() {        return idDireccion;    }
+    public void setIdDireccion(int idDireccion) {        this.idDireccion = idDireccion;    }
 
-    public String getApellido() {
-        return apellido;
-    }
+    public String getDireccion() {        return direccion;    }
+    public void setDireccion(String direccion) {        this.direccion = direccion;    }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+    public int getIdPedido() {        return idPedido;    }
+    public void setIdPedido(int idPedido) {        this.idPedido = idPedido;    }
 
-    public int getIdDireccion() {
-        return idDireccion;
-    }
+    public String getProductosEnCarrito() {        return productosEnCarrito;    }
+    public void setProductosEnCarrito(String productosEnCarrito) {        this.productosEnCarrito = productosEnCarrito;    }
 
-    public void setIdDireccion(int idDireccion) {
-        this.idDireccion = idDireccion;
-    }
+    public List<Productos> getProductos() {        return productos;    }
+    public void setProductos(List<Productos> productos) {        this.productos = productos;    }
 
-    public String getDireccion() {
-        return direccion;
-    }
+    public int getIdPago() {        return idPago;    }
+    public void setIdPago(int idPago) {        this.idPago = idPago;    }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+    public double getTotalPago() {        return totalPago;    }
+    public void setTotalPago(double totalPago) {        this.totalPago = totalPago;    }
+    
+    public LocalDateTime getFechaPago() { return fechaPago; }  // Getter para LocalDateTime
+    public void setFechaPago(LocalDateTime fechaPago) { this.fechaPago = fechaPago; }  // Setter para LocalDateTime
 
-    public int getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(int idPedido) {
-        this.idPedido = idPedido;
-    }
-
-    public String getProductosEnCarrito() {
-        return productosEnCarrito;
-    }
-
-    public void setProductosEnCarrito(String productosEnCarrito) {
-        this.productosEnCarrito = productosEnCarrito;
-    }
-
-    public List<Productos> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Productos> productos) {
-        this.productos = productos;
-    }
-
-    public int getIdPago() {
-        return idPago;
-    }
-
-    public void setIdPago(int idPago) {
-        this.idPago = idPago;
-    }
-
-    public double getTotalPago() {
-        return totalPago;
-    }
-
-    public void setTotalPago(double totalPago) {
-        this.totalPago = totalPago;
-    }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,8 @@ public class ReciboDAO {
                      "d.iddireccion, d.direccion, " +
                      "p.idpedido, " +
                      "pr.idproducto, pr.nomproducto, " +
-                     "cp.precioproducto, cp.cantidad, " +
-                     "pg.idpago, pg.totalpago " +
+                     "pr.PrecioUnitario as precioProducto, cp.cantidad, " +
+                     "pg.idpago, pg.totalpago, pg.fechaPago " +
                      "FROM cliente c " +
                      "INNER JOIN direccion d ON c.idcliente = d.idcliente " +
                      "INNER JOIN pedido p ON c.idcliente = p.idcliente " +
@@ -49,10 +50,15 @@ public class ReciboDAO {
                     recibo.setDireccion(rs.getString("direccion"));
                     recibo.setIdPedido(rs.getInt("idpedido"));
                     recibo.setTotalPago(rs.getDouble("totalpago"));
+                    
+                    // Convertir la fechaPago de Timestamp a LocalDateTime
+                    Timestamp timestamp = rs.getTimestamp("fechaPago");
+                    if (timestamp != null) {
+                        recibo.setFechaPago(timestamp.toLocalDateTime());  // Establecer el valor en LocalDateTime
+                    }
 
                     List<Productos> productosList = new ArrayList<>();
 
-                    // Mapear los productos desde el ResultSet
                     do {
                         Long idProducto = rs.getLong("idproducto");
                         String nomProducto = rs.getString("nomproducto");
