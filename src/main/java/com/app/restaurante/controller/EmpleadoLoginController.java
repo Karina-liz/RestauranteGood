@@ -24,7 +24,7 @@ public class EmpleadoLoginController {
     @Autowired
     private HttpSession session;
 
-    @GetMapping("/loginEmpleado")
+    @GetMapping("/login-Empleado")
     public String mostrarLogin() {
         return "loginEmpleado"; // Asegúrate de tener una vista llamada login.html
     }

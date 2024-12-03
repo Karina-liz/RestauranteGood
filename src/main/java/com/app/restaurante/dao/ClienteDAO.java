@@ -97,10 +97,12 @@ public class ClienteDAO {
         return clientes.isEmpty() ? null : clientes.get(0);
     }
 
+    // USADO EN EL LOGIN
     // Metodo para encontrar un usuario por su correo electrónico y contraseña
-    public Cliente findByEmailAndPassword(String email, String password) {
-        String sql = "SELECT * FROM " + getTableName() + " WHERE correo = ? AND contrasena = ?";
-        List<Cliente> results = jdbcTemplate.query(sql, getRowMapper(), email, password);
+    // Cambiar el nombre
+    public Cliente findByEmailAndPassword(String usuario, String password) {
+        String sql = "SELECT * FROM " + getTableName() + " WHERE usuario = ? AND contrasena = ?";
+        List<Cliente> results = jdbcTemplate.query(sql, getRowMapper(), usuario, password);
         return results.isEmpty() ? null : results.get(0);
     }
 

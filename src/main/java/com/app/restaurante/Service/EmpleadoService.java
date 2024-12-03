@@ -19,6 +19,7 @@ public interface EmpleadoService {
     
     public void eliminarEmpleado(Integer id);
 
-    public Empleado validateUser(String usuario, String contrasena) throws NoSuchAlgorithmException, IOException;
+    // Empleado empleado = empleadoService.validateUser(usuario, password); 
+    public Empleado validateUser(String usuario, String contrasena) throws IOException, NoSuchAlgorithmException;
 
 }
