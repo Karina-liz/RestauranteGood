@@ -211,39 +211,9 @@
                         Empleado
                     </button>
                 </div>
-
-<<<<<<< HEAD
-                <button type="button" id="next-btn" onclick="redirectToLogin()">Siguiente</button>
-
-                <p>¿No tiene cuenta? <a th:href="@{/registro}">Regístrese aquí</a></p>
-
-                <!-- Modal para trabajar el login del cliente o del empleao -->
-                <div id="loginModal" class="modal">
-                    <div class="modal-content">
-                        <h3>Inicio de Sesión</h3>
-                        
-                        <form id="loginForm" method="POST" autocomplete="off" >
-                            <div class="registro-input-box">
-                                <label for="email">Correo electrónico:</label>
-                                <input type="email" id="email" name="email" class="registro-input" placeholder="Correo electrónico" required />
-                                <h5>Ejemplo: usuario@dominio.com</h5>
-                            </div>
-                            <div class="registro-input-box">
-                                <label for="contrasena">Contraseña:</label>
-                                <input type="password" id="contrasena" name="contrasena" class="registro-input" placeholder="Contraseña" required />
-                            </div>                            
-                            <div class="remember-forgot">
-                                <a href="#">Restablecer contraseña</a>
-                            </div>
-
-                            <input type="submit" value="Iniciar Sesión" class="button-p" name="iniciar_sesion">
-                            <button type="button" onclick="closeModal()" class="btn-modal btn-cancel">Cancelar</button>
-                        </form>
-                    </div>
-                </div>
-
             </section>
-=======
+        </div>
+
     <div class="body-login">
         <div class="registro-container login">
             <form action="#" th:action="@{/login}" method="POST" class="registro-form" id="FormContact" autocomplete="off">
@@ -270,7 +240,6 @@
                 </div>
                 <input type="submit" value="Iniciar Sesión" class="button-p" name="iniciar_sesion">               
             </form>
->>>>>>> 2abe777631b528e6f2f4f84ca10a18a89fbe7d52
         </div>
     </main>
 
