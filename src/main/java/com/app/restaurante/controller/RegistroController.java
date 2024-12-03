@@ -35,7 +35,7 @@ public class RegistroController {
     private final String API_URL = "https://apiperu.dev/api/dni/";
     private final String API_TOKEN = "5374cc314f74f8d7193c53d6299c6b24a33afec5502bd3fec6869b38029ee5fa";
 
-    @GetMapping("/registrarse")
+    @GetMapping("/registro")
     public String showRegistro(Model model) {
         return "registrarse";
     }

@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selección de Rol | Nextclass</title>
-    <!--
-        ARREGLAR LOS ESTILOS HAY CONFUCIONES POR LAS CLASES
-    -->
     <style>
-        /* Estilos generales */
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -33,13 +30,11 @@
             text-decoration: underline;
         }
 
-        /* Contenedor principal */
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Estilos de los botones de selección */
         .role-buttons {
             display: flex;
             flex-wrap: wrap; /* Permite que los botones se ajusten */
@@ -100,7 +95,6 @@
             background-color: #218838;
         }
 
-        /* Estilos del modal */
         .modal {
             display: none;
             position: fixed;
@@ -209,16 +203,18 @@
 
                 <div class="role-buttons">
                     <button class="role-button btn-cliente" id="cliente-btn" onclick="selectRole('cliente')">
+                        <img src="./img/cliente.jpg" alt="">
                         Cliente
                     </button>
                     <button class="role-button btn-empleado" id="empleado-btn" onclick="selectRole('empleado')">
+                        <img src="./img/empleado.jpg" alt="">
                         Empleado
                     </button>
                 </div>
 
                 <button type="button" id="next-btn" onclick="redirectToLogin()">Siguiente</button>
 
-                <p>¿No tiene cuenta? <a th:href="@{/registrarse}">Regístrese aquí</a></p>
+                <p>¿No tiene cuenta? <a th:href="@{/registro}">Regístrese aquí</a></p>
 
                 <!-- Modal para trabajar el login del cliente o del empleao -->
                 <div id="loginModal" class="modal">

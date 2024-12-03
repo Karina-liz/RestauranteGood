@@ -96,7 +96,7 @@
                 </div>
     
                 <div class="remember-forgot registro-remember-forgot">
-                    <a href="#">¿Ya tienes cuenta?</a>
+                    <a th:href="@{/login}">¿Ya tienes cuenta?</a>
                 </div>
                 <input type="submit" value="Registrarse" class="button-p" name="registro" id="submit-registro">
             </form>    
@@ -120,6 +120,48 @@
             mensajeContainer.style.display = 'none';
         }
     }, 3000);
+</script>
+<script>
+    // Función para validar nombre y apellido
+    function validarNombreApellido(input) {
+        const regex = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
+        if (!regex.test(input.value)) {
+            alert("El nombre o apellido solo puede contener letras y espacios.");
+            input.value = ""; // Limpiar el campo si no es válido
+            input.focus();
+        }
+    }
+
+    // Función para verificar la validez de todos los campos
+    function verificarDatos(event) {
+        const nombre = document.getElementById('nombre');
+        const apellidos = document.getElementById('apellidos');
+        const usuario = document.getElementById('usuario');
+
+        // Validar nombre y apellido
+        validarNombreApellido(nombre);
+        validarNombreApellido(apellidos);
+
+        
+        // Si algún campo no es válido, evitar el envío del formulario
+        if (!nombre.value || !apellidos.value) {
+            event.preventDefault();
+            return false;
+        }
+    }
+
+    window.onload = function() {
+        // Asignar validaciones a los campos de nombre, apellido y usuario
+        document.getElementById('nombre').addEventListener('input', function() {
+            validarNombreApellido(this);
+        });
+        document.getElementById('apellidos').addEventListener('input', function() {
+            validarNombreApellido(this);
+        });
+
+        // Agregar validación al enviar el formulario
+        document.getElementById('FormRegistro').addEventListener('submit', verificarDatos);
+    };
 </script>
 
 </script>
