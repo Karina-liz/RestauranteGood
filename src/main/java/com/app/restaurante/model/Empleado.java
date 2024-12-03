@@ -22,8 +22,8 @@ public class Empleado {
     @Column(name = "Usuario", length = 50, nullable = true)
     private String usuario;
 
-    @Column(name = "Contraseña", length = 150, nullable = true)
-    private String contraseña;
+    @Column(name = "Contrasena", length = 150, nullable = true)
+    private String contrasena;
 
     @ManyToOne
     @JoinColumn(name = "IDRol", nullable = true)
@@ -84,11 +84,11 @@ public class Empleado {
     }
 
     public String getContraseña() {
-        return contraseña;
+        return contrasena;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContraseña(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public Rol getRol() {
@@ -104,20 +104,20 @@ public class Empleado {
     }
 
     public Empleado(Integer idEmpleado, String nombre, String apellidoMaterno, String apellidoPaterno, 
-    String usuario, String contraseña, Rol rol) {
+    String usuario, String contrasena, Rol rol) {
         this.IDEmpleado = idEmpleado;
         this.nombre = nombre;
         this.apellidoMaterno = apellidoMaterno;
         this.apellidoPaterno = apellidoPaterno;
         this.usuario = usuario;
-        this.contraseña = contraseña;
+        this.contrasena = contrasena;
         this.rol = rol;
     }
 
     
     @Override
     public String toString() {
-        return "Empleado [IDEmpleado=" + IDEmpleado + ", nombre=" + nombre + ", apellidoMaterno=" + apellidoMaterno + ", " + ", usuario=" + usuario + ", contraseña=" + contraseña + ", rol=" + rol + "]";
+        return "Empleado [IDEmpleado=" + IDEmpleado + ", nombre=" + nombre + ", apellidoMaterno=" + apellidoMaterno + ", " + ", usuario=" + usuario + ", contraseña=" + contrasena + ", rol=" + rol + "]";
         }
 }
 

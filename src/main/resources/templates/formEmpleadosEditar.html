@@ -19,7 +19,7 @@
         <label>Usuario:</label>
         <input type="text" th:field="*{usuario}" required/>
         <label>Contraseña:</label>
-        <input type="password" th:field="*{contraseña}" required/>
+        <input type="password" th:field="*{contrasena}" required/>
         <label>Rol:</label>
         <select th:field="*{rol.idRol}" required>
             <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nomRol}"></option> 
