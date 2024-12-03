@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public class DeliveryDAO {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate; // Inyección de JdbcTemplate para ejecutar consultas SQL
+    private JdbcTemplate jdbcTemplate;
 
     protected String getTableName() {
         return "delivery"; // Nombre de la tabla en la base de datos

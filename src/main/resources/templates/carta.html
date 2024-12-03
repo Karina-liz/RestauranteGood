@@ -40,8 +40,8 @@
             <h3 class="carta-title">Carta de Menú</h3>
     
             <div class="carta-content">
-                <!-- Categoría Bebidas -->
-                <!-- Productos en carta.html -->
+                <!-- Trabajamos con categorias 3 categorias fijas -->
+                <!-- Categoria bebidas -->
                 <h4 class="carta-category-title">Bebidas</h4>
                 <div class="productos">
                     <div th:if="${bebidas != null and bebidas.size() > 0}" th:each="producto : ${bebidas}" class="carta-item">
@@ -59,7 +59,7 @@
                     </div>
                 </div>        
                 
-                <!-- Categoría Platillos -->
+                <!-- Categoria platillos -->
                 <h4 class="carta-category-title">Platillos</h4>
                 <div class="productos">
                     <div th:if="${platillos != null and platillos.size() > 0}" th:each="producto : ${platillos}" class="carta-item">
@@ -77,7 +77,7 @@
                     </div>
                 </div>        
                 
-                <!-- Categoría Postres -->
+                <!-- Categoria postres -->
                 <h4 class="carta-category-title">Postres</h4>
                 <div class="productos">
                     <div th:if="${postres != null and postres.size() > 0}" th:each="producto : ${postres}" class="carta-item">

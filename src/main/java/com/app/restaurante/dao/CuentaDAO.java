@@ -21,7 +21,6 @@ import com.app.restaurante.utils.Validation;
 @Repository
 public class CuentaDAO {
     
-    // Inyección de dependencia de JdbcTemplate para ejecutar consultas SQL
     private final JdbcTemplate jdbcTemplate;
 
     public CuentaDAO(JdbcTemplate jdbcTemplate) {
@@ -29,11 +28,11 @@ public class CuentaDAO {
     }
 
     /**
-     * Método para obtener direcciones por ID de cliente
+     * Metodo para obtener direcciones por ID de cliente
      */
     @SuppressWarnings("deprecation")
     public List<Direccion> obtenerDireccionesPorCliente(Long idCliente) {
-        // Consulta SQL para obtener direcciones por ID de cliente
+        
         String sql = "SELECT dir.idDireccion, dir.idCliente, dir.Direccion, dir.Referencia, di.distrito " +
                      "FROM direccion dir " +
                      "INNER JOIN Distrito di ON dir.IDDistrito = di.IDDistrito WHERE idCliente = ?;";
@@ -48,11 +47,11 @@ public class CuentaDAO {
     }
 
     /**
-     * Método para obtener los pedidos por ID de cliente
+     * Metodo para obtener los pedidos por ID de cliente
      */
     @SuppressWarnings("deprecation")
     public List<Pedido> obtenerPedidosPorCliente(Long idCliente) {
-        // Consulta SQL para obtener direcciones por ID de cliente
+
         String sql = "SELECT ped.IDPedido, ped.IDCliente, pa.IDPago, ped.Estado, ped.FechaPedido, " +
                      "pa.FechaPago, pa.TotalPago, ped.MontoFinal " +
                      "FROM pedido ped " +
@@ -75,7 +74,6 @@ public class CuentaDAO {
     // Metodo para actualizar los datos del cliente
     public void update(Cliente cliente) {
         
-        // Si el cliente tiene ID, es un cliente existente, hacemos un UPDATE
         String sql = "UPDATE cliente SET nombre = ?, apellido = ?, usuario = ?, correo = ? WHERE idCliente = ?";
         jdbcTemplate.update(sql,
             cliente.getNombre(),

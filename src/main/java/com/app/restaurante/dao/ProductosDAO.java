@@ -17,7 +17,7 @@ import java.util.List;
 @Repository
 public class ProductosDAO {
 
-    // Inyección de dependencia de JdbcTemplate para ejecutar consultas SQL
+    // Inyeccion de dependencia de JdbcTemplate para ejecutar consultas SQL
     private final JdbcTemplate jdbcTemplate;
 
     /**
@@ -29,12 +29,12 @@ public class ProductosDAO {
     /*
     -------------------------------------- 
     */
-    // Método que devuelve el nombre de la tabla en la base de datos donde se almacenan los clientes
+    // Metodo que devuelve el nombre de la tabla en la base de datos donde se almacenan los clientes
     protected String getTableName() {
-        return "producto"; // Nombre de la tabla en la base de datos
+        return "producto";
     }
 
-    // Método que devuelve el RowMapper para mapear los resultados a objetos Productos
+    // Metodo que devuelve el RowMapper para mapear los resultados a objetos Productos
     protected RowMapper<Productos> getRowMapper() {
         return new RowMapper<Productos>() {
             @Override
@@ -54,7 +54,7 @@ public class ProductosDAO {
         };
     }
 
-    // Método para guardar o actualizar un producto
+    // Metodo para guardar o actualizar un producto
     public void save(Productos producto) {
         if (producto.getIdProducto() == null) {
             // Si el producto no tiene ID, es nuevo, hacemos INSERT
@@ -91,7 +91,7 @@ public class ProductosDAO {
         }
     }
 
-    // Método para buscar un producto por su ID
+    // Metodo para buscar un producto por su ID
     @SuppressWarnings("deprecation")
     public Productos findById(Long idProducto) {
         String sql = "SELECT * FROM " + getTableName() + " WHERE idProducto = ?";
@@ -99,25 +99,25 @@ public class ProductosDAO {
         return productos.isEmpty() ? null : productos.get(0);
     }
 
-    // Método para eliminar un producto por su ID
+    // Metodo para eliminar un producto por su ID
     public void deleteById(Long idProducto) {
         String sql = "DELETE FROM " + getTableName() + " WHERE idProducto = ?";
         jdbcTemplate.update(sql, idProducto);
     }
 
-    // Método para eliminar todos los productos
+    // Metodo para eliminar todos los productos
     public void deleteAll() {
         String sql = "DELETE FROM " + getTableName();
         jdbcTemplate.update(sql);
     }
 
-    // Método para eliminar productos por categoría
+    // Metodo para eliminar productos por categoría
     public void deleteByCategoria(Long idCategoria) {
         String sql = "DELETE FROM " + getTableName() + " WHERE IDCategoria = ?";
         jdbcTemplate.update(sql, idCategoria);
     }    
     
-    // Método para obtener todos los productos
+    // Metodo para obtener todos los productos
     public List<Productos> findAll() {
         String sql = "SELECT * FROM " + getTableName();
         return jdbcTemplate.query(sql, getRowMapper());
@@ -128,8 +128,7 @@ public class ProductosDAO {
     */
     
     /*
-     * Método para obtener todas las categorías de productos
-     * @return Lista de categorías de productos
+     * Metodo para obtener todas las categorías de productos
      */
     public List<String> findAllCategorias() {
         // Consulta SQL para obtener todas las categorías distintas
@@ -138,7 +137,7 @@ public class ProductosDAO {
     }
 
     /*
-     * Método para obtener todos los tipos de productos
+     * Metodo para obtener todos los tipos de productos
      * @return Lista de tipos de productos
      */
     public List<String> findAllTipos() {
@@ -152,11 +151,11 @@ public class ProductosDAO {
     */
 
     /**
-     * Método para obtener productos por categoría
+     * Metodo para obtener productos por categoría
      */
     @SuppressWarnings("deprecation")
     public List<Productos> obtenerPorCategoria(String categoria) {
-        // Consulta SQL para obtener productos por categoría
+        // Consulta SQL para obtener productos por categoria
         String sql = "SELECT idProducto, NomProducto, PrecioUnitario, FotoProducto, Descripcion, Cantidad FROM producto WHERE idCategoria = (SELECT idCategoria FROM categoriaproducto WHERE NomCategoria = ?);";
         List<Productos> productos = jdbcTemplate.query(sql, new Object[]{categoria}, new BeanPropertyRowMapper<>(Productos.class));
     
@@ -170,7 +169,7 @@ public class ProductosDAO {
     }
 
     /**
-     * Método para obtener un producto por su ID
+     * Metodo para obtener un producto por su ID
      */
     @SuppressWarnings("deprecation")
     public Productos obtenerProductoPorId(int idProducto) {

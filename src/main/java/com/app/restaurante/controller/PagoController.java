@@ -57,7 +57,7 @@ public class PagoController {
 
         // Agrege los TryCatch para trabajar los errores
         try {            
-            pagoDao.registrarPago(idPedido, total); // Registrar el pago si los datos son correctos
+            pagoDao.registrarPago(idPedido, total);
         } catch (Exception e) {            
             redirectAttributes.addFlashAttribute("error", "Error al procesar el pago: " + e.getMessage());
             return "redirect:/carrito_compra";
@@ -71,7 +71,8 @@ public class PagoController {
         }
 
         try {            
-            deliveryDao.registrarDelivery(idPedido); // Crear delivery para la entrega del pedido
+            // Crear delivery para la entrega del pedido
+            deliveryDao.registrarDelivery(idPedido);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al registrar la entrega: " + e.getMessage());
             return "redirect:/carrito_compra";

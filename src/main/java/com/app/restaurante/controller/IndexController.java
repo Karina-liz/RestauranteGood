@@ -28,6 +28,7 @@ public class IndexController {
 
     @GetMapping("/bienvenido")
     public String bienvenida(Model model) {
+
         // Verificar si el cliente está en sesión
         Cliente cliente = (Cliente) session.getAttribute("cliente");
         if (cliente == null) {
@@ -44,9 +45,7 @@ public class IndexController {
         model.addAttribute("mostrarModal", direccion == null); // Mostrar modal si no hay dirección
         model.addAttribute("cliente", cliente);
 
-
-
-        return "bienvenido"; // Asegúrate de que hay una vista bienvenido.html
+        return "bienvenido";
     }    
 
 

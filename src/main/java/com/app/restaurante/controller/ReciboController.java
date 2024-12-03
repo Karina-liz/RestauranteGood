@@ -54,8 +54,7 @@ public class ReciboController {
         // Pasar el objeto Recibo al modelo
         model.addAttribute("recibo", recibo);
 
-        // Retornar la vista que mostrará el recibo
-        return "recibo";  // Asegúrate de que esta vista exista en tu proyecto
+        return "recibo";
     }
 
     @GetMapping("/recibo_modal/{idPedido}")
@@ -63,6 +62,7 @@ public class ReciboController {
                               HttpSession session,
                               Model model, 
                               RedirectAttributes redirectAttributes) {
+        
         Cliente cliente = (Cliente) session.getAttribute("cliente");
         if (cliente == null) {
             redirectAttributes.addFlashAttribute("error", "Debe iniciar sesión para continuar.");

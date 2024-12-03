@@ -74,7 +74,7 @@ public class ClienteDAO {
         return jdbcTemplate.query(sql, getRowMapper());
     }
 
-    // Método para verificar si existe un cliente por DNI
+    // Metodo para verificar si existe un cliente por DNI
     public boolean existsByDni(String dni) {
         String sql = "SELECT COUNT(*) FROM " + getTableName() + " WHERE dni = ?";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, dni);
@@ -89,7 +89,7 @@ public class ClienteDAO {
         return clientes.isEmpty() ? null : clientes.get(0); // Si no se encuentra el cliente, retornamos null
     }
 
-    // Metodo para obtener un cliente por correo electrónico (puedes agregar más métodos de búsqueda si lo deseas)
+    // Metodo para obtener un cliente por correo electrónico
     @SuppressWarnings("deprecation")
     public Cliente findByCorreo(String correo) {
         String sql = "SELECT * FROM " + getTableName() + " WHERE correo = ?";
@@ -118,10 +118,10 @@ public class ClienteDAO {
         try { 
             String sql = "INSERT INTO direccion (idCliente, direccion, ciudad) VALUES (?, ?, ?)";
             int rows = jdbcTemplate.update(sql, idCliente, direccion, ciudad);
-            return rows > 0; // Devuelve true si se insertó al menos una fila
+            return rows > 0;
         } catch (Exception e) {
             e.printStackTrace();
-            return false; // Devuelve false en caso de error
+            return false;
         }
     }    
 
@@ -132,13 +132,13 @@ public class ClienteDAO {
     }
     
 
-    // Método para obtener la lista de distritos
+    // Metodo para obtener la lista de distritos
     public List<Direccion> findAllDistritos() {
-        String sql = "SELECT IDDistrito, distrito FROM distrito"; // Consulta que obtiene tanto el ID como el nombre del distrito
+        String sql = "SELECT IDDistrito, distrito FROM distrito"; 
         return jdbcTemplate.query(sql, (rs, rowNum) -> {
             Direccion direccion = new Direccion();
-            direccion.setIdDistrito(rs.getLong("IDDistrito")); // Asignar ID del distrito
-            direccion.setDistrito(rs.getString("distrito")); // Asignar nombre del distrito
+            direccion.setIdDistrito(rs.getLong("IDDistrito")); 
+            direccion.setDistrito(rs.getString("distrito"));
             return direccion;
         });
     }

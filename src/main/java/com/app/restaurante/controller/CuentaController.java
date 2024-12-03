@@ -32,7 +32,7 @@ public class CuentaController {
     private HttpSession session;
 
     /**
-     * Método principal que maneja la solicitud GET para mostrar la cuenta de un cliente
+     * Metodo principal que maneja la solicitud GET para mostrar la cuenta de un cliente
      */
     @GetMapping("/micuenta")
     public String mostrarCuenta(Model model) {
@@ -63,7 +63,7 @@ public class CuentaController {
     }
 
     /**
-     * Método para mostrar la sección de datos personales
+     * Metodo para mostrar la sección de datos personales
      */
     @GetMapping("/datos_personales")
     public String datosPersonales(Model model) {
@@ -87,7 +87,7 @@ public class CuentaController {
     }
 
     /**
-     * Método para mostrar la sección de mis direcciones
+     * Metodo para mostrar la sección de mis direcciones
      */
     @GetMapping("/mis_direcciones")
     public String misDirecciones(Model model) {
@@ -107,7 +107,7 @@ public class CuentaController {
     }
 
     /**
-     * Método para mostrar la sección de mis pedidos
+     * Metodo para mostrar la sección de mis pedidos
      */
     @GetMapping("/mis_pedidos")
     public String misPedidos(Model model) {
@@ -126,7 +126,7 @@ public class CuentaController {
         return "micuenta";
     }
 
-    // Principal para procesar la actualizacion de  clientes
+    // Para procesar la actualizacion de  clientes
     @PostMapping("/cambiarDatos")
     public String registrarCliente(@RequestParam("nombre") String nombre,
                                    @RequestParam("apellido") String apellido,

@@ -14,7 +14,8 @@ public class DatabaseController {
 
     @Autowired
     private DataSource dataSource;
-    // Método para realizar la prueba de validacion atravez del archivo estatico validation.html
+
+    // Metodo para realizar la prueba de la conexion a la BD
     @GetMapping("/validation")
     public String validateDatabaseConnection(Model model) {
         String message;

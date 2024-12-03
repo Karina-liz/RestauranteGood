@@ -13,17 +13,15 @@
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            width: 150mm; /* Ancho ajustado */
-            height: 200mm; /* Alto ajustado */
+            width: 150mm;
+            height: 200mm;
             margin: auto;
             position: relative;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            border-radius: 10px; /* Opcional, bordes redondeados */
+            border-radius: 10px;
             color: black;
         }
-
-        /* Pseudo-elemento para agregar la capa con opacidad sobre la imagen */
         .container::before {
             content: "";
             position: absolute;
@@ -31,84 +29,67 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.5); /* Fondo oscuro con opacidad (ajusta según lo necesites) */
-            z-index: 1; /* Asegura que la capa esté encima de la imagen pero debajo del contenido */
+            background: rgba(255, 255, 255, 0.5);
+            z-index: 1; 
         }
-
         .container > * {
             position: relative;
-            z-index: 13; /* Asegura que el contenido quede encima de la capa */
+            z-index: 13; 
         }
-
         .col {
             padding-right: 10px;
             padding-left: 10px;
         }
-
         .card {
-            opacity: 1; /* Mantiene la opacidad del 100% en el elemento y sus hijos */
+            opacity: 1;
             background: transparent;
         }
-
         .card-body {
             padding: 10px;
         }
-
         .card-title {
             margin-bottom: 0;
             display: flex;
             justify-content: center;
         }
-
         .datos-linea {
             display: flex;
             justify-content: space-between;
             gap: 40px;
         }
-
         .datos-linea .col {
             flex: 1;
         }
-
         .datos-linea p {
             margin: 0;
             padding: 0;
         }
-
         .productos-table tr {
             background: rgba(0, 0, 0, 0);
         }
-
-        /* Eliminar borde en la tabla */
         .productos-table,
         .productos-table th,
         .productos-table td {
             border: none;
         }
-
-        /* Reducir la altura de las filas */
         .productos-table th,
         .productos-table td {
-            padding: 5px 10px; /* Menos padding para filas más cortas */
+            padding: 5px 10px;
             text-align: center;
         }
-
         .productos-table {
             width: 100%;
         }
-
         .titulo-recibo {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
         }
-
         .titulo-recibo img {
             width: 50px;
             height: 50px;
         }
-
         footer {
             display: flex;
             margin-top: 20px;
@@ -119,16 +100,13 @@
             font-size: 12px;
             color: #888; /* Gris claro */
         }
-
         footer p {
             margin: 0px 0;
         }
-
         footer a {
             color: #888; /* Gris claro */
             text-decoration: none;
         }
-
         footer a:hover {
             text-decoration: underline;
         }
@@ -190,7 +168,6 @@
             </div>
         </div>
 
-        <!-- Pie de página -->
         <footer>
             <p>Puedes comunicarte con nosotros al <a href="tel:999222111">999-222-111</a> o enviarnos un correo electrónico a <a href="mailto:contacto@goodday.com">contacto@goodday.com</a>.</p>
         </footer>
@@ -210,7 +187,7 @@
 
             html2canvas(container, { scale: 2 }).then(canvas => {
                 const imgData = canvas.toDataURL("image/png");
-                const pdf = new jsPDF("p", "mm", [150, 200]); // Dimensiones ajustadas
+                const pdf = new jsPDF("p", "mm", [150, 200]); // Dimensiones del pdf
                 const pageWidth = 150; 
                 const imgWidth = pageWidth;
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
