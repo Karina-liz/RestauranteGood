@@ -27,14 +27,15 @@ public class LoginController {
     @Autowired
     private HttpSession session;    
     
+    // Cambiar el email por el user
     @PostMapping("/login")
     public ModelAndView login(
-            @RequestParam("email") String email, 
+            @RequestParam("usuario") String usuario, 
             @RequestParam("contrasena") String password,
             RedirectAttributes redirectAttributes)
              throws NoSuchAlgorithmException, IOException, CloneNotSupportedException {
         
-        Cliente cliente = loginService.validateUser(email, password);  // Validación de credenciales
+        Cliente cliente = loginService.validateUser(usuario, password);  // Validación de credenciales
         
         if (cliente != null) {
             // Almacena el cliente en la sesión

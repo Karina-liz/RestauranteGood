@@ -2,89 +2,101 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Pedidos</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra el contenido de la página */
+        }
+
+        /* Componente adminMenu en una sola línea */
+        .component {
+            width: 100%;
+            margin-bottom: 20px; /* Separación entre el menu y las cartas */
+        }
+        .pedido-container {
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .pedido-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .pedido-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pedido-card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .pedido-card p {
+            color: #555;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .pedido-card .pedido-status {
+            font-weight: bold;
+        }
+
+        .pedido-card .pedido-total {
+            font-size: 16px;
+            color: #2a9d8f;
+        }
+
+        .pedido-card .pedido-date {
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
-    <div th:include="components/adminMenu"></div>
-    
-    <div class="container mt-4">
-        <h1 class="mb-4">Gestión de Pedidos</h1>
+
+    <div th:include="components/adminMenu" class="component"></div>
+
+    <div class="pedido-container">
+
+        <div class="pedido-card">
+            <h3>Pedido #12345</h3>
+            <p><strong>ID Cliente:</strong> 67890</p>
+            <p><span class="pedido-status">Estado:</span> En proceso</p>
+            <p><span class="pedido-total">Monto Total: $50.00</span></p>
+            <p class="pedido-date"><strong>Fecha de Pago:</strong> 2024-12-03</p>
+        </div>
+
+        <div class="pedido-card">
+            <h3>Pedido #12346</h3>
+            <p><strong>ID Cliente:</strong> 67891</p>
+            <p><span class="pedido-status">Estado:</span> Completado</p>
+            <p><span class="pedido-total">Monto Total: $35.50</span></p>
+            <p class="pedido-date"><strong>Fecha de Pago:</strong> 2024-12-02</p>
+        </div>
+
+        <div class="pedido-card">
+            <h3>Pedido #12347</h3>
+            <p><strong>ID Cliente:</strong> 67892</p>
+            <p><span class="pedido-status">Estado:</span> Cancelado</p>
+            <p><span class="pedido-total">Monto Total: $22.00</span></p>
+            <p class="pedido-date"><strong>Fecha de Pago:</strong> 2024-12-01</p>
+        </div>
         
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h5 class="card-title mb-0">Lista de Pedidos</h5>
-            </div>
-            
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>ID Pedido</th>
-                                <th>Cliente</th>
-                                <th>Estado</th>
-                                <th>Fecha Pedido</th>
-                                <th>Fecha Pago</th>
-                                <th>Total</th>
-                                <th>Monto Final</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="pedido : ${pedidos}">
-                                <td th:text="${pedido.idPedido}"></td>
-                                <td th:text="${pedido.idCliente}"></td>
-                                <td>
-                                    <span th:class="${pedido.estadoPedido == 'Completado' ? 'badge bg-success' : 
-                                                    pedido.estadoPedido == 'Pendiente' ? 'badge bg-warning' :
-                                                    pedido.estadoPedido == 'Cancelado' ? 'badge bg-danger' : 'badge bg-info'}"
-                                          th:text="${pedido.estadoPedido}">
-                                    </span>
-                                </td>
-                                <td th:text="${#dates.format(pedido.fechaPedido, 'dd/MM/yyyy HH:mm')}"></td>
-                                <td th:text="${#dates.format(pedido.fechaPago, 'dd/MM/yyyy HH:mm')}"></td>
-                                <td th:text="'S/. ' + ${#numbers.formatDecimal(pedido.totalPago, 1, 2)}"></td>
-                                <td th:text="'S/. ' + ${#numbers.formatDecimal(pedido.montoFinal, 1, 2)}"></td>
-                                <td>
-                                    <div class="btn-group" role="group">
-                                        <a th:href="@{/pedidos/{id}/ver(id=${pedido.idPedido})}" 
-                                           class="btn btn-info btn-sm" title="Ver detalles">
-                                            <i class="fas fa-eye"></i> Ver
-                                        </a>
-                                        <a th:href="@{/pedidos/{id}/editar(id=${pedido.idPedido})}" 
-                                           class="btn btn-warning btn-sm" title="Editar">
-                                            <i class="fas fa-edit"></i> Editar
-                                        </a>
-                                        <a th:href="@{/recibo/{id}(id=${pedido.idPedido})}" 
-                                           class="btn btn-success btn-sm" title="Ver recibo">
-                                            <i class="fas fa-file-invoice"></i> Recibo
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
 
-        <!-- Mensaje de éxito -->
-        <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            <span th:text="${mensaje}"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-
-        <!-- Mensaje de error -->
-        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-            <span th:text="${error}"></span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
     </div>
-
-    <!-- Bootstrap JS y Font Awesome -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
 </body>
-</html> 
+</html>
