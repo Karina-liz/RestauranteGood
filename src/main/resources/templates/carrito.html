@@ -10,12 +10,12 @@
 
 <body>
     <header th:include="components/nav_panel"></header>
+    <br>
 
     <div th:include="components/mensajes"></div>
 
 <br>
     <div class="container mt-5">
-        <br>
         <h2>Mi Carrito de Compras</h2>
         
         <div th:if="${#lists.isEmpty(carrito)}" class="alert alert-info">
