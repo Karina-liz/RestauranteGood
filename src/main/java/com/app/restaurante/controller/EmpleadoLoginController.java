@@ -24,9 +24,9 @@ public class EmpleadoLoginController {
     @Autowired
     private HttpSession session;
 
-    @GetMapping("/login-Empleado")
+    @GetMapping("/loginEmpleado")
     public String mostrarLogin() {
-        return "loginEmpleado"; // Asegúrate de tener una vista llamada login.html
+        return "login"; // Asegúrate de tener una vista llamada login.html
     }
 
     @PostMapping("/loginEmpleado")
@@ -49,7 +49,7 @@ public class EmpleadoLoginController {
         } else {
             // Si las credenciales son incorrectas, redirige al login con un mensaje de error
             redirectAttributes.addFlashAttribute("error", "Usuario o contraseña inválidos");
-            return new ModelAndView("redirect:/loginEmpleado");
+            return new ModelAndView("redirect:/login");
         }
     }
 } 

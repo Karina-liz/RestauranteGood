@@ -12,6 +12,7 @@
 </head>
 <body>
     <div th:include="components/adminMenu"></div>
+    
     <h1 th:text="${empleado.idEmpleado} == null ? 'Agregar Empleado' : 'Editar Empleado'"></h1>
     <form th:action="@{/empleados}" th:object="${empleado}" method="post">
         <input type="hidden" th:field="*{idEmpleado}"/>
@@ -39,8 +40,8 @@
         <select th:field="*{rol.idRol}" required onchange="if(this.value === 'nuevo') redirectToCreateRole()">
             <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nomRol}"></option>
             <option value="nuevo">Crear Nuevo Rol</option>
-        </select>
-        <button type="submit">Siguiente</button>-->
+        </select-->
+        <button type="submit">Siguiente</button>
     </form>
     <a href="/empleados">Volver a la lista</a>
 </body>

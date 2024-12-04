@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selección de Rol | Nextclass</title>
+    <!--
+        ARREGLAR LOS ESTILOS HAY CONFUCIONES POR LAS CLASES
+    -->
     <style>
-
+        /* Estilos generales */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -30,11 +33,13 @@
             text-decoration: underline;
         }
 
+        /* Contenedor principal */
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        /* Estilos de los botones de selección */
         .role-buttons {
             display: flex;
             flex-wrap: wrap; /* Permite que los botones se ajusten */
@@ -95,6 +100,7 @@
             background-color: #218838;
         }
 
+        /* Estilos del modal */
         .modal {
             display: none;
             position: fixed;
@@ -203,43 +209,48 @@
 
                 <div class="role-buttons">
                     <button class="role-button btn-cliente" id="cliente-btn" onclick="selectRole('cliente')">
-                        <img src="./img/cliente.jpg" alt="">
                         Cliente
                     </button>
                     <button class="role-button btn-empleado" id="empleado-btn" onclick="selectRole('empleado')">
-                        <img src="./img/empleado.jpg" alt="">
                         Empleado
                     </button>
                 </div>
-            </section>
-        </div>
 
-    <div class="body-login">
-        <div class="registro-container login">
-            <form action="#" th:action="@{/login}" method="POST" class="registro-form" id="FormContact" autocomplete="off">
-                <h1>¡Hola!</h1>
-                <hr>
-                <p>Ingresa tus datos</p>
-                <!--sdiv class="input-box registro-input-box">
-                    <label for="email">Correo electrónico:</label>
-                    <input type="email" id="email" name="email" class="registro-input" placeholder="Correo electrónico" required />
-                    <h5>Ejemplo: usuario@dominio.com</h5>
-                </div-->
-                <div class="input-box registro-input-box">
-                    <label for="email">Usuario:</label>
-                    <input type="text" id="usuario" name="usuario" class="registro-input" placeholder="Usuario" required />
-                    <h5>Ejemplo: user123</h5>
+                <button type="button" id="next-btn" onclick="redirectToLogin()">Siguiente</button>
+
+                <p>¿No tiene cuenta? <a th:href="@{/registrarse}">Regístrese aquí</a></p>
+
+                <!-- Modal para trabajar el login del cliente o del empleao -->
+                <div id="loginModal" class="modal">
+                    <div class="modal-content">
+                        <h3>Inicio de Sesión</h3>
+                        
+                        <form id="loginForm" method="POST" autocomplete="off" >
+                            <!--div class="registro-input-box">
+                                <label for="email">Correo electrónico:</label>
+                                <input type="email" id="email" name="email" class="registro-input" placeholder="Correo electrónico" required />
+                                <h5>Ejemplo: usuario@dominio.com</h5>
+                            </div-->
+                            <div class="registro-input-box">
+                                <label for="usuario">Usuario:</label>
+                                <input type="text" id="usuario" name="usuario" class="registro-input" placeholder="Usuario" required />
+                                <h5>Ejemplo: usuario123</h5>
+                            </div>
+                            <div class="registro-input-box">
+                                <label for="contrasena">Contraseña:</label>
+                                <input type="password" id="contrasena" name="contrasena" class="registro-input" placeholder="Contraseña" required />
+                            </div>                            
+                            <!--div class="remember-forgot">
+                                <a href="#">Restablecer contraseña</a>
+                            </div-->
+
+                            <input type="submit" value="Iniciar Sesión" class="button-p" name="iniciar_sesion">
+                            <button type="button" onclick="closeModal()" class="btn-modal btn-cancel">Cancelar</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="input-box registro-input-box">
-                    <label for="contrasena">Contraseña:</label>
-                    <input type="password" id="contrasena" name="contrasena" class="registro-input" placeholder="Contraseña" required />
-                </div>
-                
-                <div class="remember-forgot">
-                    <!--a href="#">Restablecer contraseña</a-->
-                </div>
-                <input type="submit" value="Iniciar Sesión" class="button-p" name="iniciar_sesion">               
-            </form>
+
+            </section>
         </div>
     </main>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--DOCTYPE html> 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -6,21 +6,95 @@
     <title>Menú de Administración</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
-<body>
+<body-->
     
-    <div class="container">
-        <div class="navbar">
-            <h1>Menú de Administración</h1>
-            <nav>
-                <ul class="menu">
-                    <li><a href="/roles">Gestión de Roles</a></li>
-                    <li><a href="/empleados">Gestión de Empleados</a></li>
-                </ul>
-            </nav>
-        </div>
-        <footer>
-            
-        </footer>
-    </div>
-</body>
-</html> 
+<div class="container">
+    <header class="header">
+        <h1 class="header-title">Menú de Administración</h1>
+        <nav class="navbar">
+            <ul class="navbar-menu">
+                <li class="navbar-item"><a href="/roles" class="navbar-link">Gestión de Roles</a></li>
+                <li class="navbar-item"><a href="/empleados" class="navbar-link">Gestión de Empleados</a></li>
+                <li class="navbar-item"><a href="/listapedidos" class="navbar-link">Gestión de Pedidos</a></li>
+                <li class="navbar-item"><a href="/reportes-ingresos" class="navbar-link">Reportes de Ingresos</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+<!--/body>
+</html-->
+<style>
+/* General Styles */
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilos del header */
+.header {
+    background-color: #6c757d;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Título del header */
+.header-title {
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Estilos de la barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Estilo de la lista del menú */
+.navbar-menu {
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Estilo de los elementos de la lista */
+.navbar-item {
+    margin: 0;
+}
+.navbar-item a{
+    text-decoration: none;
+}
+
+/* Estilo de los enlaces */
+.navbar-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover sobre los enlaces */
+.navbar-link:hover {
+    background-color: #5a6268;
+}
+
+</style>
