@@ -20,6 +20,7 @@ public class CarritoDAO {
 
     /*
      * Metodo para agregar un producto al carrito asociado a un pedido
+     * SE USA EN CARRITO
      */
     public void guardarEnCarrito(Long idCliente, Long idProducto, int cantidad, double precioUnitario, Integer idPedido) {
         // Insertar el producto en el carrito
@@ -27,7 +28,7 @@ public class CarritoDAO {
         jdbcTemplate.update(sqlCarrito, idPedido, idProducto, cantidad, precioUnitario);
 
         // Actualizar el monto final del pedido sumando todos los productos del carrito
-        String sqlActualizarMonto = "UPDATE pedido p SET p.MontoFinal = (SELECT SUM(c.PrecioProducto * c.Cantidad) FROM carrito c WHERE c.IDPedido = ?) WHERE p.IDPedido = ?";
+        String sqlActualizarMonto = "UPDATE pedido p SET p.MontoFinal = (SELECT SUM(c.PrecioProducto) FROM carrito c WHERE c.IDPedido = ?) WHERE p.IDPedido = ?";
         jdbcTemplate.update(sqlActualizarMonto, idPedido, idPedido);
     }
 
@@ -43,6 +44,7 @@ public class CarritoDAO {
 
     /**
      * Metodo para crear un nuevo pedido para el cliente
+     * SE USA EN CARRITO
      */
     public Integer crearNuevoPedido(Long idCliente) {
         String sqlPedido = "INSERT INTO pedido (IDCliente, FechaPedido, MontoFinal, Estado) VALUES (?, NOW(), 0, 'Activo')";
@@ -77,6 +79,11 @@ public class CarritoDAO {
     public void eliminarProducto(Long idCarrito, Long idPedido) {
         String sql = "DELETE FROM carrito WHERE idCarrito = ? AND idPedido = ?";
         jdbcTemplate.update(sql, idCarrito, idPedido);
+
+        // SE REPITE CREAR UN METODO PARA UTLIZARLO
+        // Actualizar el monto final del pedido sumando todos los productos del carrito
+        String sqlActualizarMonto = "UPDATE pedido p SET p.MontoFinal = (SELECT SUM(c.PrecioProducto) FROM carrito c WHERE c.IDPedido = ?) WHERE p.IDPedido = ?";
+        jdbcTemplate.update(sqlActualizarMonto, idPedido, idPedido);
     }
 
 }
