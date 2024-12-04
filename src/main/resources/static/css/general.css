@@ -15,7 +15,7 @@ body{
     width: 100%;
 }
 .menu{
-    position:absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -24,7 +24,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index:9999;
+    z-index: 1;
 }
 .btn-menu{display: none;}
 .menu .logobox{margin-left: 30px;}

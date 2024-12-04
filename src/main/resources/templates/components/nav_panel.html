@@ -38,10 +38,10 @@
                  <li><a th:href="@{/Nosotros}">Nosotros</a></li>
              </ul>
          </div>
-
+        
          <div class="user-actions">
              <div th:if="${session.usuario != null}" class="user-info">
-                 <span th:text="'Bienvenido, ' + ${session.usuario}"></span> <!-- Muestra el mensaje de bienvenida -->
+                 <span th:text="${session.usuario}"></span> <!-- Muestra el mensaje de bienvenida -->
                  <button class="toggle-logout" onclick="toggleLogout(event)" style="background: none; border: none; color: black; font-size: 20px;">▼</button> <!-- Botón para mostrar/ocultar el cierre de sesión -->
                  <div class="logout-container" style="display: none;">
                      <a href="/logout" class="buttoncerrar" title="Cerrar Sesión">Cerrar Sesión</a>
@@ -56,7 +56,7 @@
                  <i class="fas fa-shopping-cart"></i> Carrito
              </a>
          </div>
-     </nav>
+        </nav>
      
     </header>
 <!-- Scripts -->

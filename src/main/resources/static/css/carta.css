@@ -92,7 +92,7 @@ body::-webkit-scrollbar {
 /*Estilo de los productos*/
 .section {
     padding: 20px;
-    background-color: var(--base-color);
+    background-color: #f6f6f6b8;
     min-height: 100vh;
 }
 
@@ -113,25 +113,34 @@ body::-webkit-scrollbar {
     max-width: 1700px;
 }
 .carta-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
     display: block;
     justify-content: center;
     align-items: center;
-    border: 1px solid #000;
+
 }
 .productos {
     display: flex;
-    flex-wrap: wrap; /* Esto permite que los items se envuelvan en líneas cuando no haya suficiente espacio */
-    gap: 15px; /* Añade espacio entre los elementos (opcional) */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    
 }
 .carta-item {
     display: flex;
     width: 400px;
-    border: 1px solid #000;
     height: 250px;
     position: relative; /* Necesario para posicionar el precio dentro de este contenedor */
-    border-radius: 20px;
     padding: 10px;
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.carta-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 .producto-modal-trigger{
     text-decoration: none;
@@ -149,21 +158,21 @@ body::-webkit-scrollbar {
     align-items: center;
     width: 230px;
     height: 230px;
-    border: 1px solid #000;
+    transition: filter 0.3s ease;
 }
+
 .producto-price {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 90px;
+    width: 170px;
     bottom: 10px;
-    right: 10px;
-    padding: 5px;
-    border: 1px solid #000;
-    background-color: rgb(78, 124, 109);
+    right: 0px;
+    padding: 10px;
+    background-color: rgb(162, 14, 14);
     color: #f0f0f0;
-    border-radius: 40px;
+    border-radius: 5px 0 0 5px;
 }
 
 
