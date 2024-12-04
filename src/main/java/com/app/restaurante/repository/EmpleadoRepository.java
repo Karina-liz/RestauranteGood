@@ -12,6 +12,7 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Integer> {
     Empleado findTopByOrderByIDEmpleadoDesc();
 
     @Query("SELECT e FROM Empleado e WHERE e.usuario = :usuario AND e.contrasena = :contrasena")
-    Empleado findByUsuarioAndContrasena(@Param("usuario") String usuario, @Param("contrasena") String contrasena);
+    Empleado findByUsuarioAndContrasena(@Param("usuario") String usuario, 
+                                        @Param("contrasena") String contrasena);
 
 }
