@@ -8,7 +8,14 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 public class WebConfig implements WebMvcConfigurer{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
+        // Ruta para imágenes de empleados
         registry.addResourceHandler("/empleados/**")
-                .addResourceLocations("classpath:/static/upload/empleados/");
+            .addResourceLocations("classpath:/static/upload/empleados/");
+        
+        // Ruta para imágenes de productos
+        registry.addResourceHandler("/productos/**")
+                .addResourceLocations("classpath:/static/upload/productos/");
     }
+
+
 }
