@@ -4,6 +4,9 @@ import com.app.restaurante.model.Empleado;
 import com.app.restaurante.model.DetalleEmpleado;
 import com.app.restaurante.service.EmpleadoService;
 import com.app.restaurante.service.RolService;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +26,13 @@ public class EmpleadoController {
     @Autowired
     private RolService rolService;
 
+        @Autowired
+    private HttpSession session;
+
+
     @GetMapping
     public String listarEmpleados(Model model) {
+
         List<Empleado> empleados = empleadoService.listarEmpleados();
         model.addAttribute("empleados", empleados);
         return "listEmpleados";
@@ -48,6 +56,8 @@ public class EmpleadoController {
 
     @GetMapping("/{id}/editar")
     public String mostrarFormEmpleadoEditar(@PathVariable Integer id, Model model) {
+
+        
         Empleado empleado = empleadoService.obtenerEmpleadoPorId(id);
         model.addAttribute("empleado", empleado);
         model.addAttribute("roles", rolService.listarRol());

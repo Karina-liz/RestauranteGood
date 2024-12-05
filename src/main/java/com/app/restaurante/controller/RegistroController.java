@@ -100,8 +100,9 @@ public class RegistroController {
         return "redirect:/registro_completar";
     }
 
-    // Metodo para validar el DNI mediante el API
+    // Metodo para validar el DNI mediante el API 
     private Map<String, Object> validarDni(String dni) {
+        
         try {
             String url = API_URL + dni + "?api_token=" + API_TOKEN;
             ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
@@ -116,7 +117,8 @@ public class RegistroController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null; // Si falla o no encuentra
+
+        return null; // Si falla o no encuentra        
     }
 
     

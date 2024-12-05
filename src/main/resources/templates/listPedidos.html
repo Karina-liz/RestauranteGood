@@ -71,7 +71,21 @@
     <div th:include="components/adminMenu" class="component"></div>
 
     <div class="pedido-container">
+        <div th:each="pedido : ${pedidos}" class="pedido-card">
+            <h3 th:text="'Pedido # ' + ${pedido.idPedido}"></h3>  <!-- idPedido -->
+            <p><strong>ID Cliente:</strong> <span th:text="${pedido.idCliente}"></span></p>  <!-- idCliente -->
+            <p><strong>Cliente:</strong> <span th:text="${pedido.nombre} + ' ' + ${pedido.apellido}"></span></p>
+            <p><strong>Dirección:</strong> <span th:text="${pedido.direccion}"></span></p>
+            <p><span class="pedido-status" th:text="${pedido.estadoPedido}"></span></p>  <!-- estadoPedido -->
+            <p><span class="pedido-total" th:text="'Monto Total: ' + ${pedido.totalPagoUltimo}"></span></p>  <!-- totalPagoUltimo -->
+            <p class="pedido-date"><strong>Fecha de Pago:</strong> <span th:text="${pedido.fechaPagoUltimo}"></span></p>  <!-- fechaPagoUltimo -->
+        </div>
+    </div>
+    
+    
+    <!--div class="pedido-container">
 
+        
         <div class="pedido-card">
             <h3>Pedido #12345</h3>
             <p><strong>ID Cliente:</strong> 67890</p>
@@ -97,6 +111,6 @@
         </div>
         
 
-    </div>
+    </div-->
 </body>
 </html>

@@ -1,17 +1,26 @@
 package com.app.restaurante.model;
 
 import java.sql.Date;
+import java.math.BigDecimal;
 
 public class Pedido {
-    private Long idPedido;
-    private Long idCliente;
-    private Long idPago;
-    private String EstadoPedido;
-    private Date FechaPedido;
-    private Date FechaPago;
-    private Double TotalPago;
-    private Double MontoFinal;
-    
+    private Long idPedido;            
+    private Long idCliente;           
+    private Long idPago;              
+    private String estadoPedido;      
+    private Date fechaPedido;         
+    private Date fechaPago;           // Fecha de pago
+    private Double totalPago;         // Total pagado en el pedido
+    private Double montoFinal;        // Monto final
+    private Long idDireccion;         // ID de la dirección
+    private String direccion;         // Dirección
+    private Long idPagoUltimo;        // ID del último pago
+    private BigDecimal totalPagoUltimo; // Total del último pago
+    private Date fechaPagoUltimo;     // Fecha del último pago
+    private String estado;            // Estado adicional del reporte
+    private String nombre;            // Nombre del cliente
+    private String apellido;          // Apellido del cliente
+
     // Getters y Setters
     public Long getIdPedido() {
         return idPedido;
@@ -38,42 +47,106 @@ public class Pedido {
     }
 
     public String getEstadoPedido() {
-        return EstadoPedido;
+        return estadoPedido;
     }
 
     public void setEstadoPedido(String estadoPedido) {
-        this.EstadoPedido = estadoPedido;
+        this.estadoPedido = estadoPedido;
     }
 
     public Date getFechaPedido() {
-        return FechaPedido;
+        return fechaPedido;
     }
 
     public void setFechaPedido(Date fechaPedido) {
-        this.FechaPedido = fechaPedido;
+        this.fechaPedido = fechaPedido;
     }
 
     public Date getFechaPago() {
-        return FechaPago;
+        return fechaPago;
     }
 
     public void setFechaPago(Date fechaPago) {
-        this.FechaPago = fechaPago;
+        this.fechaPago = fechaPago;
     }
 
     public Double getTotalPago() {
-        return TotalPago;
+        return totalPago;
     }
 
     public void setTotalPago(Double totalPago) {
-        this.TotalPago = totalPago;
+        this.totalPago = totalPago;
     }
 
     public Double getMontoFinal() {
-        return MontoFinal;
+        return montoFinal;
     }
 
     public void setMontoFinal(Double montoFinal) {
-        this.MontoFinal = montoFinal;
+        this.montoFinal = montoFinal;
+    }
+
+    public Long getIdDireccion() {
+        return idDireccion;
+    }
+
+    public void setIdDireccion(Long idDireccion) {
+        this.idDireccion = idDireccion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Long getIdPagoUltimo() {
+        return idPagoUltimo;
+    }
+
+    public void setIdPagoUltimo(Long idPagoUltimo) {
+        this.idPagoUltimo = idPagoUltimo;
+    }
+
+    public BigDecimal getTotalPagoUltimo() {
+        return totalPagoUltimo;
+    }
+
+    public void setTotalPagoUltimo(BigDecimal totalPagoUltimo) {
+        this.totalPagoUltimo = totalPagoUltimo;
+    }
+
+    public Date getFechaPagoUltimo() {
+        return fechaPagoUltimo;
+    }
+
+    public void setFechaPagoUltimo(Date fechaPagoUltimo) {
+        this.fechaPagoUltimo = fechaPagoUltimo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 }

@@ -45,24 +45,29 @@
     <div class="container">
         <h1>Seleccionar Pedidos para Delivery</h1>
         
-        <div class="button-container">
-            <button id="seleccionarPedidos" onclick="handlePedidos()">Seleccionar Pedidos</button>
-            <button id="confirmarDelivery" onclick="handleConfirmar()">Confirmar Delivery</button>
-        </div>
+        <header th:include="components/nav_delivery"></header>
+        <main>
+            <section>
+                <!-- Datos Personales -->
+                <div th:if="${activePage == 'seleccionar_pedido'}" th:include="components/seleccionar_pedido"></div>
+    
+                <!-- Mis Direcciones -->
+                <div th:if="${activePage == 'mis_entregas'}" th:include="components/mis_entregas"></div>
+            </section>
+        </main>
+
     </div>
 
-    <script>
-        // Función para manejar la selección de pedidos
-        function handlePedidos() {
-            alert("Has seleccionado los pedidos.");
-            // Aquí puedes agregar lógica para cargar y seleccionar los pedidos
-        }
 
-        // Función para confirmar el delivery
-        function handleConfirmar() {
-            alert("Confirmando el delivery.");
-            // Aquí puedes agregar lógica para confirmar el pedido para entrega
-        }
-    </script>
+    <div th:include="components/mensajes"></div>
 </body>
+<script>
+    // Esperar 3 segundos y ocultar el mensaje
+    setTimeout(function() {
+        const mensajeContainer = document.querySelector('.mensaje-container');
+        if (mensajeContainer) {
+            mensajeContainer.style.display = 'none';
+        }
+    }, 3000);
+</script>
 </html>
