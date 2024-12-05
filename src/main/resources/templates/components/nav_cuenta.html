@@ -7,31 +7,31 @@
             <li class="nav-item">
                 <a class="nav-link"
                     th:classappend="${activePage == 'datos_personales'} ? 'active-link'" th:href="@{/datos_personales}">
-                    <i class="ki-outline ki-user nav-icon"></i> <!-- Icono de usuario -->
+                    <i class="ki-outline ki-user nav-icon"></i> 
                     <span>Mis Datos Personales</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
                     th:classappend="${activePage == 'mis_pedidos'} ? 'active-link'" th:href="@{/mis_pedidos}">
-                    <i class="ki-outline ki-shopping-cart nav-icon"></i> <!-- Icono de carrito -->
+                    <i class="ki-outline ki-shopping-cart nav-icon"></i>
                     <span>Mis Pedidos</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link"
                     th:classappend="${activePage == 'mis_direcciones'} ? 'active-link'" th:href="@{/mis_direcciones}">
-                    <i class="ki-outline ki-map-marker nav-icon"></i> <!-- Icono de marcador de mapa -->
+                    <i class="ki-outline ki-map-marker nav-icon"></i> 
                     <span>Mis Direcciones</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <!--li class="nav-item">
                 <a class="nav-link"
                     th:classappend="${activePage == 'mis_configuraciones'} ? 'active-link'" th:href="@{/mis_configuraciones}">
-                    <i class="ki-outline ki-cog nav-icon"></i> <!-- Icono de engranaje -->
+                    <i class="ki-outline ki-cog nav-icon"></i>
                     <span>Mis Configuraciones</span>
                 </a>
-            </li>
+            </li-->
         </ul>        
     </div>
 </nav>
