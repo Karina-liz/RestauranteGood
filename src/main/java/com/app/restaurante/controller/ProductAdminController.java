@@ -42,26 +42,31 @@ public class ProductAdminController {
     }
 
     @PostMapping("/productos")
-    public String guardarProducto(@ModelAttribute Productos producto, @RequestParam("file") MultipartFile file) {
-        try {
-            String fileName = uploadServicio.saveUpload(file, "productos"); // Guardar en subcarpeta "productos"
-            if (fileName != null) {
-                producto.setFotoProducto(fileName); // Asignar nombre del archivo al producto
-                
-            }
-            productosDAO.save(producto); // Guardar el producto en la base de datos
+public String guardarProducto(@ModelAttribute Productos producto, @RequestParam("file") MultipartFile file) {
+    try {
+        // Verificar y establecer la fecha del producto si no está configurada
+        if (producto.getFechaProducto() == null || producto.getFechaProducto().isEmpty()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            producto.setFechaProducto(LocalDateTime.now().format(formatter));
+        }
 
-            } catch (IOException e) {
+        // Guardar el archivo de imagen si se proporciona
+        String fileName = uploadServicio.saveUpload(file, "productos"); // Guardar en subcarpeta "productos"
+        if (fileName != null) {
+            producto.setFotoProducto(fileName); // Asignar nombre del archivo al producto
+        }
+
+        // Guardar el producto en la base de datos
+        productosDAO.save(producto);
+
+    } catch (IOException e) {
         e.printStackTrace();
-        return "error";
+        return "error"; // Redirigir a una página de error si ocurre un problema
     }
-    if (producto.getFechaProducto() == null || producto.getFechaProducto().isEmpty()) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        producto.setFechaProducto(LocalDateTime.now().format(formatter));
-    }
-        
-        return "redirect:/productos"; // Redirigir a la lista de productos
+
+    return "redirect:/productos"; // Redirigir a la lista de productos tras guardar
 }
+
 
         // NUEVO: Método para cargar el formulario de edición
     @GetMapping("/productos/editar/{id}")
@@ -106,6 +111,18 @@ public class ProductAdminController {
             return "error";
         }
         return "redirect:/productos"; // Redirigir a la lista de productos
+    }
+
+    // Método para eliminar un producto por su ID
+    @GetMapping("/productos/eliminar/{id}")
+    public String eliminarProducto(@PathVariable("id") Long id) {
+        try {
+            productosDAO.deleteById(id); // Eliminar el producto por su ID
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error"; // Redirigir a una página de error si ocurre un problema
+        }
+        return "redirect:/productos"; // Redirigir a la lista de productos tras la eliminación
     }
 
 }
