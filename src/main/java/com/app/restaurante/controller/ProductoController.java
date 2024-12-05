@@ -133,4 +133,10 @@ public class ProductoController {
         model.addAttribute("productos", productos);
         return "productocarta";
     }
+
+
+    /*** APARTADO PARA LA GESTIONAR LOS PRODUCTOS EN LA VISTA DEL EMPLEADO ****/
+
+
+    
 }

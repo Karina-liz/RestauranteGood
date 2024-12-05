@@ -1,5 +1,8 @@
 package com.app.restaurante.dao;
 
+import com.app.restaurante.model.Pedido;
+//import com.app.restaurante.model.PedidoReporte;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -11,7 +14,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
  */
 @Repository
 public class PedidoDAO {
-    
+
     private final JdbcTemplate jdbcTemplate;
 
     public PedidoDAO(JdbcTemplate jdbcTemplate) {
@@ -22,9 +25,30 @@ public class PedidoDAO {
         return "pedido";
     }
 
-    public void insertarPedido(Long idCliente, String fechaPedido) {
-        String sql = "INSERT INTO " + getTableName() + " (IDCliente, FechaPedido, Estado) VALUES (?, ?,'Activo')";
-        jdbcTemplate.update(sql, idCliente, fechaPedido);
+    /*
+     * RELACIONADO CON EL ADMINITRADOR EMPLEADO
+     */
+    /*
+     * Metodo para obtener todos los pedidos
+    */
+
+    public List<Pedido> obtenerPedidosPagados() {
+        String sql = "SELECT c.idcliente, c.nombre, c.apellido, "+
+                        "d.iddireccion, d.direccion, " +
+                        "p.idpedido, " +
+                        "MAX(pg.idpago) AS idPagoUltimo, " +
+                        "MAX(pg.totalpago) AS totalPagoUltimo, " +
+                        "MAX(pg.FechaPago) AS fechaPagoUltimo, " +
+                        "p.Estado " +
+                        "FROM cliente c " +
+                        "INNER JOIN direccion d ON c.idcliente = d.idcliente " +
+                        "INNER JOIN pedido p ON c.idcliente = p.idcliente " +
+                        "INNER JOIN pago pg ON p.idpedido = pg.idpedido " +
+                        "WHERE p.Estado = 'Pagado' " +
+                        "GROUP BY c.idcliente, c.nombre, c.apellido, " +
+                        "d.iddireccion, d.direccion, p.idpedido, p.Estado;";
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Pedido.class));
     }
 
     /**

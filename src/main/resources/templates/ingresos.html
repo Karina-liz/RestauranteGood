@@ -5,11 +5,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportes de Ingresos del Restaurante</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        canvas {
-            width: 600px !important;
-            height: 300px !important;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        /* Contenedor principal para las columnas */
+        .container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Cada sección de la columna */
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 30%;
+            min-width: 280px;
+        }
+
+        /* Estilo para las tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        /* Estilo para el total de ingresos */
+        .total-ingresos p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007BFF;
+            text-align: center;
+        }
+
+        /* Sección de encabezado */
+        .section h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .section table {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -19,113 +92,54 @@
 
     <h1>Reportes de Ingresos del Restaurante</h1>
 
-    <!-- Ingresos Totales -->
-    <section>
-        <h2>Ingresos Totales</h2>
-        <p th:text="'$' + ${ingresosTotales}"></p>
+    <!-- Contenedor principal para las tres columnas -->
+    <div class="container">
+        
+        <!-- Sección de Ingresos Totales -->
+        <div class="section total-ingresos">
+            <h2>Ingresos Totales</h2>
+            <p th:text="'$' + ${ingresosTotales}"></p>
+        </div>
 
-        <canvas id="ingresosTotalesChart" class="canvas"></canvas>
-    </section>
+        <!-- Sección de Ingresos por Producto -->
+        <div class="section ingresos-producto">
+            <h2>Ingresos por Producto</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Ingresos Totales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="producto : ${ingresosProducto}">
+                        <td th:text="${producto['NomProducto']}"></td>
+                        <td th:text="${producto['IngresosTotales']}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Ingresos por Producto -->
-    <section>
-        <h2>Ingresos por Producto</h2>
-        <canvas id="ingresosProductoChart" class="canvas"></canvas>
-    </section>
+        <!-- Sección de Ingresos por Cliente -->
+        <div class="section ingresos-cliente">
+            <h2>Ingresos por Cliente</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Total Gastado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cliente : ${ingresosCliente}">
+                        <td th:text="${cliente['Nombre']}"></td>
+                        <td th:text="${cliente['TotalGastado']}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Ingresos por Cliente -->
-    <section>
-        <h2>Ingresos por Cliente</h2>
-        <canvas id="ingresosClienteChart" class="canvas"></canvas>
-    </section>
-
-    <!-- Tabla de Clientes y su Total Gastado -->
-    <section>
-        <h2>Clientes y su Total Gastado</h2>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Cliente</th>
-                    <th>Total Gastado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="cliente : ${ingresosCliente}">
-                    <td th:text="${cliente['Nombre']}"></td>
-                    <td th:text="${cliente['TotalGastado']}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
-        integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script>
-        var ingresosTotales = [[${ingresosTotales}]];
-        console.log('Ingresos Totales:', ingresosTotales);
-
-        // Gráfico de Ingresos Totales
-        var ingresosTotalesChart = new Chart(document.getElementById('ingresosTotalesChart'), {
-            type: 'line',
-            data: {
-                labels: ['Total'],
-                datasets: [{
-                    label: 'Ingresos Totales',
-                    data: ingresosTotales,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: false
-                }]
-            }
-        });
-
-        // Datos de Ingresos por Producto
-        var ingresosProductoData = [[${ingresosProducto}]];
-        console.log('Ingresos Producto:', ingresosProductoData);
-
-        // Gráfico de Ingresos por Producto
-        if (ingresosProductoData && ingresosProductoData.length > 0) {
-            var ingresosProductoChart = new Chart(document.getElementById('ingresosProductoChart'), {
-                type: 'bar',
-                data: {
-                    labels: ingresosProductoData.map(p => p['NomProducto']),
-                    datasets: [{
-                        label: 'Ingresos por Producto',
-                        data: ingresosProductoData.map(p => p['IngresosTotales']),
-                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                        borderColor: 'rgba(153, 102, 255, 1)',
-                        borderWidth: 1
-                    }]
-                }
-            });
-        } else {
-            console.log('No hay datos para Ingresos por Producto');
-        }
-
-        // Datos de Ingresos por Cliente
-        var ingresosClienteData = [[${ingresosCliente}]];
-        console.log('Ingresos Cliente:', ingresosClienteData);
-
-        // Gráfico de Ingresos por Cliente
-        if (ingresosClienteData && ingresosClienteData.length > 0) {
-            var ingresosClienteChart = new Chart(document.getElementById('ingresosClienteChart'), {
-                type: 'pie',
-                data: {
-                    labels: ingresosClienteData.map(c => c['Nombre']),
-                    datasets: [{
-                        label: 'Ingresos por Cliente',
-                        data: ingresosClienteData.map(c => c['TotalGastado']),
-                        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
-                        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
-                        borderWidth: 1
-                    }]
-                }
-            });
-        } else {
-            console.log('No hay datos para Ingresos por Cliente');
-        }
-    </script>
+    </div> <!-- fin del contenedor principal -->
 </body>
 
 </html>

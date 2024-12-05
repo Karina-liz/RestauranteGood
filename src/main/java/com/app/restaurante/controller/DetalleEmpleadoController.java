@@ -28,6 +28,8 @@ public class DetalleEmpleadoController {
     @GetMapping("/nuevo")
     public String mostrarFormNuevo(Model model) {
         model.addAttribute("detalleEmpleado", new DetalleEmpleado());
+        
+        
         // Aquí puedes agregar la lista de empleados para el selector
         return "formDetEmpleados"; // Vista para crear un nuevo detalle empleado
     }

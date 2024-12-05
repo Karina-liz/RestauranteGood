@@ -71,7 +71,7 @@ public class LoginController {
         response.setHeader("Pragma", "no-cache"); 
         response.setDateHeader("Expires", 0); 
         
-        return "redirect:/login";
+        return "redirect:/";
     }
 
 }

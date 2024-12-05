@@ -48,7 +48,7 @@ public class CarritoController {
         Integer idPedido = carritoDAO.obtenerUltimoPedidoPorCliente(cliente.getIdCliente());
         if (idPedido == null) {
             // Si no existe un pedido activo hoy, se crea uno nuevo
-            idPedido = carritoDAO.crearNuevoPedido(cliente.getIdCliente());
+            idPedido = carritoDAO.crearNuevoPedido(cliente.getIdCliente()); // Se trae el id del pedido creado
         }
 
         // Guardar el producto en el carrito del pedido
@@ -97,7 +97,7 @@ public class CarritoController {
 
         // Calcular el total del carrito
         double total = carritoDelPedido.stream()
-                                       .mapToDouble(item -> item.getCantidad() * item.getPrecioUnitario())
+                                       .mapToDouble(item -> item.getCantidad() * item.getPrecioUnitario()) 
                                        .sum();
         model.addAttribute("total", total);
 
