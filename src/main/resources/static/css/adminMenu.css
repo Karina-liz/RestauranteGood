@@ -41,4 +41,25 @@
     margin: 0;
     --bs-gutter-x: 30px;
 }
-
+/* */
+.logout-container {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.buttoncerrar {
+    padding: 12px 25px;
+    background-color: red;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 30px;
+}
+.buttoncerrar:hover {
+    background-color: darkred;
+    text-decoration: none;
+}

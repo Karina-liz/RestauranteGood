@@ -1,142 +1,112 @@
-@import url(colors.css);
-.body-login {
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
-    height: 100vh;
-    background: linear-gradient(60deg, #ff5733 50%, #33c1ff 50%);
+    padding: 0;
 }
 
-.login-container, .registro-container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ddd;
+.body-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: rgba(80, 9, 9, 0.805)
+}
+
+.registro-container {
+    background-color: #fff;
+    padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(175, 122, 122, 0.1);
-}
-.login{
-    background-color: #e37474;
-}
-.registro{
-    background-color: #ccc;
-}
-
-.login-container h1 {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.login-container hr {
-    border-top: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
     width: 100%;
-    margin: 20px 0;
 }
 
-.login-container p {
-    color: #666;
+.registro-form h1 {
+    font-size: 24px;
     margin-bottom: 20px;
-}
-
-.login-container .input-box {
-    margin-bottom: 20px;
-}
-
-.login-container .input-box label {
-    display: block;
     color: #333;
-    margin-bottom: 5px;
+    text-align: center;
 }
 
-.login-container .input-box input {
-    width: 90%;
+.registro-form hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin-bottom: 20px;
+}
+
+.registro-form p {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-box {
+    margin-bottom: 20px;
+}
+
+.input-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input-box input {
+    width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
 }
 
-
-.login-container .remember-forgot {
-    margin-top: 20px;
+.button-p {
+    width: 100%;
+    padding: 10px;
+    background-color: #890606;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
 }
 
-.login-container .remember-forgot a {
+.button-p:hover {
+    background-color: #c21e0f;
+    
+}
+
+.remember-forgot a {
     color: #007bff;
     text-decoration: none;
-}
-
-.login-container .login-submit {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.login-container .toggle-login {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.registro .registro-form {
+    display: block;
+    text-align: center;
     margin-top: 20px;
 }
 
-.registro .registro-input-box {
-    margin-bottom: 20px;
+.remember-forgot a:hover {
+    text-decoration: underline;
 }
 
-.registro .registro-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+#mensaje-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
 }
 
-.registro .registro-submit {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.registro .registro-toggle {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.registro-container .input-box input {
-    width: 90%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+.registro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
 @media (max-width: 768px) {
-    .body-login {
-        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+    .registro-grid {
+        grid-template-columns: 1fr;
     }
 }
