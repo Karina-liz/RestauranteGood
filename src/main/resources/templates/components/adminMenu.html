@@ -1,85 +1,65 @@
-
-    
-<div class="container">
-    <header class="header">
-        <h1 class="header-title">Menú de Administración</h1>
-        <nav class="navbar">
-            <ul class="navbar-menu">
-                <li class="navbar-item"><a href="/roles" class="navbar-link">Gestión de Roles</a></li>
-                <li class="navbar-item"><a href="/empleados" class="navbar-link">Gestión de Empleados</a></li>
-                <li class="navbar-item"><a href="/listapedidos" class="navbar-link">Gestión de Pedidos</a></li>
-                <li class="navbar-item"><a href="/listaproductos" class="navbar-link">Gestión de Productos</a></li>
-                <li class="navbar-item"><a href="/reportes-ingresos" class="navbar-link">Reportes de Ingresos</a></li>
-                <li class="navbar-item">
-                    <a href="/logout" class="navbar-link" title="Cerrar Sesión">Cerrar Sesión</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-</div>
-
-<style>
-body {
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
-    color: #333;
-}
-
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
-}
-.header {
-    background-color: #6c757d;
-    padding: 20px 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.header-title {
-    color: white;
-    font-size: 26px;
-    font-weight: bold;
-    margin: 0;
-}
-.navbar {
-    display: flex;
-    justify-content: flex-end;
-}
-.navbar-menu {
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-/* Estilo de los elementos de la lista */
-.navbar-item {
-    margin: 0;
-}
-.navbar-item a{
-    text-decoration: none;
-}
-
-/* Estilo de los enlaces */
-.navbar-link {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-/* Efecto hover sobre los enlaces */
-.navbar-link:hover {
-    background-color: #5a6268;
-}
-
-</style>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/adminMenu.css">
+</head>
+<body>
+    <div class="admin-menu">
+        <div class="container-fluid">
+            <h1 class="text-center menu-title">Menú de Administración</h1>
+            <div class="row justify-content-center">
+                <!-- Primera columna -->
+                <div class="col-md-4">
+                    <div class="menu-item">
+                        <a href="/roles">
+                            <i class="fas fa-user-tag"></i>
+                            Gestión de Roles
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="/empleados">
+                            <i class="fas fa-users"></i>
+                            Gestión de Empleados
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Segunda columna -->
+                <div class="col-md-4">
+                    <div class="menu-item">
+                        <a href="/productos">
+                            <i class="fas fa-box"></i>
+                            Gestión de Productos
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="/clientes">
+                            <i class="fas fa-user-friends"></i>
+                            Gestión de Clientes
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Tercera columna -->
+                <div class="col-md-4">
+                    <div class="menu-item">
+                        <a href="/pedidos">
+                            <i class="fas fa-shopping-cart"></i>
+                            Gestión de Pedidos
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="/reportes-ingresos">
+                            <i class="fas fa-chart-line"></i>
+                            Reportes de Ingresos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Font Awesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+</html> 

@@ -132,7 +132,7 @@
             
             <div class="modal-producto-detalle">
                 <div class="modal-producto-imagen-container">
-                    <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
+                    <img th:src="@{/upload/productos/{filename}(filename=${producto.FotoProducto})}" 
                          th:alt="'Imagen de ' + ${producto.FotoProducto}" class="modal-producto-imagen">
                 </div>
                 <div class="modal-producto-datos">

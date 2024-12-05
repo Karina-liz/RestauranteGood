@@ -1,25 +1,27 @@
 package com.app.restaurante.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.ui.Model;
+
 import com.app.restaurante.dao.PedidoDAO;
 import com.app.restaurante.model.Pedido;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.List;
 
 @Controller
 public class PedidoController {
 
-    private final PedidoDAO pedidoDAO;
+    @Autowired
+    private PedidoDAO pedidoDao;
 
-    public PedidoController(PedidoDAO pedidoDAO) {
-        this.pedidoDAO = pedidoDAO;
-    }
-
-    @GetMapping("/listapedidos")
+    @GetMapping("/pedidos")
     public String mostrarReportes(Model model) {
-        List<Pedido> pedidos = pedidoDAO.obtenerPedidosPagados();
+        List<Pedido> pedidos = pedidoDao.obtenerPedidosPagados();
         model.addAttribute("pedidos", pedidos);
         return "listPedidos";  // nombre de la vista Thymeleaf
     }

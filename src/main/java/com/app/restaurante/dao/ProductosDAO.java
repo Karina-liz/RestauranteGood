@@ -136,6 +136,7 @@ public class ProductosDAO {
         return jdbcTemplate.queryForList(sql, String.class);
     }
 
+    
     /*
      * Metodo para obtener todos los tipos de productos
      * @return Lista de tipos de productos

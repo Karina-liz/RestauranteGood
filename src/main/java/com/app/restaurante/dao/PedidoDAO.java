@@ -5,9 +5,13 @@ import com.app.restaurante.model.Pedido;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
+import com.app.restaurante.model.Pedido;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
+/**
+ * Clase DAO para gestionar las operaciones de base de datos relacionadas con los pedidos
+ */
 @Repository
 public class PedidoDAO {
 
@@ -47,28 +51,22 @@ public class PedidoDAO {
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Pedido.class));
     }
 
-    /*
-     * RELACIONADO CON EL DELIVERY
+    /**
+     * Obtiene todos los pedidos de la base de datos
+     * @return Lista de todos los pedidos
      */
+    public List<Pedido> findAll() {
+        String sql = "SELECT * FROM " + getTableName();
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Pedido.class));
+    }
 
-     /*
- * Como se realiza el proceso del delivery
- * 
- * Primero se registra el delivery con el pedido el estado "Iniciado"
- * ingresamos la hora en la que inicia el delivery
- * 
- * En la tabla hay un campo IDEmpleado
- * Se relaciona cuando el empleado con el rol de delivery 
- * 
- * Aqui si el admin es quien asigana un pedido a un empleado
- * o el empleado es quien agarra el pedido y lo marca como suyo cuando lo recoge
- * 
- * El estado del delivery cambia a "En camino" cuando el empleado tiene el pedido
- * 
- * Cuando se entrega el pedido el estado cambia "Entregado"
- * se hace con un click al boton de pedido entregado
- */
-
-
-
+    /**
+     * Busca un pedido específico por su ID
+     * @param id ID del pedido a buscar
+     * @return Pedido encontrado o null si no existe
+     */
+    public Pedido findById(Long id) {
+        String sql = "SELECT * FROM " + getTableName() + " WHERE IDPedido = ?";
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Pedido.class), id);
+    }
 }

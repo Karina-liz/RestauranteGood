@@ -46,7 +46,7 @@ public class IndexController {
         model.addAttribute("cliente", cliente);
 
         return "bienvenido";
-    }    
+    }   
 
     @GetMapping("/Nosotros")
 public String nosotros() {

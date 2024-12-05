@@ -17,7 +17,7 @@
 
     <section class="section carta-section">
         <div class="carta carta-container">
-            <h3 class="carta-title">Carta de Menú</h3>
+            <h3 class="carta-title" >Carta GOOD DAY</h3>
     
             <div class="carta-content">
                 <!-- Trabajamos con categorias 3 categorias fijas -->
@@ -27,7 +27,7 @@
                     <div th:if="${bebidas != null and bebidas.size() > 0}" th:each="producto : ${bebidas}" class="carta-item">
                         <a th:href="@{'/producto/' + ${producto.idProducto}}" class="producto-modal-trigger">
                             <div class="producto-image-container">
-                                <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
+                                <img th:src="@{/upload/productos/{filename}(filename=${producto.FotoProducto})}" 
                                      th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
                             </div>
                             <div class="producto-info">
@@ -45,7 +45,7 @@
                     <div th:if="${platillos != null and platillos.size() > 0}" th:each="producto : ${platillos}" class="carta-item">
                         <a th:href="@{'/producto/' + ${producto.idProducto}}" class="producto-modal-trigger">
                             <div class="producto-image-container">
-                                <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
+                                <img th:src="@{/upload/productos/{filename}(filename=${producto.FotoProducto})}" 
                                      th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
                             </div>
                             <div class="producto-info">
@@ -63,7 +63,7 @@
                     <div th:if="${postres != null and postres.size() > 0}" th:each="producto : ${postres}" class="carta-item">
                         <a th:href="@{'/producto/' + ${producto.idProducto}}" class="producto-modal-trigger">
                             <div class="producto-image-container">
-                                <img th:src="@{/upload/productos/{filename}.jpg(filename=${producto.FotoProducto})}" 
+                                <img th:src="@{/upload/productos/{filename}(filename=${producto.FotoProducto})}" 
                                      th:alt="'Imagen de ' + ${producto.FotoProducto}" class="producto-image">
                             </div>
                             <div class="producto-info">

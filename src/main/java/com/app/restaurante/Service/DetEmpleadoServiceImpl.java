@@ -36,7 +36,7 @@ public class DetEmpleadoServiceImpl implements DetEmpleadoService{
 
     @Override
     public DetalleEmpleado guardarDetEmpleado(DetalleEmpleado detEmpleado, MultipartFile file) throws IOException {
-        String nombreArchivo = uploadServicio.saveUpload(file);
+        String nombreArchivo = uploadServicio.saveUpload(file, "empleados");
         detEmpleado.setFoto(nombreArchivo);
         
         // Obtener el empleado más reciente
@@ -51,7 +51,7 @@ public class DetEmpleadoServiceImpl implements DetEmpleadoService{
     @Override
     public DetalleEmpleado actualizarDetEmpleado(DetalleEmpleado detEmpleado, MultipartFile file) throws IOException{
         if (!file.isEmpty()) {
-            String nombreArchivo = uploadServicio.saveUpload(file);
+            String nombreArchivo = uploadServicio.saveUpload(file, "empleados");
             detEmpleado.setFoto(nombreArchivo);
         }
         return detalleEmpleadoRepository.save(detEmpleado);
