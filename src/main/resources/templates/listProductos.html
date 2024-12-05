@@ -40,7 +40,14 @@
                                 <td th:text="${producto.precioUnitario}"></td>
                                 <td th:text="${producto.descripcion}"></td>
                                 <td th:text="${producto.cantidad}"></td>
-                                <td th:text="${producto.idCategoria}"></td>
+                                <td th:switch="${producto.idCategoria}">
+                                    <span th:case="'1'">Platillos</span>
+                                    <span th:case="'2'">Bebidas</span>
+                                    <span th:case="'3'">Entradas</span>
+                                    <span th:case="'4'">Postres</span>
+                                    <span th:case="*">Otra Categoría</span> <!-- Opción por defecto -->
+                                </td>
+                                
                                 <td>
                                     <img th:src="@{/upload/productos/{nombre}(nombre=${producto.fotoProducto} + '.jpg')}" 
                                     alt="Sin foto" style="width: 100px; height: auto;" />

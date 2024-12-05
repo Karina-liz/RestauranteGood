@@ -18,6 +18,8 @@ public class ProductAdminController {
     public String mostrarProductos(Model model) {
         List<Productos> productos = productosDAO.findAll(); // Obtener la lista de productos
         model.addAttribute("productos", productos); // Agregar la lista al modelo
+        
         return "listProductos"; // Nombre de la vista que se mostrará
+    
     }
 }
