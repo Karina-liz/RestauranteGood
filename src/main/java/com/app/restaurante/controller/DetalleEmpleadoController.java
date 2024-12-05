@@ -50,7 +50,7 @@ public class DetalleEmpleadoController {
     public String actualizarDetEmpleado(@PathVariable Integer id, @RequestPart MultipartFile file, @ModelAttribute DetalleEmpleado detalleEmpleado) throws IOException {
         detalleEmpleado.setIdDetalleEmp(id);
         detEmpleadoService.actualizarDetEmpleado(detalleEmpleado, file);
-        return "redirect:/detalle-empleados";
+        return "redirect:/empleados";
     }
 
     @GetMapping("/{id}/eliminar")

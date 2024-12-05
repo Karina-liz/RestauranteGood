@@ -34,13 +34,13 @@
         <input type="email" th:field="*{detalleEmpleado.correo}" required/>
         <label>Foto:</label>
         <input type="text" th:field="*{detalleEmpleado.foto}" required/>
-
+-->
         <label>Rol:</label>
         <select th:field="*{rol.idRol}" required onchange="if(this.value === 'nuevo') redirectToCreateRole()">
             <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nomRol}"></option>
             <option value="nuevo">Crear Nuevo Rol</option>
         </select>
-        -->
+        
         <button type="submit">Siguiente</button>
     </form>
     <a href="/empleados">Volver a la lista</a>

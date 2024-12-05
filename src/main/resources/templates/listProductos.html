@@ -54,7 +54,9 @@
                                 </td>
                                 <td>
                                     <a th:href="@{/productos/editar/{id}(id=${producto.idProducto})}" class="btn btn-warning btn-sm">Editar</a>
-                                    <a th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}" class="btn btn-danger btn-sm">Eliminar</a>
+                                    <a th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}" class="btn btn-danger btn-sm" 
+                                    onclick="return confirm('¿Estás seguro de eliminar este empleado?')"
+                                    title="Eliminar">Eliminar</a>
                                 </td>
                             </tr>
                         </tbody>

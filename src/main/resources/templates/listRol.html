@@ -35,11 +35,11 @@
                                 <td th:text="${rol.descripcion}"></td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a th:href="@{/roles/{id}/editar(id=${rol.idRol})}" 
+                                        <a th:href="@{/roles/editar/{id}(id=${rol.idRol})}" 
                                            class="btn btn-warning btn-sm" title="Editar">
                                             <i class="fas fa-edit"></i> Editar
                                         </a>
-                                        <a th:href="@{/roles/{id}/eliminar(id=${rol.idRol})}" 
+                                        <a th:href="@{/roles/eliminar/{id}(id=${rol.idRol})}" 
                                            class="btn btn-danger btn-sm" 
                                            onclick="return confirm('¿Estás seguro de eliminar este rol?')"
                                            title="Eliminar">

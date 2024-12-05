@@ -39,10 +39,11 @@
                                 <td th:text="${empleado.rol != null ? empleado.rol.nomRol : 'Sin rol'}"></td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a th:href="@{/empleados/{id}/ver(id=${empleado.idEmpleado})}" 
+                                        <!--
+                                        <a th:href=href="/detalle-empleados/nuevo"
                                            class="btn btn-info btn-sm" title="Ver detalles">
-                                            <i class="fas fa-eye"></i> Ver
-                                        </a>
+                                            <i class="fas fa-eye"></i> Detalles
+                                        </a>-->
                                         <a th:href="@{/empleados/{id}/editar(id=${empleado.idEmpleado})}" 
                                            class="btn btn-warning btn-sm" title="Editar">
                                             <i class="fas fa-edit"></i> Editar
