@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,4 +62,50 @@ public class ProductAdminController {
         
         return "redirect:/productos"; // Redirigir a la lista de productos
 }
+
+        // NUEVO: Método para cargar el formulario de edición
+    @GetMapping("/productos/editar/{id}")
+    public String editarProductoForm(@PathVariable("id") Long id, Model model) {
+        Productos producto = productosDAO.findById(id); // Buscar el producto por su ID
+        if (producto == null) {
+            return "error"; // Manejar el caso donde el producto no exista
+        }
+        model.addAttribute("producto", producto); // Agregar el producto al modelo
+        return "formProductoEditar"; // Nombre de la vista del formulario de edición
+    }
+
+    // NUEVO: Método para procesar los cambios del formulario de edición
+    @PostMapping("/productos/{id}")
+    public String actualizarProducto(
+            @PathVariable("id") Long id,
+            @ModelAttribute Productos producto,
+            @RequestParam("file") MultipartFile file) {
+        try {
+            Productos productoExistente = productosDAO.findById(id); // Buscar el producto existente
+            if (productoExistente == null) {
+                return "error"; // Manejar el caso donde el producto no exista
+            }
+
+            // Actualizar los campos del producto existente
+            productoExistente.setNomProducto(producto.getNomProducto());
+            productoExistente.setPrecioUnitario(producto.getPrecioUnitario());
+            productoExistente.setDescripcion(producto.getDescripcion());
+            productoExistente.setCantidad(producto.getCantidad());
+            productoExistente.setIdCategoria(producto.getIdCategoria());
+            productoExistente.setIdTipo(producto.getIdTipo());
+
+            // Actualizar la imagen si se ha subido una nueva
+            if (!file.isEmpty()) {
+                String fileName = uploadServicio.saveUpload(file, "productos");
+                productoExistente.setFotoProducto(fileName);
+            }
+
+            productosDAO.save(productoExistente); // Guardar los cambios en la base de datos
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error";
+        }
+        return "redirect:/productos"; // Redirigir a la lista de productos
+    }
+
 }

@@ -16,10 +16,10 @@
             </div>
             
             <div class="card-body">
-                <form th:action="@{/productos/{id}(id=${producto.idProducto})}" method="post" th:object="${producto}">
+                <form th:action="@{/productos/{id}(id=${producto.idProducto})}" method="post" th:object="${producto}" enctype="multipart/form-data">
                     <input type="hidden" th:field="*{idProducto}">
                     
-                    <!-- Mismo contenido del formulario que en formProducto.html -->
+                    <!-- Campos del formulario -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="nomProducto" class="form-label">Nombre del Producto</label>
@@ -41,7 +41,6 @@
                             <input type="number" class="form-control" id="cantidad" th:field="*{cantidad}" required>
                         </div>
                         
-                        
                         <div class="col-md-6 mb-3">
                             <label for="idCategoria" class="form-label">Categoría</label>
                             <select class="form-select" id="idCategoria" th:field="*{idCategoria}" required>
@@ -52,13 +51,22 @@
                             </select>
                         </div>
                         
-                        
+                        <!-- Mostrar la imagen actual si existe -->
                         <div class="col-md-12 mb-3">
-                            <label for="fotoProducto" class="form-label">Imagen</label>
-                            <input type="text" class="form-control" id="fotoProducto" th:field="*{fotoProducto}">
+                            <label for="imagenActual" class="form-label">Imagen Actual</label>
+                            <div>
+                                <img th:src="@{/upload/productos/{nombre}(nombre=${producto.fotoProducto})}"alt="Imagen actual del producto" class="img-thumbnail" style="max-width: 200px;">
+                            </div>
+                        </div>
+
+                        <!-- Campo para cargar nueva imagen -->
+                        <div class="col-md-12 mb-3">
+                            <label for="file" class="form-label">Nueva Imagen del Producto:</label>
+                            <input type="file" class="form-control" id="file" name="file" accept="image/*">
                         </div>
                     </div>
                     
+                    <!-- Botones de acción -->
                     <div class="mt-3">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Guardar Cambios
@@ -75,5 +83,6 @@
     <!-- Bootstrap JS y Font Awesome -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+    <a href="/productos">Volver a la lista</a>
 </body>
-</html> 
+</html>
