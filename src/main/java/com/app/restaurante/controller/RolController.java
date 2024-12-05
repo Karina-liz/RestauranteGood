@@ -5,6 +5,7 @@ import com.app.restaurante.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,17 +43,22 @@ public class RolController {
         return "formRolEditar";
     }
 
-    @PostMapping("/{id}/")
-    public String actualizarRol(@PathVariable Integer id, @ModelAttribute Rol rol, Model model) {
+     @PostMapping("/{id}")
+    public String actualizarRol(@PathVariable Integer id, @ModelAttribute Rol rol, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("rol", rol);
+            return "formRolEditar";
+        }
+
         Rol rolExistente = rolService.obtenerRolPorId(id);
         if (rolExistente == null) {
-            return "redirect:/roles?error=RolNoEncontrado";
+            return "redirect:/roles?error=Rol no encontrado";
         }
         rolExistente.setNomRol(rol.getNomRol());
         rolExistente.setDescripcion(rol.getDescripcion());
-        
         rolService.actualizarRol(rolExistente);
-        return "redirect:/roles";
+
+        return "redirect:/roles?mensaje=Rol actualizado exitosamente";
     }
 
 
