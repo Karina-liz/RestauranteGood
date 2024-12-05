@@ -7,8 +7,10 @@
     <title>Recibo de Pedido</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <style>
-        .container {
+        /* Prefijo 'recibo-' añadido a todas las clases */
+        .recibo-container {
             background-image: url(../img/fonto_recibo.png);
             background-size: cover;
             background-position: center center;
@@ -22,7 +24,7 @@
             border-radius: 10px;
             color: black;
         }
-        .container::before {
+        .recibo-container::before {
             content: "";
             position: absolute;
             top: 0;
@@ -32,65 +34,65 @@
             background: rgba(255, 255, 255, 0.5);
             z-index: 1; 
         }
-        .container > * {
+        .recibo-container > * {
             position: relative;
             z-index: 13; 
         }
-        .col {
+        .recibo-col {
             padding-right: 10px;
             padding-left: 10px;
         }
-        .card {
+        .recibo-card {
             opacity: 1;
             background: transparent;
         }
-        .card-body {
+        .recibo-card-body {
             padding: 10px;
         }
-        .card-title {
+        .recibo-card-title {
             margin-bottom: 0;
             display: flex;
             justify-content: center;
         }
-        .datos-linea {
+        .recibo-datos-linea {
             display: flex;
             justify-content: space-between;
             gap: 40px;
         }
-        .datos-linea .col {
+        .recibo-datos-linea .recibo-col {
             flex: 1;
         }
-        .datos-linea p {
+        .recibo-datos-linea p {
             margin: 0;
             padding: 0;
         }
-        .productos-table tr {
+        .recibo-productos-table tr {
             background: rgba(0, 0, 0, 0);
         }
-        .productos-table,
-        .productos-table th,
-        .productos-table td {
+        .recibo-productos-table,
+        .recibo-productos-table th,
+        .recibo-productos-table td {
             border: none;
         }
-        .productos-table th,
-        .productos-table td {
+        .recibo-productos-table th,
+        .recibo-productos-table td {
             padding: 5px 10px;
             text-align: center;
         }
-        .productos-table {
+        .recibo-productos-table {
             width: 100%;
         }
-        .titulo-recibo {
+        .recibo-titulo {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
         }
-        .titulo-recibo img {
+        .recibo-titulo img {
             width: 50px;
             height: 50px;
         }
-        footer {
+        .recibo-footer {
             display: flex;
             margin-top: 20px;
             padding-top: 10px;
@@ -100,45 +102,44 @@
             font-size: 12px;
             color: #888; /* Gris claro */
         }
-        footer p {
+        .recibo-footer p {
             margin: 0px 0;
         }
-        footer a {
+        .recibo-footer a {
             color: #888; /* Gris claro */
             text-decoration: none;
         }
-        footer a:hover {
+        .recibo-footer a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
-
-    <div class="container mt-5">
-        <div class="titulo-recibo">
+    <div class="recibo-container mt-5">
+        <div class="recibo-titulo">
             <img src="../img/logo_recibo.png" alt="Logo" />
             <h2 class="text-center">Recibo de Pedido</h2>
         </div>
 
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="datos-linea">
+        <div class="recibo-card mb-4">
+            <div class="recibo-card-body">
+                <div class="recibo-datos-linea">
                     <p><strong>ID Pedido:</strong> <span id="idPedido" th:text="${recibo.idPedido}"></span></p>
                 </div>
             </div>
         </div>
 
-        <div class="card mb-4">
-            <div class="card-body">
-                <div class="datos-linea">
-                    <div class="col">
-                        <h4 class="card-title">Información del Cliente</h4>
+        <div class="recibo-card mb-4">
+            <div class="recibo-card-body">
+                <div class="recibo-datos-linea">
+                    <div class="recibo-col">
+                        <h4 class="recibo-card-title">Información del Cliente</h4>
                         <p><strong>Nombre:</strong> <span id="nombreCliente" th:text="${recibo.nombre} + ' ' + ${recibo.apellido}"></span></p>
                         <p><strong>Dirección:</strong> <span id="direccionCliente" th:text="${recibo.direccion}"></span></p>
                     </div>
-                    <div class="col">
-                        <h4 class="card-title">Información del Pedido</h4>                        
+                    <div class="recibo-col">
+                        <h4 class="recibo-card-title">Información del Pedido</h4>                        
                         <p><strong>Total:</strong> S/. <span id="totalPago" th:text="${recibo.totalPago}"></span></p>
                         <p><strong>Fecha:</strong> <span id="fechaPago" th:text="${recibo.fechaPago}"></span></p>
                     </div>
@@ -146,10 +147,10 @@
             </div>
         </div>
 
-        <div class="card mb-4">
-            <div class="card-body">
-                <h4 class="card-title">Productos Comprados</h4>
-                <table class="table productos-table" id="productosTable">
+        <div class="recibo-card mb-4">
+            <div class="recibo-card-body">
+                <h4 class="recibo-card-title">Productos Comprados</h4>
+                <table class="table recibo-productos-table" id="productosTable">
                     <thead>
                         <tr>
                             <th>Producto</th>
@@ -168,13 +169,13 @@
             </div>
         </div>
 
-        <footer>
+        <div class="recibo-footer">
             <p>Puedes comunicarte con nosotros al <a href="tel:999222111">999-222-111</a> o enviarnos un correo electrónico a <a href="mailto:contacto@goodday.com">contacto@goodday.com</a>.</p>
-        </footer>
+        </div>
     </div>
 
     <div class="text-center">
-        <a href="/carrito_compra" class="btn btn-primary">Volver al carrito</a>
+        <a href="/bienvenido" class="btn btn-primary">Volver</a>
         <button onclick="descargarRecibo()" class="btn btn-success">Descargar Recibo PDF</button>
     </div>
 
@@ -183,7 +184,7 @@
     <script>
         function descargarRecibo() {
             const { jsPDF } = window.jspdf;
-            const container = document.querySelector(".container");
+            const container = document.querySelector(".recibo-container");
 
             html2canvas(container, { scale: 2 }).then(canvas => {
                 const imgData = canvas.toDataURL("image/png");
