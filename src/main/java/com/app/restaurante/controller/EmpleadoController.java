@@ -1,9 +1,9 @@
 package com.app.restaurante.controller;
 
 import com.app.restaurante.model.Empleado;
-import com.app.restaurante.model.DetalleEmpleado;
 import com.app.restaurante.service.EmpleadoService;
 import com.app.restaurante.service.RolService;
+import com.app.restaurante.model.DetalleEmpleado;
 
 import jakarta.servlet.http.HttpSession;
 

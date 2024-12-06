@@ -2,6 +2,7 @@ package com.app.restaurante.controller;
 
 import com.app.restaurante.model.DetalleEmpleado;
 import com.app.restaurante.service.DetEmpleadoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
