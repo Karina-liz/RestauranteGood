@@ -28,8 +28,9 @@ public class ReciboController {
     @Autowired
     private ReciboDAO reciboDao;
 
-    @GetMapping("/recibo")
+    @GetMapping("/recibo") // La accion DEBE HABER UN <a>
     public String mostrarRecibo(Model model) {
+        // Este es el html
         return "recibo"; 
     }
 

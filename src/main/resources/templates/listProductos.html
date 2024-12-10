@@ -10,7 +10,7 @@
 <body>
     <div th:include="components/adminMenu"></div>
     
-    <div class="container mt-4">
+    <div class="container">
         <h1 class="mb-4">Lista de Productos</h1>
         
         <div class="card">
@@ -23,16 +23,17 @@
                     <table class="table table-striped table-hover">
                         <thead class="table-dark">
                             <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Precio Unitario</th>
-                                <th>Descripción</th>
-                                <th>Cantidad</th>
-                                <th>Categoría</th>
-                                <th>Foto</th>
-                                <th>Acciones</th>
+                                <th class="id-col">ID</th>
+                                <th class="nombre-col">Nombre</th>
+                                <th class="precio-col">Precio Unitario</th>
+                                <th class="descripcion-col">Descripción</th> <!-- Clase para la columna de Descripción -->
+                                <th class="cantidad-col">Cantidad</th>
+                                <th class="categoria-col">Categoría</th>
+                                <th class="foto-col">Foto</th>
+                                <th class="acciones-col">Acciones</th> <!-- Clase para la columna de Acciones -->
                             </tr>
                         </thead>
+                        
                         <tbody>
                             <tr th:each="producto : ${productos}">
                                 <td th:text="${producto.idProducto}"></td>
@@ -53,11 +54,18 @@
                                     alt="Sin foto" style="width: 100px; height: auto;" />
                                 </td>
                                 <td>
-                                    <a th:href="@{/productos/editar/{id}(id=${producto.idProducto})}" class="btn btn-warning btn-sm">Editar</a>
-                                    <a th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}" class="btn btn-danger btn-sm" 
-                                    onclick="return confirm('¿Estás seguro de eliminar este empleado?')"
-                                    title="Eliminar">Eliminar</a>
+                                    <a th:href="@{/productos/editar/{id}(id=${producto.idProducto})}" class="btn-action btn-edit">
+                                        <img src="./icons/edit_24.png" alt="Editar"> Editar
+                                    </a>
+                                    <a th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}" class="btn-action btn-delete" 
+                                        onclick="return confirm('¿Estás seguro de eliminar este producto?')" title="Eliminar">
+                                        <img src="./icons/delete_24.png" alt="Eliminar"> Eliminar
+                                    </a>
+                                    <a href="#" class="btn-action btn-update">
+                                        <img src="./icons/autorenew_24.png" alt="Actualizar"> Actualizar
+                                    </a>
                                 </td>
+                                
                             </tr>
                         </tbody>
                     </table>

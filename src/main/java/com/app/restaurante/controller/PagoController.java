@@ -49,7 +49,6 @@ public class PagoController {
         }
 
         // Validar los datos de la tarjeta
-        // POSIBLE MEJORA: PODEMOS ENCRIPTAR DATOS Y COMPARAMOS HASH
         if (!validarDatosTarjeta(numeroTarjeta, fechaVencimiento, codigoSeguridad, nombreTitular)) {
             redirectAttributes.addFlashAttribute("error", "Datos de tarjeta inválidos.");
             return "redirect:/carrito_compra";

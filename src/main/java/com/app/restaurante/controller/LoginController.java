@@ -42,6 +42,7 @@ public class LoginController {
             session.setAttribute("idCliente", cliente.getIdCliente());
             session.setAttribute("usuario", cliente.getUsuario()); 
             session.setAttribute("nombre", cliente.getNombre());
+            session.setAttribute("correo", cliente.getCorreo());
            
             return new ModelAndView("redirect:/registro_completar");
 

@@ -132,6 +132,7 @@ public class RegistroController {
         // Verifica si el cliente ya tiene dirección registrada
         boolean tieneDireccion = clienteDAO.hasDireccion(cliente.getIdCliente()); // Método en DAO
         model.addAttribute("cliente", cliente);
+        model.addAttribute("correo", cliente);
         model.addAttribute("mostrarModal", !tieneDireccion); // Muestra el modal si no tiene dirección
 
         // Obtenenemos los distritos de la base de datos

@@ -35,7 +35,7 @@ public class ClienteDAO {
                 cliente.setUsuario(rs.getString("usuario"));
                 cliente.setContrasena(rs.getString("contrasena"));
                 cliente.setCorreo(rs.getString("correo"));  
-                cliente.setCorreo(rs.getString("dni"));              
+                //cliente.setCorreo(rs.getString("dni"));
                 return cliente;
             }
         };

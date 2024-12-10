@@ -2,16 +2,16 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
+    padding: 10px;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: auto;
     background: white;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.702);
 }
 
 h1 {
@@ -127,3 +127,102 @@ select {
     border: 1px solid #ccc;
     border-radius: 4px;
 } 
+/*<tr>
+                                <th class="id-col">ID</th>
+                                <th class="nombre-col">Nombre</th>
+                                <th class="precio-col">Precio Unitario</th>
+                                <th class="descripcion-col">Descripción</th> <!-- Clase para la columna de Descripción -->
+                                <th class="cantidad-col">Cantidad</th>
+                                <th class="categoria-col">Categoría</th>
+                                <th class="foto-col">Foto</th>
+                                <th class="acciones-col">Acciones</th> <!-- Clase para la columna de Acciones -->
+                            </tr>*/
+/* Columnas de la tabla */
+.id-col {
+    width: 8%;  /* Ancho para la columna ID */
+}
+
+.nombre-col {
+    width: 20%;  /* Ancho mayor para el nombre del producto */
+}
+
+.precio-col {
+    width: 12%;  /* Ancho adecuado para el precio unitario */
+}
+
+.descripcion-col {
+    width: 30%;  /* Ancho para la descripción, ya que puede ser más largo */
+}
+
+.cantidad-col {
+    width: 10%;  /* Ancho adecuado para la cantidad */
+}
+
+.categoria-col {
+    width: 12%;  /* Ancho para la categoría */
+}
+
+.foto-col {
+    width: 10%;  /* Ancho para la foto */
+}
+
+.acciones-col {
+    width: 18%;  /* Ancho para las acciones, considerando los botones */
+}
+
+
+/* Estilos generales para los botones de acción */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-action img {
+    margin-right: 5px; /* Espacio entre el ícono y el texto */
+    width: 16px;
+    height: 16px;
+}
+
+/* Botón de Editar */
+.btn-edit {
+    background-color: #f39c12; /* Color amarillo/amarillo oscuro */
+}
+
+.btn-edit:hover {
+    background-color: #e67e22; /* Hover más oscuro */
+    transform: scale(1.05);
+}
+
+/* Botón de Eliminar */
+.btn-delete {
+    background-color: #e74c3c; /* Color rojo */
+}
+
+.btn-delete:hover {
+    background-color: #c0392b; /* Hover más oscuro */
+    transform: scale(1.05);
+}
+
+/* Botón de Actualizar */
+.btn-update {
+    background-color: #3498db; /* Color azul */
+}
+
+.btn-update:hover {
+    background-color: #2980b9; /* Hover más oscuro */
+    transform: scale(1.05);
+}
+
+/* Opcional: Botón con fondo más claro al pasar el ratón */
+.btn-action:active {
+    transform: scale(0.98); /* Efecto de presionado */
+}
+
+/* Asegúrate de que los iconos en los botones tengan tamaño adecuado */
