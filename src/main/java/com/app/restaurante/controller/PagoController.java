@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.app.restaurante.dao.DeliveryDAO;
 import com.app.restaurante.dao.PagoDAO;
 import com.app.restaurante.model.Cliente;
+import com.app.restaurante.service.EmailService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +21,10 @@ public class PagoController {
 
     @Autowired
     private PagoDAO pagoDao;
+    
+    @Autowired
+    private EmailService emailService;
+
 
     @Autowired
     private DeliveryDAO deliveryDao;
@@ -55,10 +60,13 @@ public class PagoController {
             return "redirect:/carrito_compra";
         }
 
-        // Agrege los TryCatch para trabajar los errores
+        
+
         try {            
             pagoDao.registrarPago(idPedido, total);
-        } catch (Exception e) {            
+            pagoDao.actualizarEstadoPedido(idPedido, "Pagado");
+            deliveryDao.registrarDelivery(idPedido);
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", "Error al procesar el pago: " + e.getMessage());
             return "redirect:/carrito_compra";
         }
@@ -70,14 +78,23 @@ public class PagoController {
             return "redirect:/carrito_compra";
         }
 
-        try {            
-            // Crear delivery para la entrega del pedido
-            deliveryDao.registrarDelivery(idPedido);
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Error al registrar la entrega: " + e.getMessage());
-            return "redirect:/carrito_compra";
-        }
+        // Enviar correo de confirmación
+    try {
+        String destinatario = (String) session.getAttribute("correo");
+        //String destinatario = cliente.getCorreo();
+        String asunto = "Confirmación de pago - Pedido #" + idPedido;
+        String cuerpo = "Estimado " + cliente.getNombre() + " " + cliente.getApellido() + ",\n\n" +
+                        "Gracias por tu compra. El pago por el pedido #" + idPedido + " se ha procesado exitosamente.\n" +
+                        "Monto total: $" + total + "\n\n" +
+                        "Estamos preparando tu pedido para su entrega.\n\n" +
+                        "Saludos,\nEl equipo de Restaurante.";
+        System.out.println(destinatario);
+        emailService.enviarCorreo(destinatario, asunto, cuerpo);
+    } catch (Exception e) {
+        redirectAttributes.addFlashAttribute("error", "Pago registrado, pero no se pudo enviar el correo: " + e.getMessage());
+    }
 
+        
         // Retraso de 2 segundos antes de redirigir
         try {
             Thread.sleep(2000); 

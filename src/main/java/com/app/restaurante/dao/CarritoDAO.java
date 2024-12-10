@@ -1,6 +1,8 @@
 package com.app.restaurante.dao;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -22,15 +24,21 @@ public class CarritoDAO {
      * Metodo para agregar un producto al carrito asociado a un pedido
      * SE USA EN CARRITO
      */
-    public void guardarEnCarrito(Long idCliente, Long idProducto, int cantidad, double precioUnitario, Integer idPedido) {
-        // Insertar el producto en el carrito
-        String sqlCarrito = "INSERT INTO carrito (IDPedido, IDProducto, Cantidad, PrecioProducto) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sqlCarrito, idPedido, idProducto, cantidad, precioUnitario);
+    @Autowired
+private ReporteProductosDAO reporteProductosDAO;
 
-        // Actualizar el monto final del pedido sumando todos los productos del carrito
-        String sqlActualizarMonto = "UPDATE pedido p SET p.MontoFinal = (SELECT SUM(c.PrecioProducto) FROM carrito c WHERE c.IDPedido = ?) WHERE p.IDPedido = ?";
-        jdbcTemplate.update(sqlActualizarMonto, idPedido, idPedido);
-    }
+public void guardarEnCarrito(Long idCliente, Long idProducto, int cantidad, double precioUnitario, Integer idPedido) {
+    // Insertar producto en carrito
+    String sqlCarrito = "INSERT INTO carrito (IDPedido, IDProducto, Cantidad, PrecioProducto) VALUES (?, ?, ?, ?)";
+    jdbcTemplate.update(sqlCarrito, idPedido, idProducto, cantidad, precioUnitario);
+
+    // Actualizar el reporte de productos
+    String sqlProducto = "SELECT NomProducto FROM producto WHERE IDProducto = ?";
+    String nomProducto = jdbcTemplate.queryForObject(sqlProducto, new Object[]{idProducto}, String.class);
+
+    reporteProductosDAO.actualizarReporteProducto(idProducto.intValue(), nomProducto, cantidad);
+}
+
 
     /**
      * Metodo para obtener el último ID de pedido de un cliente
