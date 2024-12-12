@@ -31,6 +31,7 @@ public class LoginService {
         // Si se encuentra al usuario, se guarda en la sesión HTTP
         if (cliente != null) {
             session.setAttribute("cliente", cliente);
+            session.setAttribute("correo", cliente);
         }
         // Devuelve el objeto Usuarios encontrado (o null si no se encontró)
         return cliente;

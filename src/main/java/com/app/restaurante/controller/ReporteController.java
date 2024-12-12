@@ -1,6 +1,7 @@
 package com.app.restaurante.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.restaurante.dao.ReporteDAO;
+import com.app.restaurante.dao.ReporteProductosDAO;
 
 @Controller
 public class ReporteController {
@@ -20,6 +23,51 @@ public class ReporteController {
     @Autowired
     public ReporteController(ReporteDAO reporteDao) {
         this.reporteDao = reporteDao;
+    }
+
+    @Autowired
+    private ReporteProductosDAO reporteProductosDAO;
+
+    // Wa
+    @GetMapping("/templates/reporte_productos")
+    public String mostrarReporte(
+            @RequestParam(required = false) String fechaInicio,
+            @RequestParam(required = false) String fechaFin,
+            Model model) {
+            
+        // Si no se proporcionan fechas, usa valores predeterminados
+        if (fechaInicio == null || fechaFin == null) {
+            LocalDate hoy = LocalDate.now();
+            fechaInicio = hoy.toString(); // Fecha de hoy
+            fechaFin = hoy.toString();
+        }
+
+        List<Map<String, Object>> reporte = reporteProductosDAO.obtenerReporte(fechaInicio, fechaFin);
+        model.addAttribute("reporte", reporte);
+        model.addAttribute("fechaInicio", fechaInicio);
+        model.addAttribute("fechaFin", fechaFin);
+        return "reporte_productos";
+    }
+        
+    // Wa
+    @GetMapping("/templates/reporte_productos_sobra")
+    public String mostrarReporteSobra(
+            @RequestParam(required = false) String fechaInicio,
+            @RequestParam(required = false) String fechaFin,
+            Model model) {
+            
+        // Si no se proporcionan fechas, usa valores predeterminados
+        if (fechaInicio == null || fechaFin == null) {
+            LocalDate hoy = LocalDate.now();
+            fechaInicio = hoy.toString(); // Fecha de hoy
+            fechaFin = hoy.toString();
+        }
+
+        List<Map<String, Object>> reportesobra = reporteProductosDAO.obtenerReporteSobra(fechaInicio, fechaFin);
+        model.addAttribute("reporte", reportesobra);
+        model.addAttribute("fechaInicio", fechaInicio);
+        model.addAttribute("fechaFin", fechaFin);
+        return "reporte_productos";
     }
 
     @GetMapping("/reportes-ingresos")
@@ -62,4 +110,7 @@ public class ReporteController {
         
         return "ingresos";  // Nombre de la vista Thymeleaf
     }
+
+
+    
 }

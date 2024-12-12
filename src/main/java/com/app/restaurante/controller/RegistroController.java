@@ -140,6 +140,10 @@ public class RegistroController {
         List<Direccion> distritos = clienteDAO.findAllDistritos();
         model.addAttribute("distritos", distritos);
 
+
+        // Obtener el idCliente de la sesion
+        String idCliente = (String) session.getAttribute("correo");
+
         return "bienvenido";
     }
 
